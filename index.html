@@ -2,342 +2,519 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>灵探 InSensor — 市场分析报告与调研问卷</title>
 <style>
 :root{
-  --void:#050A15;--dark:#0C1929;--ink:#16324F;
-  --blue:#2563EB;--sky:#0EA5E9;--teal:#0D9488;--cyan:#06B6D4;
-  --gold:#D97706;--amber:#F59E0B;--coral:#DC2626;
-  --sage:#16A34A;--emerald:#10B981;
+  --void:#050A14;--dark:#0A1628;--ink:#0E2145;
+  --blue:#3B82F6;--sky:#38BDF8;--teal:#2DD4BF;--cyan:#22D3EE;
+  --gold:#F59E0B;--amber:#FBBF24;--coral:#EF4444;
+  --sage:#34D399;--emerald:#10B981;
   --steel:#64748B;--slate:#94A3B8;
-  --bg:#F8FAFC;--bg-alt:#F1F5F9;--card:#FFFFFF;
-  --border:#E2E8F0;--border-light:#F1F5F9;
-  --text:#0F172A;--text-mid:#475569;--text-light:#94A3B8;
-  --glass:rgba(255,255,255,0.06);--glass-border:rgba(255,255,255,0.08);
-  --shadow-sm:0 1px 3px rgba(0,0,0,0.06);
-  --shadow-md:0 4px 16px rgba(0,0,0,0.08);
-  --shadow-lg:0 12px 40px rgba(0,0,0,0.12);
-  --shadow-glow:0 0 40px rgba(14,165,233,0.15);
-  --radius:14px;--radius-lg:20px;--radius-xl:28px;
-  --section-gap:6rem;
-  --transition:0.4s cubic-bezier(0.16,1,0.3,1);
+  --bg:#F8FAFC;--bg2:#F1F5F9;--card:#FFF;
+  --bdr:#E2E8F0;--bdr2:#F1F5F9;
+  --tx:#0F172A;--tx2:#475569;--tx3:#94A3B8;
+  --glass:rgba(255,255,255,.06);--glass-b:rgba(255,255,255,.08);
+  --sh1:0 1px 2px rgba(0,0,0,.04),0 2px 6px rgba(0,0,0,.04);
+  --sh2:0 4px 12px rgba(0,0,0,.06),0 8px 24px rgba(0,0,0,.06);
+  --sh3:0 8px 24px rgba(0,0,0,.08),0 24px 56px rgba(0,0,0,.10);
+  --glow:0 0 60px rgba(56,189,248,.15);
+  --r:14px;--r2:20px;--r3:28px;
+  --gap:6.5rem;
+  --ease:cubic-bezier(.16,1,.3,1);
 }
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:80px}
-body{font-family:"PingFang SC","Microsoft YaHei","Segoe UI",system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.8;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-img{max-width:100%;display:block}
-::-webkit-scrollbar{width:6px}
-::-webkit-scrollbar-track{background:transparent}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px;-webkit-text-size-adjust:100%}
+body{font-family:"PingFang SC","Microsoft YaHei","Segoe UI",system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--tx);line-height:1.85;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;
+  background-image:radial-gradient(circle at 15% 50%,rgba(59,130,246,.015) 0%,transparent 50%),
+    radial-gradient(circle at 85% 20%,rgba(45,212,191,.012) 0%,transparent 40%)}
+img{max-width:100%;display:block;border-radius:4px}
+::selection{background:rgba(14,165,233,.18)}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--steel);border-radius:3px}
 
-/* === PROGRESS BAR === */
-.progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--sky),var(--teal),var(--amber));z-index:10001;width:0;transition:width 0.15s}
+.progbar{position:fixed;top:0;left:0;height:3px;z-index:10001;width:0;
+  background:linear-gradient(90deg,var(--blue),var(--sky),var(--teal),var(--sage),var(--amber));
+  background-size:200% 100%;animation:shimmer 3s ease-in-out infinite;
+  box-shadow:0 0 12px rgba(56,189,248,.3);transition:width .12s}
 
-/* === ANIMATIONS === */
-@keyframes fadeUp{from{opacity:0;transform:translateY(50px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(44px)}to{opacity:1;transform:none}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes slideL{from{opacity:0;transform:translateX(-60px)}to{opacity:1;transform:translateX(0)}}
-@keyframes slideR{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:translateX(0)}}
-@keyframes scaleIn{from{opacity:0;transform:scale(0.85)}to{opacity:1;transform:scale(1)}}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(14,165,233,0.4)}50%{box-shadow:0 0 0 14px rgba(14,165,233,0)}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes slideL{from{opacity:0;transform:translateX(-50px)}to{opacity:1;transform:none}}
+@keyframes slideR{from{opacity:0;transform:translateX(50px)}to{opacity:1;transform:none}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.88)}to{opacity:1;transform:none}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(14,165,233,.35)}50%{box-shadow:0 0 0 12px rgba(14,165,233,0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
-@keyframes glow{0%,100%{opacity:0.4}50%{opacity:0.8}}
-@keyframes orbit{0%{transform:rotate(0deg) translateX(120px) rotate(0deg)}100%{transform:rotate(360deg) translateX(120px) rotate(-360deg)}}
-@keyframes drift{0%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-20px) scale(1.1)}66%{transform:translate(-20px,15px) scale(0.95)}100%{transform:translate(0,0) scale(1)}}
+@keyframes drift{0%{transform:translate(0,0) scale(1)}33%{transform:translate(25px,-18px) scale(1.08)}66%{transform:translate(-18px,12px) scale(.94)}100%{transform:translate(0,0) scale(1)}}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-.rv{opacity:0;transform:translateY(50px);transition:all 0.9s cubic-bezier(0.16,1,0.3,1)}
+.rv{opacity:0;transform:translateY(44px);transition:all .85s var(--ease)}
 .rv.vis{opacity:1;transform:none}
-.rv-l{opacity:0;transform:translateX(-60px);transition:all 0.9s cubic-bezier(0.16,1,0.3,1)}
+.rv-l{opacity:0;transform:translateX(-50px);transition:all .85s var(--ease)}
 .rv-l.vis{opacity:1;transform:none}
-.rv-r{opacity:0;transform:translateX(60px);transition:all 0.9s cubic-bezier(0.16,1,0.3,1)}
+.rv-r{opacity:0;transform:translateX(50px);transition:all .85s var(--ease)}
 .rv-r.vis{opacity:1;transform:none}
-.rv-s{opacity:0;transform:scale(0.9);transition:all 0.8s cubic-bezier(0.16,1,0.3,1)}
-.rv-s.vis{opacity:1;transform:scale(1)}
+.rv-s{opacity:0;transform:scale(.92);transition:all .75s var(--ease)}
+.rv-s.vis{opacity:1;transform:none}
 .stagger>[class*="rv"]:nth-child(1){transition-delay:0s}
-.stagger>[class*="rv"]:nth-child(2){transition-delay:.08s}
-.stagger>[class*="rv"]:nth-child(3){transition-delay:.16s}
-.stagger>[class*="rv"]:nth-child(4){transition-delay:.24s}
-.stagger>[class*="rv"]:nth-child(5){transition-delay:.32s}
-.stagger>[class*="rv"]:nth-child(6){transition-delay:.4s}
+.stagger>[class*="rv"]:nth-child(2){transition-delay:.07s}
+.stagger>[class*="rv"]:nth-child(3){transition-delay:.14s}
+.stagger>[class*="rv"]:nth-child(4){transition-delay:.21s}
+.stagger>[class*="rv"]:nth-child(5){transition-delay:.28s}
+.stagger>[class*="rv"]:nth-child(6){transition-delay:.35s}
+.stagger>[class*="rv"]:nth-child(7){transition-delay:.42s}
+.stagger>[class*="rv"]:nth-child(8){transition-delay:.49s}
 
-/* === NAVIGATION === */
-.nav{position:fixed;top:8px;left:50%;transform:translateX(-50%);z-index:10000;width:calc(100% - 32px);max-width:1200px;
-  background:rgba(15,23,42,0.75);backdrop-filter:blur(20px) saturate(1.6);
-  border:1px solid rgba(255,255,255,0.08);border-radius:16px;
-  transition:all 0.4s cubic-bezier(0.16,1,0.3,1);
-}
-.nav.solid{background:rgba(15,23,42,0.92);border-color:rgba(255,255,255,0.12);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;height:56px}
-.nav-brand{font-size:1rem;font-weight:800;color:#fff;display:flex;align-items:center;gap:0.5rem;letter-spacing:1px}
-.nav-brand .dot{width:8px;height:8px;border-radius:50%;background:var(--teal);animation:pulse 2.5s infinite}
-.nav-links{display:flex;gap:2px;overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none}
+/* NAV */
+.nav{position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:10000;
+  width:calc(100% - 28px);max-width:1200px;
+  background:linear-gradient(135deg,rgba(10,22,40,.68),rgba(14,33,69,.62));
+  backdrop-filter:blur(28px) saturate(1.9);
+  border:1px solid rgba(255,255,255,.08);border-radius:20px;
+  box-shadow:0 4px 24px rgba(0,0,0,.15),inset 0 1px 0 rgba(255,255,255,.06);
+  transition:all .45s var(--ease)}
+.nav.solid{background:linear-gradient(135deg,rgba(10,22,40,.96),rgba(14,33,69,.94));
+  border-color:rgba(255,255,255,.12);
+  box-shadow:0 8px 40px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.05)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;padding:0 1.8rem;height:56px}
+.nav-brand{font-size:.96rem;font-weight:800;color:#fff;display:flex;align-items:center;gap:.6rem;letter-spacing:.6px}
+.nav-brand .dot{width:8px;height:8px;border-radius:50%;background:var(--teal);animation:pulse 2.5s infinite;
+  box-shadow:0 0 10px rgba(45,212,191,.5)}
+.nav-links{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
 .nav-links::-webkit-scrollbar{display:none}
-.nav-links a{color:rgba(255,255,255,0.6);text-decoration:none;font-size:.8rem;font-weight:500;padding:.35rem .7rem;border-radius:8px;transition:all .25s;white-space:nowrap;position:relative}
-.nav-links a:hover{color:#fff;background:rgba(255,255,255,0.08)}
-.nav-links a.active{color:#fff;background:rgba(14,165,233,0.2)}
-.nav-toggle{display:none;cursor:pointer;color:#fff;font-size:1.3rem;background:none;border:none;padding:.3rem}
+.nav-links a{color:rgba(255,255,255,.5);text-decoration:none;font-size:.8rem;font-weight:500;
+  padding:.38rem .72rem;border-radius:10px;transition:all .25s var(--ease);white-space:nowrap;
+  position:relative}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.08);
+  text-shadow:0 0 12px rgba(255,255,255,.15)}
+.nav-links a.active{color:#fff;background:linear-gradient(135deg,rgba(56,189,248,.18),rgba(45,212,191,.14));
+  box-shadow:0 0 12px rgba(56,189,248,.1),inset 0 1px 0 rgba(255,255,255,.06)}
+.nav-tog{display:none;cursor:pointer;color:#fff;font-size:1.2rem;background:none;border:none;
+  padding:.35rem;border-radius:8px;transition:all .2s}
+.nav-tog:hover{background:rgba(255,255,255,.08)}
 @media(max-width:1024px){
-  .nav{width:calc(100% - 16px)}
-  .nav-links{display:none;position:absolute;top:64px;left:0;right:0;background:rgba(15,23,42,0.95);backdrop-filter:blur(20px);flex-direction:column;padding:1rem;border-radius:0 0 16px 16px;border:1px solid rgba(255,255,255,0.08);border-top:0}
+  .nav{width:calc(100% - 16px);border-radius:16px}
+  .nav-links{display:none;position:absolute;top:calc(100% + 8px);left:8px;right:8px;
+    background:linear-gradient(160deg,rgba(10,22,40,.97),rgba(14,33,69,.96));
+    backdrop-filter:blur(32px) saturate(1.8);
+    flex-direction:column;padding:.6rem;gap:2px;
+    border-radius:16px;
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 16px 48px rgba(0,0,0,.45),0 4px 16px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.06);
+    animation:navDrop .35s var(--ease)}
+  @keyframes navDrop{from{opacity:0;transform:translateY(-10px) scale(.97)}to{opacity:1;transform:none}}
   .nav-links.open{display:flex}
-  .nav-toggle{display:block}
+  .nav-links a{padding:.65rem 1rem;border-radius:10px;font-size:.88rem;
+    color:rgba(255,255,255,.6);transition:all .2s var(--ease)}
+  .nav-links a:hover{color:#fff;background:linear-gradient(135deg,rgba(56,189,248,.1),rgba(45,212,191,.06));
+    padding-left:1.25rem}
+  .nav-links a.active{color:#fff;
+    background:linear-gradient(135deg,rgba(56,189,248,.16),rgba(45,212,191,.10));
+    box-shadow:inset 0 0 0 1px rgba(56,189,248,.12)}
+  .nav-tog{display:block}
 }
 
-/* === HERO === */
+/* HERO */
 .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  background:var(--void);color:#fff;text-align:center;padding:8rem 2rem 5rem;position:relative;overflow:hidden}
+  background:var(--void);color:#fff;text-align:center;padding:7rem 2rem 5rem;position:relative;overflow:hidden}
 .hero-bg{position:absolute;inset:0;overflow:hidden}
-.hero-orb{position:absolute;border-radius:50%;filter:blur(80px);animation:drift 12s ease-in-out infinite}
-.hero-orb.o1{width:500px;height:500px;background:rgba(37,99,235,0.15);top:-10%;left:-10%;animation-delay:0s}
-.hero-orb.o2{width:400px;height:400px;background:rgba(13,148,136,0.12);bottom:0;right:-5%;animation-delay:-4s}
-.hero-orb.o3{width:300px;height:300px;background:rgba(217,119,6,0.08);top:40%;left:50%;animation-delay:-8s}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 60% 50% at 50% 50%,black 40%,transparent 80%)}
-.hero-fade{position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(to bottom,transparent,var(--bg))}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(90px);animation:drift 14s ease-in-out infinite;will-change:transform}
+.hero-orb.o1{width:600px;height:600px;background:radial-gradient(circle,rgba(59,130,246,.2),rgba(59,130,246,.05));top:-10%;left:-10%;animation-delay:0s}
+.hero-orb.o2{width:500px;height:500px;background:radial-gradient(circle,rgba(45,212,191,.16),rgba(45,212,191,.03));bottom:-8%;right:-5%;animation-delay:-5s}
+.hero-orb.o3{width:400px;height:400px;background:radial-gradient(circle,rgba(245,158,11,.1),rgba(245,158,11,.02));top:30%;left:55%;animation-delay:-9s}
+.hero-grid{position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:56px 56px;
+  mask-image:radial-gradient(ellipse 55% 50% at 50% 50%,#000 35%,transparent 80%)}
+.hero-fade{position:absolute;bottom:0;left:0;right:0;height:220px;background:linear-gradient(transparent,var(--bg))}
 .hero>*{position:relative;z-index:1}
 .hero-badge{display:inline-flex;align-items:center;gap:.6rem;
-  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(8px);
-  padding:.45rem 1.4rem;border-radius:30px;font-size:.82rem;font-weight:500;margin-bottom:2.5rem;animation:fadeIn 1s ease}
-.hero-badge .ind{width:7px;height:7px;border-radius:50%;background:#4ADE80;box-shadow:0 0 8px #4ADE80}
-.hero h1{font-size:clamp(2.2rem,5.5vw,3.8rem);font-weight:900;line-height:1.2;margin-bottom:1.5rem;letter-spacing:-0.02em;animation:fadeUp 1s ease}
-.hero h1 .grad{background:linear-gradient(135deg,#60A5FA,#34D399,#FBBF24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero .subtitle{max-width:720px;font-size:1.05rem;opacity:0.7;line-height:1.9;margin-bottom:3.5rem;animation:fadeUp 1s .2s both}
-.hero-metrics{display:flex;gap:1.2rem;flex-wrap:wrap;justify-content:center;animation:fadeUp 1s .4s both}
-.hero-metric{text-align:center;padding:1.2rem 1.5rem;min-width:120px;
-  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
-  border-radius:16px;backdrop-filter:blur(8px);transition:all .3s}
-.hero-metric:hover{transform:translateY(-4px);background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.15)}
-.hero-metric .val{font-size:1.8rem;font-weight:900;line-height:1.2;background:linear-gradient(135deg,#fff,#94A3B8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-metric .lbl{font-size:.75rem;opacity:.5;margin-top:.3rem;font-weight:500}
-.scroll-cue{position:absolute;bottom:220px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:.4rem;animation:float 3s ease-in-out infinite;opacity:.5}
-.scroll-cue span{font-size:.72rem}
-.scroll-cue .arr{width:18px;height:18px;border-right:2px solid rgba(255,255,255,.5);border-bottom:2px solid rgba(255,255,255,.5);transform:rotate(45deg)}
+  background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.1);
+  backdrop-filter:blur(12px);padding:.45rem 1.4rem;border-radius:28px;
+  font-size:.8rem;font-weight:500;margin-bottom:2.2rem;animation:fadeIn 1s ease;
+  box-shadow:0 2px 12px rgba(0,0,0,.12),inset 0 1px 0 rgba(255,255,255,.06)}
+.hero-badge .ind{width:7px;height:7px;border-radius:50%;background:#4ADE80;box-shadow:0 0 10px #4ADE80,0 0 20px rgba(74,222,128,.3)}
+.hero h1{font-size:clamp(2rem,5.2vw,3.5rem);font-weight:900;line-height:1.15;
+  margin-bottom:1.4rem;letter-spacing:-.02em;animation:fadeUp .9s ease}
+.hero h1 .grad{background:linear-gradient(135deg,#60A5FA 0%,#38BDF8 25%,#2DD4BF 50%,#34D399 75%,#FBBF24 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  background-size:200% auto;animation:shimmer 4s ease-in-out infinite}
+.hero .sub{max-width:700px;font-size:1rem;opacity:.65;line-height:1.9;margin-bottom:3rem;animation:fadeUp 1s .2s both}
+.hero-metrics{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;animation:fadeUp 1s .35s both}
+.hero-m{text-align:center;padding:1.2rem 1.5rem;min-width:120px;
+  background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;backdrop-filter:blur(12px);transition:all .35s var(--ease);
+  box-shadow:0 4px 16px rgba(0,0,0,.12),inset 0 1px 0 rgba(255,255,255,.06)}
+.hero-m:hover{transform:translateY(-4px);background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.04));
+  border-color:rgba(255,255,255,.15);box-shadow:0 8px 28px rgba(0,0,0,.2),0 0 20px rgba(56,189,248,.06)}
+.hero-m .v{font-size:1.7rem;font-weight:900;line-height:1.15;
+  background:linear-gradient(135deg,#fff 30%,#CBD5E1);-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text}
+.hero-m .l{font-size:.72rem;opacity:.45;margin-top:.25rem;font-weight:500}
+.scroll-cue{position:absolute;bottom:200px;left:50%;transform:translateX(-50%);z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:.35rem;
+  animation:float 3s ease-in-out infinite;opacity:.4}
+.scroll-cue span{font-size:.7rem}
+.scroll-cue .arr{width:16px;height:16px;border-right:2px solid rgba(255,255,255,.45);
+  border-bottom:2px solid rgba(255,255,255,.45);transform:rotate(45deg)}
 
-/* === CONTAINER === */
-.container{max-width:1200px;margin:0 auto;padding:0 2rem}
-.container-sm{max-width:900px;margin:0 auto;padding:0 2rem}
-section{padding:var(--section-gap) 0}
-section.alt{background:var(--bg-alt)}
+/* LAYOUT */
+.ctn{max-width:1200px;margin:0 auto;padding:0 2rem}
+.ctn-sm{max-width:900px;margin:0 auto;padding:0 2rem}
+section{padding:var(--gap) 0}
+section.alt{background:linear-gradient(180deg,var(--bg2),#EFF3F8,var(--bg2))}
 
-/* === SECTION HEADER === */
-.sec-hd{text-align:center;margin-bottom:3.5rem}
-.sec-tag{display:inline-block;padding:.3rem 1.1rem;border-radius:20px;font-size:.75rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.8rem}
-.sec-tag.blue{background:rgba(37,99,235,.08);color:var(--blue)}
-.sec-tag.teal{background:rgba(13,148,136,.08);color:var(--teal)}
-.sec-tag.gold{background:rgba(217,119,6,.08);color:var(--gold)}
-.sec-tag.coral{background:rgba(220,38,38,.08);color:var(--coral)}
-.sec-tag.sage{background:rgba(22,163,74,.08);color:var(--sage)}
-.sec-tag.ink{background:rgba(15,23,42,.06);color:var(--ink)}
-.sec-tag.sky{background:rgba(14,165,233,.08);color:var(--sky)}
-.sec-title{font-size:clamp(1.6rem,3vw,2.3rem);font-weight:800;color:var(--ink);line-height:1.3;letter-spacing:-0.01em}
-.sec-desc{max-width:680px;margin:.8rem auto 0;color:var(--text-mid);font-size:.95rem}
+/* SECTION HEADER */
+.shd{text-align:center;margin-bottom:3.2rem}
+.stag{display:inline-block;padding:.3rem 1.1rem;border-radius:20px;font-size:.72rem;
+  font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.7rem}
+.stag.blue{background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(59,130,246,.04));color:var(--blue);
+  border:1px solid rgba(59,130,246,.1)}
+.stag.teal{background:linear-gradient(135deg,rgba(45,212,191,.08),rgba(45,212,191,.04));color:var(--teal);
+  border:1px solid rgba(45,212,191,.1)}
+.stag.gold{background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(245,158,11,.04));color:var(--gold);
+  border:1px solid rgba(245,158,11,.1)}
+.stag.coral{background:linear-gradient(135deg,rgba(239,68,68,.08),rgba(239,68,68,.04));color:var(--coral);
+  border:1px solid rgba(239,68,68,.1)}
+.stag.sage{background:linear-gradient(135deg,rgba(52,211,153,.08),rgba(52,211,153,.04));color:var(--sage);
+  border:1px solid rgba(52,211,153,.1)}
+.stag.ink{background:linear-gradient(135deg,rgba(14,33,69,.06),rgba(14,33,69,.03));color:var(--ink);
+  border:1px solid rgba(14,33,69,.08)}
+.stag.sky{background:linear-gradient(135deg,rgba(56,189,248,.08),rgba(56,189,248,.04));color:var(--sky);
+  border:1px solid rgba(56,189,248,.1)}
+.stitle{font-size:clamp(1.5rem,2.8vw,2.2rem);font-weight:800;color:var(--ink);line-height:1.25;letter-spacing:-.01em;
+  background:linear-gradient(135deg,var(--ink),#1a3a5f);-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text}
+.sdesc{max-width:660px;margin:.7rem auto 0;color:var(--tx2);font-size:.92rem}
 
-/* === CARDS === */
-.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:2rem 2.5rem;box-shadow:var(--shadow-sm);transition:all var(--transition);position:relative;overflow:hidden}
-.card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--sky),var(--teal));opacity:0;transition:opacity .3s}
-.card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}.card:hover::before{opacity:1}
-.card-t{font-size:1.1rem;font-weight:700;color:var(--ink);margin-bottom:1rem;display:flex;align-items:center;gap:.6rem}
-.card-t .ic{font-size:1.3rem}
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r2);
+  padding:1.8rem 2.2rem;box-shadow:var(--sh1);transition:all .4s var(--ease);position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--sky),var(--teal),var(--sage));opacity:0;transition:opacity .35s}
+.card:hover{transform:translateY(-4px);box-shadow:var(--sh3),var(--glow)}.card:hover::before{opacity:1}
+.card-t{font-size:1.05rem;font-weight:700;color:var(--ink);margin-bottom:.9rem;
+  display:flex;align-items:center;gap:.55rem}
+.card-t .ic{font-size:1.2rem}
 
-/* === BENTO GRID === */
-.bento{display:grid;gap:1.2rem}
-.bento-6{grid-template-columns:repeat(6,1fr)}
-.bento-item{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;transition:all var(--transition);position:relative;overflow:hidden}
-.bento-item:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
-.bento-item .bi-icon{font-size:2rem;margin-bottom:.8rem}
-.bento-item .bi-val{font-size:1.8rem;font-weight:900;line-height:1.1;margin-bottom:.3rem}
-.bento-item .bi-lbl{font-size:.82rem;color:var(--text-mid)}
-.bento-item .bi-desc{font-size:.85rem;color:var(--text-mid);line-height:1.6;margin-top:.5rem}
-.bento-item.span2{grid-column:span 2}
-.bento-item.span3{grid-column:span 3}
-.bento-item.accent{background:linear-gradient(135deg,var(--ink),#1E3A5F);color:#fff;border-color:transparent}
-.bento-item.accent .bi-lbl{color:rgba(255,255,255,.65)}
-.bento-item.accent .bi-desc{color:rgba(255,255,255,.7)}
-@media(max-width:768px){.bento-6{grid-template-columns:1fr 1fr}.bento-item.span2,.bento-item.span3{grid-column:span 1}}
-@media(max-width:480px){.bento-6{grid-template-columns:1fr}}
+/* BENTO */
+.bento{display:grid;gap:1rem}
+.bn6{grid-template-columns:repeat(6,1fr)}
+.bn-i{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);
+  padding:1.4rem;transition:all .35s var(--ease);position:relative;overflow:hidden}
+.bn-i:hover{transform:translateY(-2px);box-shadow:var(--sh2)}
+.bn-i .bi-ic{font-size:1.8rem;margin-bottom:.7rem}
+.bn-i .bi-v{font-size:1.65rem;font-weight:900;line-height:1.1;margin-bottom:.25rem}
+.bn-i .bi-l{font-size:.8rem;color:var(--tx2)}
+.bn-i .bi-d{font-size:.84rem;color:var(--tx2);line-height:1.6;margin-top:.4rem}
+.bn-i.sp2{grid-column:span 2}.bn-i.sp3{grid-column:span 3}
+.bn-i.accent{background:linear-gradient(135deg,var(--ink),#1a3a5f,#0a2845);color:#fff;border-color:transparent;
+  box-shadow:0 4px 20px rgba(14,33,69,.25),inset 0 1px 0 rgba(255,255,255,.06)}
+.bn-i.accent .bi-l{color:rgba(255,255,255,.6)}
+.bn-i.accent .bi-d{color:rgba(255,255,255,.7)}
+@media(max-width:768px){.bn6{grid-template-columns:1fr 1fr}.bn-i.sp2,.bn-i.sp3{grid-column:span 1}}
+@media(max-width:480px){.bn6{grid-template-columns:1fr}}
 
-/* === GRIDS === */
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem}
-.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
+/* GRIDS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;align-items:start}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.4rem}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem}
 @media(max-width:900px){.g2,.g3,.g4{grid-template-columns:1fr}}
 
-/* === KPI ROW === */
-.kpi-row{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-bottom:2.5rem}
-.kpi{flex:1;min-width:140px;max-width:200px;text-align:center;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem 1rem;transition:all var(--transition)}
-.kpi:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
-.kpi .num{font-size:2rem;font-weight:900;line-height:1}
-.kpi .num.blue{color:var(--blue)}.kpi .num.teal{color:var(--teal)}.kpi .num.gold{color:var(--gold)}.kpi .num.sky{color:var(--sky)}.kpi .num.sage{color:var(--sage)}
-.kpi .label{font-size:.82rem;color:var(--text-mid);margin-top:.5rem}
+/* KPI */
+.kpi-row{display:flex;gap:.9rem;flex-wrap:wrap;justify-content:center;margin-bottom:2.2rem}
+.kpi{flex:1;min-width:130px;max-width:190px;text-align:center;background:var(--card);
+  border:1px solid var(--bdr);border-radius:var(--r);padding:1.3rem .9rem;transition:all .35s var(--ease);
+  box-shadow:var(--sh1)}
+.kpi:hover{transform:translateY(-4px);box-shadow:var(--sh2),var(--glow)}
+.kpi .num{font-size:1.85rem;font-weight:900;line-height:1}
+.kpi .num.blue{color:var(--blue)}.kpi .num.teal{color:var(--teal)}.kpi .num.gold{color:var(--gold)}
+.kpi .num.sky{color:var(--sky)}.kpi .num.sage{color:var(--sage)}
+.kpi .label{font-size:.8rem;color:var(--tx2);margin-top:.4rem}
 
-/* === CHART FIGURE === */
-.chart-fig{margin:1.5rem 0;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all var(--transition);cursor:pointer}
-.chart-fig:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
-.chart-fig img{width:100%;display:block;transition:transform .6s}
-.chart-fig:hover img{transform:scale(1.02)}
-.chart-cap{padding:.8rem 1.2rem;font-size:.84rem;color:var(--text-mid);border-top:1px solid var(--border);background:var(--bg-alt);text-align:center}
+/* CHART */
+.cfig{margin:1.4rem 0;background:var(--card);border:1px solid var(--bdr);
+  border-radius:var(--r2);overflow:hidden;transition:all .4s var(--ease);cursor:pointer;
+  box-shadow:var(--sh1)}
+.cfig:hover{transform:translateY(-4px);box-shadow:var(--sh3),0 0 0 1px rgba(56,189,248,.06)}
+.cfig img{width:100%;display:block;transition:transform .6s var(--ease)}
+.cfig:hover img{transform:scale(1.02)}
+.cfig .cap{padding:.75rem 1.2rem;font-size:.82rem;color:var(--tx2);
+  border-top:1px solid var(--bdr);background:linear-gradient(to right,var(--bg2),var(--card));text-align:center;
+  font-weight:500}
 
-/* === ANIMATED BAR === */
-.abar{margin:.6rem 0;display:flex;align-items:center;gap:.8rem}
-.abar-lbl{width:140px;font-size:.88rem;flex-shrink:0;text-align:right;font-weight:600;color:var(--ink)}
-.abar-track{flex:1;height:32px;background:var(--bg-alt);border-radius:8px;overflow:hidden;position:relative}
-.abar-fill{height:100%;border-radius:8px;display:flex;align-items:center;justify-content:flex-end;padding-right:10px;color:#fff;font-size:.8rem;font-weight:700;width:0;transition:width 1.4s cubic-bezier(0.22,1,0.36,1)}
-.abar-fill.blue{background:linear-gradient(90deg,var(--blue),var(--sky))}.abar-fill.teal{background:linear-gradient(90deg,var(--teal),var(--cyan))}
-.abar-fill.gold{background:linear-gradient(90deg,var(--gold),var(--amber))}.abar-fill.coral{background:linear-gradient(90deg,#B91C1C,#EF4444)}
+/* BAR */
+.abar{margin:.55rem 0;display:flex;align-items:center;gap:.7rem}
+.abar-lbl{width:135px;font-size:.86rem;flex-shrink:0;text-align:right;font-weight:600;color:var(--ink)}
+.abar-trk{flex:1;height:30px;background:var(--bg2);border-radius:8px;overflow:hidden}
+.abar-fill{height:100%;border-radius:8px;display:flex;align-items:center;justify-content:flex-end;
+  padding-right:10px;color:#fff;font-size:.78rem;font-weight:700;width:0;
+  transition:width 1.3s cubic-bezier(.22,1,.36,1)}
+.abar-fill.blue{background:linear-gradient(90deg,var(--blue),var(--sky))}
+.abar-fill.teal{background:linear-gradient(90deg,var(--teal),var(--cyan))}
+.abar-fill.gold{background:linear-gradient(90deg,var(--gold),var(--amber))}
+.abar-fill.coral{background:linear-gradient(90deg,#B91C1C,#EF4444)}
 .abar-fill.ink{background:linear-gradient(90deg,var(--ink),var(--blue))}
 
-/* === TABLE === */
-.dtable{width:100%;border-collapse:separate;border-spacing:0;font-size:.88rem;margin:1rem 0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border)}
-.dtable thead th{background:var(--ink);color:#fff;padding:.75rem 1rem;text-align:left;font-weight:600;font-size:.84rem}
-.dtable tbody td{padding:.7rem 1rem;border-bottom:1px solid var(--border)}
-.dtable tbody tr{transition:background .2s}.dtable tbody tr:hover{background:rgba(14,165,233,.04)}
-.dtable .hl{background:rgba(14,165,233,.06);font-weight:600}
+/* TABLE */
+.dtbl{width:100%;border-collapse:separate;border-spacing:0;font-size:.86rem;
+  margin:1rem 0;border-radius:var(--r);overflow:hidden;border:1px solid var(--bdr)}
+.dtbl thead th{background:linear-gradient(135deg,var(--ink),#1a3a5f);color:#fff;padding:.75rem .9rem;
+  text-align:left;font-weight:600;font-size:.82rem}
+.dtbl tbody td{padding:.65rem .9rem;border-bottom:1px solid var(--bdr)}
+.dtbl tbody tr{transition:background .2s}.dtbl tbody tr:hover{background:rgba(14,165,233,.035)}
+.dtbl .hl{background:rgba(14,165,233,.05);font-weight:600}
 .badge-ok{color:var(--sage);font-weight:700}.badge-warn{color:var(--gold);font-weight:700}
 .hyp-ok{color:var(--sage);font-weight:700}.hyp-ok::before{content:"✓ ";font-size:1rem}
 
-/* === PRICE BAND === */
-.price-band{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin:2.5rem 0}
-.price-node{text-align:center;padding:1.5rem 2rem;border:2px solid var(--border);border-radius:var(--radius-lg);min-width:140px;transition:all .3s;background:var(--card)}
-.price-node:hover{transform:translateY(-5px);box-shadow:var(--shadow-md)}.price-node.star{border-color:var(--amber);background:linear-gradient(135deg,#FFFBEB,#FEF3C7);box-shadow:0 4px 20px rgba(245,158,11,.15)}
-.price-node .big{font-size:1.7rem;font-weight:900}.price-node .big.gold{color:var(--gold)}.price-node .big.blue{color:var(--blue)}
-.price-node .tag{font-size:.78rem;color:var(--text-mid);margin-top:.3rem}
+/* PRICE BAND */
+.pband{display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap;margin:2.2rem 0}
+.pnode{text-align:center;padding:1.4rem 1.8rem;border:2px solid var(--bdr);
+  border-radius:var(--r2);min-width:130px;transition:all .35s var(--ease);background:var(--card);
+  box-shadow:var(--sh1)}
+.pnode:hover{transform:translateY(-5px);box-shadow:var(--sh3)}
+.pnode.star{border-color:var(--amber);background:linear-gradient(135deg,#FFFBEB,#FEF3C7,#FFF7ED);
+  box-shadow:0 4px 24px rgba(245,158,11,.12),inset 0 1px 0 rgba(255,255,255,.8)}
+.pnode .big{font-size:1.6rem;font-weight:900}.pnode .big.gold{color:var(--gold)}.pnode .big.blue{color:var(--blue)}
+.pnode .ptag{font-size:.76rem;color:var(--tx2);margin-top:.25rem}
 
-/* === CLUSTER CARDS === */
-.cluster-row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
-@media(max-width:768px){.cluster-row{grid-template-columns:1fr}}
-.cluster-card{border-radius:var(--radius);padding:1.8rem;background:var(--card);border:1px solid var(--border);border-left:5px solid;transition:all .3s}
-.cluster-card:hover{transform:translateX(5px);box-shadow:var(--shadow-md)}
-.cluster-card.c1{border-left-color:var(--teal)}.cluster-card.c2{border-left-color:var(--gold)}.cluster-card.c3{border-left-color:var(--coral)}.cluster-card.c4{border-left-color:var(--steel)}
-.cluster-card h4{font-size:1.05rem;font-weight:700;margin-bottom:.3rem}
-.cluster-card .pct{font-size:1.6rem;font-weight:900;margin-bottom:.3rem}
-.cluster-card p{font-size:.88rem;color:var(--text-mid);line-height:1.7}
+/* CLUSTER */
+.cl-row{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+@media(max-width:768px){.cl-row{grid-template-columns:1fr}}
+.cl-c{border-radius:var(--r);padding:1.6rem;background:var(--card);border:1px solid var(--bdr);
+  border-left:4px solid;transition:all .35s var(--ease);box-shadow:var(--sh1)}
+.cl-c:hover{transform:translateX(5px);box-shadow:var(--sh2)}
+.cl-c.c1{border-left-color:var(--teal)}.cl-c.c2{border-left-color:var(--gold)}
+.cl-c.c3{border-left-color:var(--coral)}.cl-c.c4{border-left-color:var(--steel)}
+.cl-c h4{font-size:1rem;font-weight:700;margin-bottom:.2rem}
+.cl-c .pct{font-size:1.5rem;font-weight:900;margin-bottom:.25rem}
+.cl-c p{font-size:.86rem;color:var(--tx2);line-height:1.7}
 
-/* === TIMELINE === */
-.vtl{position:relative;padding-left:44px;margin:2rem 0}
-.vtl::before{content:"";position:absolute;left:16px;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--sky),var(--teal),var(--amber));border-radius:2px}
-.vtl-item{position:relative;margin-bottom:2.5rem;padding-left:2rem}
-.vtl-item::before{content:"";position:absolute;left:-36px;top:4px;width:18px;height:18px;border-radius:50%;background:var(--card);border:3px solid var(--sky);transition:all .3s;z-index:1}
-.vtl-item:nth-child(2)::before{border-color:var(--teal)}.vtl-item:nth-child(3)::before{border-color:var(--amber)}.vtl-item:nth-child(4)::before{border-color:var(--sage)}
-.vtl-item:hover::before{transform:scale(1.4);box-shadow:0 0 0 8px rgba(14,165,233,.12)}
-.vtl-item h4{font-size:1rem;font-weight:700;color:var(--ink)}.vtl-item .period{font-size:.78rem;color:var(--text-light);margin-bottom:.4rem}
-.vtl-item p{font-size:.9rem;color:var(--text-mid);line-height:1.7}
+/* TIMELINE */
+.vtl{position:relative;padding-left:42px;margin:1.8rem 0}
+.vtl::before{content:"";position:absolute;left:15px;top:0;bottom:0;width:2.5px;
+  background:linear-gradient(to bottom,var(--sky),var(--teal),var(--amber));border-radius:2px}
+.vtl-item{position:relative;margin-bottom:2.2rem;padding-left:1.8rem}
+.vtl-item::before{content:"";position:absolute;left:-34px;top:3px;width:16px;height:16px;
+  border-radius:50%;background:var(--card);border:3px solid var(--sky);transition:all .3s;z-index:1}
+.vtl-item:nth-child(2)::before{border-color:var(--teal)}
+.vtl-item:nth-child(3)::before{border-color:var(--amber)}
+.vtl-item:nth-child(4)::before{border-color:var(--sage)}
+.vtl-item:hover::before{transform:scale(1.35);box-shadow:0 0 0 7px rgba(14,165,233,.1)}
+.vtl-item h4{font-size:.98rem;font-weight:700;color:var(--ink)}
+.vtl-item .period{font-size:.76rem;color:var(--tx3);margin-bottom:.35rem}
+.vtl-item p{font-size:.88rem;color:var(--tx2);line-height:1.7}
 
-/* === NPS === */
-.nps-hero{text-align:center;padding:3rem;background:linear-gradient(135deg,#F0FDF4,#ECFDF5);border-radius:var(--radius-lg);border:1px solid #BBF7D0}
-.nps-hero .nps-val{font-size:4rem;font-weight:900;color:var(--sage);line-height:1}
-.nps-hero .nps-lbl{font-size:.9rem;color:var(--text-mid);margin-top:.5rem}
+/* NPS */
+.nps-hero{text-align:center;padding:3rem;background:linear-gradient(135deg,#F0FDF4,#ECFDF5,#F0FDF9);
+  border-radius:var(--r2);border:1px solid #BBF7D0;
+  box-shadow:0 4px 20px rgba(52,211,153,.08),inset 0 1px 0 rgba(255,255,255,.8)}
+.nps-hero .nps-v{font-size:3.5rem;font-weight:900;color:var(--sage);line-height:1}
+.nps-hero .nps-l{font-size:.88rem;color:var(--tx2);margin-top:.4rem}
 
-/* === INSIGHT === */
-.insight{background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border-left:4px solid var(--sky);border-radius:0 var(--radius) var(--radius) 0;padding:1.3rem 1.6rem;margin:1.2rem 0;font-size:.9rem;color:var(--ink);line-height:1.8}
+/* INSIGHT */
+.insight{background:linear-gradient(135deg,#EFF6FF,#DBEAFE,#F0F9FF);border-left:3px solid var(--sky);
+  border-radius:0 var(--r) var(--r) 0;padding:1.3rem 1.6rem;margin:1.1rem 0;
+  font-size:.88rem;color:var(--ink);line-height:1.8;
+  box-shadow:0 2px 8px rgba(56,189,248,.06)}
 .insight strong{color:var(--blue)}
 
-/* === SEPARATOR === */
-.sep{border:none;height:1px;margin:0;max-width:240px;margin:0 auto;background:linear-gradient(90deg,transparent,var(--border),transparent)}
+/* SEPARATOR */
+.sep{border:none;height:1px;max-width:200px;margin:0 auto;
+  background:linear-gradient(90deg,transparent,var(--bdr),transparent)}
 
-/* === QUOTE === */
-.quote{border-left:3px solid var(--sky);padding-left:1rem;margin:.8rem 0;font-style:italic;color:var(--text-mid);font-size:.9rem;line-height:1.7}
+/* QUOTE */
+.quote{border-left:2.5px solid var(--sky);padding-left:.9rem;margin:.7rem 0;
+  font-style:italic;color:var(--tx2);font-size:.88rem;line-height:1.7}
 .quote.teal{border-left-color:var(--teal)}.quote.gold{border-left-color:var(--gold)}
 
-/* === QUESTIONNAIRE ACCORDION === */
-.q-accordion{margin:1rem 0}
-.q-acc-item{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:.8rem;overflow:hidden;transition:all .3s}
-.q-acc-item:hover{border-color:var(--sky)}
-.q-acc-head{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;cursor:pointer;background:var(--card);transition:background .2s;user-select:none}
-.q-acc-head:hover{background:var(--bg-alt)}
-.q-acc-head .q-sec-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:800;flex-shrink:0;margin-right:1rem}
-.q-acc-head .q-sec-info{flex:1}
-.q-acc-head .q-sec-info h3{font-size:1rem;font-weight:700;color:var(--ink)}
-.q-acc-head .q-sec-info span{font-size:.78rem;color:var(--text-light)}
-.q-acc-chevron{width:24px;height:24px;display:flex;align-items:center;justify-content:center;transition:transform .3s;color:var(--text-light)}
-.q-acc-item.open .q-acc-chevron{transform:rotate(180deg)}
-.q-acc-body{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(0.16,1,0.3,1)}
-.q-acc-item.open .q-acc-body{max-height:3000px}
-.q-acc-content{padding:0 1.5rem 1.5rem}
-.q-card{background:var(--bg-alt);border-radius:10px;padding:1.2rem 1.4rem;margin-bottom:.8rem}
-.q-num{display:inline-block;font-size:.72rem;font-weight:700;padding:.12rem .6rem;border-radius:6px;margin-bottom:.5rem}
-.q-num.blue{background:rgba(37,99,235,.08);color:var(--blue)}.q-num.teal{background:rgba(13,148,136,.08);color:var(--teal)}
-.q-num.coral{background:rgba(220,38,38,.08);color:var(--coral)}.q-num.gold{background:rgba(217,119,6,.08);color:var(--gold)}
-.q-num.sage{background:rgba(22,163,74,.08);color:var(--sage)}.q-num.ink{background:rgba(15,23,42,.06);color:var(--ink)}
-.q-text{font-size:.92rem;font-weight:600;color:var(--ink);line-height:1.6;margin-bottom:.6rem}
-.q-note{font-size:.82rem;color:var(--text-light);font-style:italic;margin-bottom:.6rem}
-.opts{list-style:none;padding:0;margin:0}.opts li{display:flex;align-items:center;gap:.5rem;padding:.35rem .6rem;border-radius:6px;font-size:.86rem;color:var(--text-mid)}
-.opt-r,.opt-c{width:16px;height:16px;border-radius:50%;border:2px solid var(--border);flex-shrink:0}.opt-c{border-radius:3px}
-.likert{display:flex;gap:0;margin:.4rem 0}.likert-item{flex:1;text-align:center;padding:.5rem .2rem;border:1px solid var(--border);font-size:.82rem;transition:background .2s}
-.likert-item:first-child{border-radius:6px 0 0 6px}.likert-item:last-child{border-radius:0 6px 6px 0}
-.likert-num{font-weight:700;color:var(--ink);font-size:.95rem}.likert-lbl{font-size:.66rem;color:var(--text-light);display:block;margin-top:.1rem}
-.product-info{background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border-left:4px solid var(--blue);border-radius:0 10px 10px 0;padding:1rem 1.3rem;margin:.8rem 0 1rem;font-size:.86rem;color:var(--ink);line-height:1.8}
-.product-info strong{color:var(--blue)}
-.vw-input{display:inline-flex;align-items:center;gap:.3rem;border:1px solid var(--border);border-radius:8px;padding:.35rem .7rem;background:var(--bg);margin-top:.3rem;font-size:.85rem;color:var(--text-mid)}
-.vw-input .ph{min-width:70px;border-bottom:1px dashed var(--steel);text-align:center;color:var(--ink);padding:.1rem 0}
-.nps-scale{display:flex;gap:0;margin:.4rem 0}.nps-item{flex:1;text-align:center;padding:.4rem 0;border:1px solid var(--border);font-size:.82rem;font-weight:600;transition:background .2s}
-.nps-item:first-child{border-radius:6px 0 0 6px}.nps-item:last-child{border-radius:0 6px 6px 0}
-.nps-item.det{color:var(--coral)}.nps-item.pas{color:var(--gold)}.nps-item.pro{color:var(--teal)}
-.nps-labels{display:flex;justify-content:space-between;font-size:.7rem;color:var(--text-light);margin-top:.3rem}
-.open-text{width:100%;min-height:50px;border:1px solid var(--border);border-radius:8px;padding:.7rem;font-size:.85rem;color:var(--text-light);background:var(--bg);resize:none;font-family:inherit}
+/* ACCORDION */
+.qacc{margin:.9rem 0}
+.qai{border:1px solid var(--bdr);border-radius:var(--r);margin-bottom:.7rem;overflow:hidden;
+  transition:all .35s var(--ease);box-shadow:var(--sh1)}
+.qai:hover{border-color:rgba(56,189,248,.25);box-shadow:var(--sh2),0 0 0 1px rgba(56,189,248,.04)}
+.qai.open{border-color:rgba(56,189,248,.2);box-shadow:var(--sh2)}
+.qah{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.4rem;
+  cursor:pointer;background:var(--card);transition:all .25s var(--ease);user-select:none}
+.qah:hover{background:linear-gradient(to right,var(--bg2),var(--card))}
+.qai.open .qah{background:linear-gradient(135deg,rgba(56,189,248,.03),rgba(45,212,191,.02));
+  border-bottom:1px solid var(--bdr)}
+.qah .qsi{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;font-size:1rem;font-weight:800;flex-shrink:0;margin-right:.9rem;
+  box-shadow:0 2px 6px rgba(0,0,0,.06),inset 0 1px 0 rgba(255,255,255,.4)}
+.qah .qsf{flex:1}
+.qah .qsf h3{font-size:.95rem;font-weight:700;color:var(--ink)}
+.qah .qsf span{font-size:.76rem;color:var(--tx3)}
+.qchev{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;
+  transition:all .35s var(--ease);color:var(--tx3);background:rgba(0,0,0,.03)}
+.qai.open .qchev{transform:rotate(180deg);color:var(--sky);background:rgba(56,189,248,.08)}
+.qab{max-height:0;overflow:hidden;transition:max-height .5s var(--ease)}
+.qai.open .qab{max-height:3000px}
+.qac{padding:0 1.4rem 1.4rem}
+.qc{background:linear-gradient(145deg,var(--bg2),#fff);border:1px solid rgba(0,0,0,.04);
+  border-radius:12px;padding:1.15rem 1.3rem;margin-bottom:.7rem;
+  box-shadow:0 1px 4px rgba(0,0,0,.02)}
+.qn{display:inline-block;font-size:.7rem;font-weight:700;padding:.1rem .55rem;border-radius:6px;margin-bottom:.4rem}
+.qn.blue{background:linear-gradient(135deg,rgba(59,130,246,.1),rgba(59,130,246,.04));color:var(--blue);
+  border:1px solid rgba(59,130,246,.08)}
+.qn.teal{background:linear-gradient(135deg,rgba(45,212,191,.1),rgba(45,212,191,.04));color:var(--teal);
+  border:1px solid rgba(45,212,191,.08)}
+.qn.coral{background:linear-gradient(135deg,rgba(239,68,68,.1),rgba(239,68,68,.04));color:var(--coral);
+  border:1px solid rgba(239,68,68,.08)}
+.qn.gold{background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(245,158,11,.04));color:var(--gold);
+  border:1px solid rgba(245,158,11,.08)}
+.qn.sage{background:linear-gradient(135deg,rgba(52,211,153,.1),rgba(52,211,153,.04));color:var(--sage);
+  border:1px solid rgba(52,211,153,.08)}
+.qn.ink{background:linear-gradient(135deg,rgba(14,33,69,.07),rgba(14,33,69,.03));color:var(--ink);
+  border:1px solid rgba(14,33,69,.06)}
+.qt{font-size:.9rem;font-weight:600;color:var(--ink);line-height:1.6;margin-bottom:.5rem}
+.qnote{font-size:.8rem;color:var(--tx3);font-style:italic;margin-bottom:.5rem}
+.opts{list-style:none;padding:0;margin:0}
+.opts li{display:flex;align-items:center;gap:.45rem;padding:.3rem .5rem;border-radius:6px;font-size:.84rem;color:var(--tx2)}
+.optr,.optc{width:16px;height:16px;border-radius:50%;border:2px solid #CBD5E1;flex-shrink:0;
+  background:linear-gradient(180deg,#fff,#F8FAFC);box-shadow:0 1px 2px rgba(0,0,0,.04)}.optc{border-radius:4px}
+.lk{display:flex;gap:0;margin:.35rem 0}
+.lk-i{flex:1;text-align:center;padding:.45rem .15rem;border:1px solid var(--bdr);font-size:.8rem;transition:background .2s}
+.lk-i:first-child{border-radius:6px 0 0 6px}.lk-i:last-child{border-radius:0 6px 6px 0}
+.lk-n{font-weight:700;color:var(--ink);font-size:.92rem}.lk-l{font-size:.64rem;color:var(--tx3);display:block;margin-top:.05rem}
+.pinfo{background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border-left:3px solid var(--blue);
+  border-radius:0 10px 10px 0;padding:.9rem 1.2rem;margin:.7rem 0 .9rem;font-size:.84rem;color:var(--ink);line-height:1.8}
+.pinfo strong{color:var(--blue)}
+.vw{display:inline-flex;align-items:center;gap:.25rem;border:1px solid var(--bdr);
+  border-radius:8px;padding:.3rem .6rem;background:var(--bg);margin-top:.25rem;font-size:.83rem;color:var(--tx2)}
+.vw .ph{min-width:65px;border-bottom:1px dashed var(--steel);text-align:center;color:var(--ink);padding:.05rem 0}
+.nps-sc{display:flex;gap:0;margin:.35rem 0}
+.nps-i{flex:1;text-align:center;padding:.35rem 0;border:1px solid var(--bdr);font-size:.8rem;font-weight:600;transition:background .2s}
+.nps-i:first-child{border-radius:6px 0 0 6px}.nps-i:last-child{border-radius:0 6px 6px 0}
+.nps-i.det{color:var(--coral)}.nps-i.pas{color:var(--gold)}.nps-i.pro{color:var(--teal)}
+.nps-lbls{display:flex;justify-content:space-between;font-size:.68rem;color:var(--tx3);margin-top:.25rem}
+.otxt{width:100%;min-height:48px;border:1px solid var(--bdr);border-radius:10px;
+  padding:.65rem .8rem;font-size:.83rem;color:var(--tx2);background:linear-gradient(180deg,#fff,var(--bg));
+  resize:none;font-family:inherit;transition:border-color .2s,box-shadow .2s}
+.otxt:focus{outline:none;border-color:var(--sky);box-shadow:0 0 0 3px rgba(56,189,248,.1)}
 
-/* === FOOTER === */
-footer{background:var(--dark);color:rgba(255,255,255,.5);text-align:center;padding:4rem 2rem;font-size:.85rem;position:relative;overflow:hidden}
-footer::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:40px 40px}
+/* FOOTER */
+footer{background:linear-gradient(160deg,var(--dark),var(--void));color:rgba(255,255,255,.45);text-align:center;padding:3.5rem 2rem;
+  font-size:.83rem;position:relative;overflow:hidden}
+footer::before{content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:36px 36px;
+  mask-image:radial-gradient(ellipse 60% 80% at 50% 50%,#000,transparent)}
 footer>*{position:relative;z-index:1}
-footer .f-brand{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:.5rem}
+footer .fb{font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:.4rem}
 
-/* === BTT === */
-.btt{position:fixed;bottom:2rem;right:2rem;z-index:9999;width:46px;height:46px;border-radius:50%;
-  background:var(--ink);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;
-  opacity:0;transform:translateY(20px);transition:all .3s;box-shadow:0 4px 16px rgba(0,0,0,.25)}
-.btt.show{opacity:1;transform:none}.btt:hover{background:var(--sky);transform:translateY(-3px)}
+/* BTT */
+.btt{position:fixed;bottom:1.8rem;right:1.8rem;z-index:9999;width:46px;height:46px;border-radius:50%;
+  background:linear-gradient(135deg,var(--ink),#1a3a5f);color:#fff;border:1px solid rgba(255,255,255,.08);
+  cursor:pointer;display:flex;align-items:center;
+  justify-content:center;font-size:1.1rem;opacity:0;transform:translateY(16px);
+  transition:all .35s var(--ease);box-shadow:0 4px 20px rgba(0,0,0,.25),0 0 0 0 rgba(56,189,248,0)}
+.btt.show{opacity:1;transform:none}
+.btt:hover{background:linear-gradient(135deg,var(--sky),var(--teal));transform:translateY(-3px);
+  box-shadow:0 8px 28px rgba(0,0,0,.3),0 0 20px rgba(56,189,248,.15)}
 
-/* === LIGHTBOX === */
-.lightbox{position:fixed;inset:0;z-index:20000;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:2rem;cursor:zoom-out}
-.lightbox.active{display:flex}.lightbox img{max-width:90vw;max-height:90vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+/* LIGHTBOX */
+.lb{position:fixed;inset:0;z-index:20000;background:rgba(5,10,20,.92);backdrop-filter:blur(16px) saturate(1.6);
+  display:none;align-items:center;justify-content:center;padding:2rem;cursor:zoom-out;
+  animation:fadeIn .25s ease}
+.lb.on{display:flex}
+.lb img{max-width:92vw;max-height:92vh;border-radius:14px;
+  box-shadow:0 24px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.05);
+  animation:scaleIn .3s var(--ease)}
 
-/* === RESPONSIVE === */
-@media(max-width:640px){
-  :root{--section-gap:4rem}
-  .hero{padding:6rem 1.5rem 4rem}
-  .hero h1{font-size:1.8rem}
+/* RESPONSIVE */
+@media(max-width:900px){
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  .cl-row{grid-template-columns:1fr}
   .hero-metrics{gap:.6rem}
-  .hero-metric{min-width:100px;padding:.8rem}
-  .hero-metric .val{font-size:1.3rem}
-  .card{padding:1.5rem}
-  .abar-lbl{width:100px;font-size:.8rem}
-  .price-band{flex-direction:column;align-items:center}
-  .likert{flex-wrap:wrap}.likert-item{flex:0 0 calc(20% - 2px)}
-  .nps-scale{flex-wrap:wrap}.nps-item{flex:0 0 calc(11.11% - 2px);min-width:28px}
+  .kpi-row{gap:.6rem}
+  .kpi{min-width:110px;max-width:none;flex:1 1 calc(50% - .6rem)}
+}
+@media(max-width:768px){
+  :root{--gap:4.5rem}
+  .ctn,.ctn-sm{padding:0 1.2rem}
+  .hero{padding:5.5rem 1.5rem 3.5rem}
+  .hero h1{font-size:clamp(1.6rem,4.5vw,2.2rem)}
+  .hero .sub{font-size:.9rem}
+  .hero-metrics{flex-direction:row;flex-wrap:wrap}
+  .hero-m{min-width:calc(50% - .5rem);padding:.8rem}
+  .stitle{font-size:1.4rem}
+  .sdesc{font-size:.86rem}
+  .card{padding:1.4rem 1.3rem}
+  .dtbl{font-size:.78rem}
+  .dtbl thead th{padding:.55rem .6rem;font-size:.76rem}
+  .dtbl tbody td{padding:.5rem .6rem}
+  .abar{flex-direction:column;align-items:flex-start;gap:.3rem}
+  .abar-lbl{width:auto;text-align:left}
+  .bn6{grid-template-columns:1fr 1fr}
+  .bn-i.sp2,.bn-i.sp3{grid-column:span 1}
+  .cfig .cap{font-size:.76rem;padding:.6rem .8rem}
+  .pband{flex-direction:column;align-items:center}
+  .pnode{min-width:calc(100% - 2rem)}
+  .shd{margin-bottom:2.2rem}
+  .qacc .qah{padding:.8rem 1rem}
+  .qacc .qac{padding:0 1rem 1rem}
+  .qc{padding:.9rem 1rem}
+  .lb img{max-width:96vw;max-height:88vh;border-radius:8px}
+}
+@media(max-width:480px){
+  :root{--gap:3rem}
+  .hero{padding:4.5rem 1rem 2.5rem;min-height:auto}
+  .hero h1{font-size:1.5rem;line-height:1.3}
+  .hero .sub{font-size:.82rem;margin-bottom:2rem}
+  .hero-badge{font-size:.72rem;padding:.35rem 1rem}
+  .hero-m{min-width:100%;padding:.65rem .8rem}
+  .hero-m .v{font-size:1.15rem}
+  .hero-m .l{font-size:.66rem}
+  .nav{top:6px;width:calc(100% - 12px);border-radius:14px}
+  .nav-in{height:48px;padding:0 1rem}
+  .nav-brand{font-size:.85rem}
+  .nav-links a{font-size:.82rem;padding:.55rem .85rem}
+  .stitle{font-size:1.2rem}
+  .card{padding:1.1rem;border-radius:14px}
+  .card-t{font-size:.92rem}
+  .kpi{min-width:100%;max-width:none}
+  .kpi .num{font-size:1.5rem}
+  .bn6{grid-template-columns:1fr}
+  .g2,.g3{gap:.8rem}
+  .abar-lbl{font-size:.76rem}
+  .abar-trk{height:24px}
+  .abar-fill{font-size:.7rem}
+  .cl-c{padding:1.2rem}
+  .dtbl{font-size:.72rem}
+  .lk{flex-wrap:wrap}.lk-i{flex:0 0 calc(20% - 2px);min-width:28px}
+  .nps-sc{flex-wrap:wrap}.nps-i{flex:0 0 calc(11.11% - 2px);min-width:24px;font-size:.7rem}
+  .opts li{font-size:.8rem;padding:.25rem .35rem}
+  .scroll-cue{display:none}
+  .btt{bottom:1rem;right:1rem;width:40px;height:40px;font-size:.95rem}
+  section{padding:var(--gap) 0}
 }
 </style>
 </head>
 <body>
 
-<!-- PROGRESS BAR -->
-<div class="progress-bar" id="progressBar"></div>
+<div class="progbar" id="progbar"></div>
 
-<!-- NAVIGATION -->
 <nav class="nav" id="navbar">
-  <div class="nav-inner">
+  <div class="nav-in">
     <div class="nav-brand"><span class="dot"></span>灵探 InSensor</div>
-    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="菜单">☰</button>
+    <button class="nav-tog" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="菜单">☰</button>
     <div class="nav-links">
-      <a href="#product">产品</a>
-      <a href="#overview">概览</a>
-      <a href="#sample">样本</a>
-      <a href="#pain">痛点</a>
-      <a href="#value">价值</a>
-      <a href="#sem">SEM</a>
-      <a href="#price">定价</a>
-      <a href="#cluster">用户</a>
-      <a href="#ipa">IPA</a>
-      <a href="#nps">NPS</a>
-      <a href="#compete">竞争</a>
-      <a href="#finance">财务</a>
-      <a href="#strategy">战略</a>
-      <a href="#survey">问卷</a>
+      <a href="#product">产品</a><a href="#overview">概览</a><a href="#sample">样本</a>
+      <a href="#pain">痛点</a><a href="#value">价值</a><a href="#sem">SEM</a>
+      <a href="#price">定价</a><a href="#cluster">用户</a><a href="#ipa">IPA</a>
+      <a href="#nps">NPS</a><a href="#compete">竞争</a><a href="#finance">财务</a>
+      <a href="#strategy">战略</a><a href="#survey">问卷</a>
     </div>
   </div>
 </nav>
 
-<!-- HERO -->
 <header class="hero" id="hero">
   <div class="hero-bg">
     <div class="hero-orb o1"></div>
@@ -348,84 +525,53 @@ footer .f-brand{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:.5rem}
   <div class="hero-fade"></div>
   <div class="hero-badge"><span class="ind"></span>基于 920 份有效问卷 · 多维统计建模</div>
   <h1>便携式前体化学品检测终端<br><span class="grad">市场分析报告</span></h1>
-  <p class="subtitle">整合结构方程建模、Van Westendorp 价格敏感度、K-means 聚类、IPA 分析等九种研究方法，全面验证灵探 InSensor 的市场可行性与商业前景</p>
+  <p class="sub">整合结构方程建模、Van Westendorp 价格敏感度、K-means 聚类、IPA 分析等九种研究方法，全面验证灵探 InSensor 的市场可行性与商业前景</p>
   <div class="hero-metrics">
-    <div class="hero-metric"><div class="val" data-count="920">0</div><div class="lbl">有效样本</div></div>
-    <div class="hero-metric"><div class="val">10/10</div><div class="lbl">假设支持</div></div>
-    <div class="hero-metric"><div class="val">97.22%</div><div class="lbl">检测准确率</div></div>
-    <div class="hero-metric"><div class="val">&lt;30s</div><div class="lbl">检测时间</div></div>
-    <div class="hero-metric"><div class="val">60%</div><div class="lbl">投资回报率</div></div>
-    <div class="hero-metric"><div class="val">¥3,890</div><div class="lbl">最优定价</div></div>
+    <div class="hero-m"><div class="v" data-count="920">0</div><div class="l">有效样本</div></div>
+    <div class="hero-m"><div class="v">10/10</div><div class="l">假设支持</div></div>
+    <div class="hero-m"><div class="v">97.22%</div><div class="l">检测准确率</div></div>
+    <div class="hero-m"><div class="v">&lt;30s</div><div class="l">检测时间</div></div>
+    <div class="hero-m"><div class="v">60%</div><div class="l">投资回报率</div></div>
+    <div class="hero-m"><div class="v">¥3,890</div><div class="l">最优定价</div></div>
   </div>
   <div class="scroll-cue"><span>向下滚动</span><div class="arr"></div></div>
 </header>
 
-<!-- ═══ PRODUCT 产品概览 ═══ -->
+<!-- 产品概览 -->
 <section id="product">
-<div class="container">
-  <div class="sec-hd rv">
-    <span class="sec-tag sky">PRODUCT</span>
-    <h2 class="sec-title">产品概览</h2>
-    <p class="sec-desc">基于传感器阵列与动态温度调制技术，灵探 InSensor 实现便携式易制毒前体化学品智能现场快检</p>
-  </div>
-  <div class="bento bento-6 stagger">
-    <div class="bento-item span3 accent rv">
-      <div class="bi-icon">🔬</div>
-      <div class="bi-val" style="font-size:1.3rem;color:#60A5FA">传感器阵列 + 动态温度调制 + 边缘AI推理</div>
-      <div class="bi-desc" style="margin-top:.8rem">采用多通道气敏传感器阵列，结合动态温度调制算法与嵌入式AI推理引擎，无需色谱分离即可实现前体化学品的现场智能识别。支持离线运行，适用于无网络覆盖的执法与巡检场景。</div>
+<div class="ctn">
+  <div class="shd rv"><span class="stag sky">PRODUCT</span>
+    <h2 class="stitle">产品概览</h2>
+    <p class="sdesc">基于传感器阵列与动态温度调制技术，灵探 InSensor 实现便携式易制毒前体化学品智能现场快检</p></div>
+  <div class="bento bn6 stagger">
+    <div class="bn-i sp3 accent rv">
+      <div class="bi-ic">🔬</div>
+      <div class="bi-v" style="font-size:1.2rem;color:#60A5FA">传感器阵列 + 动态温度调制 + 边缘AI推理</div>
+      <div class="bi-d" style="margin-top:.7rem">采用多通道气敏传感器阵列，结合动态温度调制算法与嵌入式AI推理引擎，无需色谱分离即可实现前体化学品的现场智能识别。支持离线运行，适用于无网络覆盖的执法与巡检场景。</div>
     </div>
-    <div class="bento-item span3 rv">
-      <div class="bi-icon">📊</div>
-      <div class="bi-val" style="color:var(--sage)">学术支撑</div>
-      <div class="bi-desc">团队累计发表学术论文 <strong>52 篇</strong>，持有专利 <strong>32 项</strong>，涵盖传感器材料、温度调制算法、边缘推理芯片等核心技术领域，形成完整的知识产权壁垒。</div>
+    <div class="bn-i sp3 rv">
+      <div class="bi-ic">📊</div>
+      <div class="bi-v" style="color:var(--sage)">学术支撑</div>
+      <div class="bi-d">团队累计发表学术论文 <strong>52 篇</strong>，持有专利 <strong>32 项</strong>，涵盖传感器材料、温度调制算法、边缘推理芯片等核心技术领域，形成完整的知识产权壁垒。</div>
     </div>
-    <div class="bento-item span2 rv">
-      <div class="bi-icon">⚡</div>
-      <div class="bi-val" style="color:var(--sky)">&lt; 30 秒</div>
-      <div class="bi-lbl">现场出结果</div>
-    </div>
-    <div class="bento-item span2 rv">
-      <div class="bi-icon">🎯</div>
-      <div class="bi-val" style="color:var(--teal)">97.22%</div>
-      <div class="bi-lbl">综合准确率</div>
-    </div>
-    <div class="bento-item span2 rv">
-      <div class="bi-icon">🔋</div>
-      <div class="bi-val" style="color:var(--gold)">零耗材</div>
-      <div class="bi-lbl">无需试剂消耗</div>
-    </div>
-    <div class="bento-item span2 rv">
-      <div class="bi-icon">📐</div>
-      <div class="bi-val" style="color:var(--blue)">2.05 kg</div>
-      <div class="bi-lbl">整机重量</div>
-      <div class="bi-desc">尺寸 200×75×300mm，单手可持</div>
-    </div>
-    <div class="bento-item span2 rv">
-      <div class="bi-icon">💰</div>
-      <div class="bi-val" style="color:var(--gold)">500 万</div>
-      <div class="bi-lbl">天使轮融资</div>
-      <div class="bi-desc">创始团队 88% · 投资方 7% · 期权池 5%</div>
-    </div>
-    <div class="bento-item span2 rv">
-      <div class="bi-icon">🛡️</div>
-      <div class="bi-val" style="color:var(--teal)">60%</div>
-      <div class="bi-lbl">投资回报率</div>
-      <div class="bi-desc">预计 2–3 年回本</div>
-    </div>
+    <div class="bn-i sp2 rv"><div class="bi-ic">⚡</div><div class="bi-v" style="color:var(--sky)">&lt; 30 秒</div><div class="bi-l">现场出结果</div></div>
+    <div class="bn-i sp2 rv"><div class="bi-ic">🎯</div><div class="bi-v" style="color:var(--teal)">97.22%</div><div class="bi-l">综合准确率</div></div>
+    <div class="bn-i sp2 rv"><div class="bi-ic">🔋</div><div class="bi-v" style="color:var(--gold)">零耗材</div><div class="bi-l">无需试剂消耗</div></div>
+    <div class="bn-i sp2 rv"><div class="bi-ic">📐</div><div class="bi-v" style="color:var(--blue)">2.05 kg</div><div class="bi-l">整机重量</div><div class="bi-d">尺寸 200×75×300mm，单手可持</div></div>
+    <div class="bn-i sp2 rv"><div class="bi-ic">💰</div><div class="bi-v" style="color:var(--gold)">500 万</div><div class="bi-l">天使轮融资</div><div class="bi-d">创始团队 88% · 投资方 7% · 期权池 5%</div></div>
+    <div class="bn-i sp2 rv"><div class="bi-ic">🛡️</div><div class="bi-v" style="color:var(--teal)">60%</div><div class="bi-l">投资回报率</div><div class="bi-d">预计 2–3 年回本</div></div>
   </div>
 </div>
 </section>
 
 <hr class="sep">
 
-<!-- ═══ OVERVIEW 研究概览 ═══ -->
+<!-- 研究概览 -->
 <section id="overview" class="alt">
-<div class="container">
-  <div class="sec-hd rv">
-    <span class="sec-tag blue">OVERVIEW</span>
-    <h2 class="sec-title">研究概览</h2>
-    <p class="sec-desc">覆盖公安禁毒、海关口岸、危化企业、园区/物流四类核心用户，运用九种定量分析方法系统验证产品市场可行性</p>
-  </div>
+<div class="ctn">
+  <div class="shd rv"><span class="stag blue">OVERVIEW</span>
+    <h2 class="stitle">研究概览</h2>
+    <p class="sdesc">覆盖公安禁毒、海关口岸、危化企业、园区/物流四类核心用户，运用九种定量分析方法系统验证产品市场可行性</p></div>
   <div class="kpi-row stagger">
     <div class="kpi rv"><div class="num blue" data-count="1320">0</div><div class="label">计划发放</div></div>
     <div class="kpi rv"><div class="num teal" data-count="920">0</div><div class="label">有效回收 (69.7%)</div></div>
@@ -435,9 +581,9 @@ footer .f-brand{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:.5rem}
   </div>
   <div class="card rv">
     <div class="card-t"><span class="ic">📋</span>研究方法体系</div>
-    <p style="color:var(--text-mid);font-size:.9rem;margin-bottom:1rem">本研究采用混合方法设计，以量化问卷调研为主、二手数据及质性开放题为辅。问卷共 8 板块 45 题，覆盖筛选、画像、痛点行为、产品认知、感知价值、购买意愿与价格、渠道信任、忠诚推荐等维度。</p>
+    <p style="color:var(--tx2);font-size:.88rem;margin-bottom:.9rem">本研究采用混合方法设计，以量化问卷调研为主、二手数据及质性开放题为辅。问卷共 8 板块 45 题，覆盖筛选、画像、痛点行为、产品认知、感知价值、购买意愿与价格、渠道信任、忠诚推荐等维度。</p>
     <div style="overflow-x:auto">
-    <table class="dtable">
+    <table class="dtbl">
       <thead><tr><th>分析方法</th><th>目的</th><th>关键输出</th></tr></thead>
       <tbody>
         <tr><td>EFA + CFA</td><td>量表信效度验证</td><td>KMO=0.873, CFI=0.953</td></tr>
@@ -458,24 +604,22 @@ footer .f-brand{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:.5rem}
 
 <hr class="sep">
 
-<!-- ═══ SAMPLE 样本画像 ═══ -->
+<!-- 样本画像 -->
 <section id="sample">
-<div class="container">
-  <div class="sec-hd rv">
-    <span class="sec-tag teal">SAMPLE</span>
-    <h2 class="sec-title">样本画像与描述性统计</h2>
-    <p class="sec-desc">配额控制良好，四类用户实际占比与计划比例完全一致；样本以 3–10 年中坚力量为主</p>
-  </div>
+<div class="ctn">
+  <div class="shd rv"><span class="stag teal">SAMPLE</span>
+    <h2 class="stitle">样本画像与描述性统计</h2>
+    <p class="sdesc">配额控制良好，四类用户实际占比与计划比例完全一致；样本以 3–10 年中坚力量为主</p></div>
   <div class="g2">
-    <div class="chart-fig rv-l"><img src="charts/图3-1 样本行业与部门分布嵌套环形图.png" alt="样本用户类型分布"><div class="chart-cap">图 3-1 样本用户类型嵌套环形图（n=920）</div></div>
-    <div class="chart-fig rv-r"><img src="charts/图3-2 行业-部门交叉热力图.png" alt="样本地域分布"><div class="chart-cap">图 3-2 部门×行业交叉热力图</div></div>
+    <div class="cfig rv-l"><img src="charts/图3-1 样本行业与部门分布嵌套环形图.png" alt="样本用户类型分布"><div class="cap">图 3-1 样本用户类型嵌套环形图（n=920）</div></div>
+    <div class="cfig rv-r"><img src="charts/图3-2 行业-部门交叉热力图.png" alt="样本地域分布"><div class="cap">图 3-2 部门×行业交叉热力图</div></div>
   </div>
-  <div class="g2" style="margin-top:1.5rem">
-    <div class="chart-fig rv-l"><img src="charts/图3-3 细分岗位矩形树图.png" alt="行业规模"><div class="chart-cap">图 3-3 行业规模矩形树图</div></div>
-    <div class="chart-fig rv-r"><img src="charts/图3-4 从业年限与学历棒棒糖图.png" alt="职级学历"><div class="chart-cap">图 3-4 职级×学历分组棒棒糖图</div></div>
+  <div class="g2" style="margin-top:1.4rem">
+    <div class="cfig rv-l"><img src="charts/图3-3 细分岗位矩形树图.png" alt="行业规模"><div class="cap">图 3-3 行业规模矩形树图</div></div>
+    <div class="cfig rv-r"><img src="charts/图3-4 从业年限与学历棒棒糖图.png" alt="职级学历"><div class="cap">图 3-4 职级×学历分组棒棒糖图</div></div>
   </div>
-  <div class="chart-fig rv" style="margin-top:1.5rem"><img src="charts/图3-5 年度预算径向条形图.png" alt="年检测量"><div class="chart-cap">图 3-5 地区×从业年限径向柱状图</div></div>
-  <div class="insight rv" style="margin-top:1.5rem">
+  <div class="cfig rv" style="margin-top:1.4rem"><img src="charts/图3-5 年度预算径向条形图.png" alt="年检测量"><div class="cap">图 3-5 地区×从业年限径向柱状图</div></div>
+  <div class="insight rv" style="margin-top:1.4rem">
     <strong>核心发现：</strong>55.2% 的受访者仍依赖实验室 GC-MS/HPLC 检测，12.2% 甚至没有任何专用检测设备——后者构成灵探 InSensor 的直接市场切入点。样本以 3–10 年中坚力量为主（55.0%），年检测量 500 次以上的高频用户占 46.5%，对便携快检存在强烈的场景需求。
   </div>
 </div>
@@ -483,21 +627,19 @@ footer .f-brand{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:.5rem}
 
 <hr class="sep">
 
-<!-- ═══ VALIDITY 信效度 ═══ -->
+<!-- 信效度 -->
 <section id="validity" class="alt">
-<div class="container">
-  <div class="sec-hd rv">
-    <span class="sec-tag blue">VALIDITY</span>
-    <h2 class="sec-title">量表信度与效度</h2>
-    <p class="sec-desc">所有量表 Cronbach's α ≥ 0.79，CFA 五项拟合指标全部达到"良好"水平</p>
-  </div>
+<div class="ctn">
+  <div class="shd rv"><span class="stag blue">VALIDITY</span>
+    <h2 class="stitle">量表信度与效度</h2>
+    <p class="sdesc">所有量表 Cronbach's α ≥ 0.79，CFA 五项拟合指标全部达到"良好"水平</p></div>
   <div class="g2">
-    <div class="chart-fig rv-l"><img src="charts/图4-1 Cronbach信度系数汇总.png" alt="信度"><div class="chart-cap">图 4-1 Cronbach's α 仪表盘</div></div>
-    <div class="chart-fig rv-r"><img src="charts/图4-2 结构效度CFA指标全景.png" alt="CFA"><div class="chart-cap">图 4-2 CFA 拟合指标雷达图</div></div>
+    <div class="cfig rv-l"><img src="charts/图4-1 Cronbach信度系数汇总.png" alt="信度"><div class="cap">图 4-1 Cronbach's α 仪表盘</div></div>
+    <div class="cfig rv-r"><img src="charts/图4-2 结构效度CFA指标全景.png" alt="CFA"><div class="cap">图 4-2 CFA 拟合指标雷达图</div></div>
   </div>
-  <div class="card rv" style="margin-top:1.5rem">
+  <div class="card rv" style="margin-top:1.4rem">
     <div class="card-t"><span class="ic">✅</span>信效度检验总结</div>
-    <table class="dtable">
+    <table class="dtbl">
       <thead><tr><th>指标</th><th>数值</th><th>参考标准</th><th>判定</th></tr></thead>
       <tbody>
         <tr><td>KMO（EFA）</td><td>0.873</td><td>&gt; 0.80</td><td class="badge-ok">优良</td></tr>
@@ -514,27 +656,25 @@ footer .f-brand{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:.5rem}
 
 <hr class="sep">
 
-<!-- ═══ PAIN 痛点分析 ═══ -->
+<!-- 痛点分析 -->
 <section id="pain">
-<div class="container">
-  <div class="sec-hd rv">
-    <span class="sec-tag coral">PAIN POINTS</span>
-    <h2 class="sec-title">行业痛点深度分析</h2>
-    <p class="sec-desc">五项痛点均值均 > 3.80，行业整体处于"高痛点"状态；送检时延（M=4.36）是最突出痛点</p>
-  </div>
+<div class="ctn">
+  <div class="shd rv"><span class="stag coral">PAIN POINTS</span>
+    <h2 class="stitle">行业痛点深度分析</h2>
+    <p class="sdesc">五项痛点均值均 > 3.80，行业整体处于"高痛点"状态；送检时延（M=4.36）是最突出痛点</p></div>
   <div class="g2">
-    <div class="chart-fig rv-l"><img src="charts/图5-1 痛点严重度热力矩阵.png" alt="痛点雷达"><div class="chart-cap">图 5-1 八维痛点雷达图（行业叠加）</div></div>
-    <div class="chart-fig rv-r"><img src="charts/图5-2 行业痛点雷达对比.png" alt="痛点对比"><div class="chart-cap">图 5-2 技术使用偏好子弹图</div></div>
+    <div class="cfig rv-l"><img src="charts/图5-1 痛点严重度热力矩阵.png" alt="痛点雷达"><div class="cap">图 5-1 八维痛点雷达图（行业叠加）</div></div>
+    <div class="cfig rv-r"><img src="charts/图5-2 行业痛点雷达对比.png" alt="痛点对比"><div class="cap">图 5-2 技术使用偏好子弹图</div></div>
   </div>
-  <div class="chart-fig rv" style="margin-top:1.5rem"><img src="charts/图5-3 痛点TOPSIS综合排序.png" alt="痛点分组"><div class="chart-cap">图 5-3 痛点分组箱线图（2×2 分面）</div></div>
-  <div class="card rv" style="margin-top:1.5rem">
+  <div class="cfig rv" style="margin-top:1.4rem"><img src="charts/图5-3 痛点TOPSIS综合排序.png" alt="痛点分组"><div class="cap">图 5-3 痛点分组箱线图（2×2 分面）</div></div>
+  <div class="card rv" style="margin-top:1.4rem">
     <div class="card-t"><span class="ic">🔥</span>五大痛点严重度</div>
-    <div style="margin-top:.5rem">
-      <div class="abar"><span class="abar-lbl">送检等待时间长</span><div class="abar-track"><div class="abar-fill blue" data-width="87.2%">4.36</div></div></div>
-      <div class="abar"><span class="abar-lbl">混合识别困难</span><div class="abar-track"><div class="abar-fill teal" data-width="84.8%">4.24</div></div></div>
-      <div class="abar"><span class="abar-lbl">场景适配不足</span><div class="abar-track"><div class="abar-fill gold" data-width="81.8%">4.09</div></div></div>
-      <div class="abar"><span class="abar-lbl">基层覆盖不足</span><div class="abar-track"><div class="abar-fill coral" data-width="80.0%">4.00</div></div></div>
-      <div class="abar"><span class="abar-lbl">耗材维护成本</span><div class="abar-track"><div class="abar-fill ink" data-width="76.0%">3.80</div></div></div>
+    <div style="margin-top:.4rem">
+      <div class="abar"><span class="abar-lbl">送检等待时间长</span><div class="abar-trk"><div class="abar-fill blue" data-width="87.2%">4.36</div></div></div>
+      <div class="abar"><span class="abar-lbl">混合识别困难</span><div class="abar-trk"><div class="abar-fill teal" data-width="84.8%">4.24</div></div></div>
+      <div class="abar"><span class="abar-lbl">场景适配不足</span><div class="abar-trk"><div class="abar-fill gold" data-width="81.8%">4.09</div></div></div>
+      <div class="abar"><span class="abar-lbl">基层覆盖不足</span><div class="abar-trk"><div class="abar-fill coral" data-width="80.0%">4.00</div></div></div>
+      <div class="abar"><span class="abar-lbl">耗材维护成本</span><div class="abar-trk"><div class="abar-fill ink" data-width="76.0%">3.80</div></div></div>
     </div>
   </div>
   <div class="insight rv">
@@ -545,26 +685,24 @@ footer .f-brand{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:.5rem}
 
 <hr class="sep">
 
-<!-- ═══ VALUE 感知价值 ═══ -->
+<!-- 感知价值 -->
 <section id="value" class="alt">
-<div class="container">
-  <div class="sec-hd rv">
-    <span class="sec-tag teal">VALUE &amp; INTENT</span>
-    <h2 class="sec-title">感知价值与购买意愿</h2>
-    <p class="sec-desc">感知价值（β=0.412）是购买意愿最强预测因子；中介效应达 63%</p>
-  </div>
+<div class="ctn">
+  <div class="shd rv"><span class="stag teal">VALUE &amp; INTENT</span>
+    <h2 class="stitle">感知价值与购买意愿</h2>
+    <p class="sdesc">感知价值（β=0.412）是购买意愿最强预测因子；中介效应达 63%</p></div>
   <div class="g2">
-    <div class="chart-fig rv-l"><img src="charts/图6-1 感知价值重要度排序.png" alt="感知价值"><div class="chart-cap">图 6-1 满意度-期望值哑铃图</div></div>
-    <div class="chart-fig rv-r"><img src="charts/图6-4 功能维度哑铃对比.png" alt="散点密度"><div class="chart-cap">图 6-4 散点密度图（回归 + KDE 等高线）</div></div>
+    <div class="cfig rv-l"><img src="charts/图6-1 感知价值重要度排序.png" alt="感知价值"><div class="cap">图 6-1 满意度-期望值哑铃图</div></div>
+    <div class="cfig rv-r"><img src="charts/图6-4 功能维度哑铃对比.png" alt="散点密度"><div class="cap">图 6-4 散点密度图（回归 + KDE 等高线）</div></div>
   </div>
-  <div class="g2" style="margin-top:1.5rem">
-    <div class="chart-fig rv-l"><img src="charts/图6-2 行业感知价值雷达对比.png" alt="价值堆叠"><div class="chart-cap">图 6-2 价值维度堆叠百分比柱状图</div></div>
-    <div class="chart-fig rv-r"><img src="charts/图6-3 感知价值TopN交叉分析.png" alt="热力图"><div class="chart-cap">图 6-3 行业×价值维度热力图</div></div>
+  <div class="g2" style="margin-top:1.4rem">
+    <div class="cfig rv-l"><img src="charts/图6-2 行业感知价值雷达对比.png" alt="价值堆叠"><div class="cap">图 6-2 价值维度堆叠百分比柱状图</div></div>
+    <div class="cfig rv-r"><img src="charts/图6-3 感知价值TopN交叉分析.png" alt="热力图"><div class="cap">图 6-3 行业×价值维度热力图</div></div>
   </div>
-  <div class="chart-fig rv" style="margin-top:1.5rem"><img src="charts/图6-5 便携维度Likert分歧图.png" alt="瀑布图"><div class="chart-cap">图 6-5 满意度增量瀑布图</div></div>
-  <div class="card rv" style="margin-top:1.5rem">
+  <div class="cfig rv" style="margin-top:1.4rem"><img src="charts/图6-5 便携维度Likert分歧图.png" alt="瀑布图"><div class="cap">图 6-5 满意度增量瀑布图</div></div>
+  <div class="card rv" style="margin-top:1.4rem">
     <div class="card-t"><span class="ic">📊</span>层次回归核心系数</div>
-    <table class="dtable">
+    <table class="dtbl">
       <thead><tr><th>变量</th><th>标准化 β</th><th>t 值</th><th>p 值</th><th>VIF</th></tr></thead>
       <tbody>
         <tr class="hl"><td>感知价值均值</td><td>0.412</td><td>9.87</td><td>&lt;0.001</td><td>1.95</td></tr>
@@ -574,7 +712,7 @@ footer .f-brand{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:.5rem}
         <tr><td>政策均值</td><td>0.095</td><td>2.44</td><td>0.015</td><td>1.64</td></tr>
       </tbody>
     </table>
-    <p style="font-size:.85rem;color:var(--text-mid);margin-top:.8rem">全模型 R²=0.442，所有 VIF&lt;2.0，Durbin-Watson=2.04</p>
+    <p style="font-size:.83rem;color:var(--tx2);margin-top:.7rem">全模型 R²=0.442，所有 VIF&lt;2.0，Durbin-Watson=2.04</p>
   </div>
   <div class="insight rv">
     <strong>核心结论：</strong>感知价值在"痛点 → 购买意愿"路径中的中介效应比例高达 <strong>63%</strong>（Bootstrap 5,000 次，95% CI [0.158, 0.278]，不含 0）。政策推动可额外贡献意愿提升 Δ+0.41（配对 t 检验 p&lt;0.001），是重要的催化因子。
@@ -584,19 +722,17 @@ footer .f-brand{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:.5rem}
 
 <hr class="sep">
 
-<!-- ═══ SEM ═══ -->
+<!-- SEM -->
 <section id="sem">
-<div class="container">
-  <div class="sec-hd rv">
-    <span class="sec-tag ink">SEM</span>
-    <h2 class="sec-title">结构方程模型：全路径验证</h2>
-    <p class="sec-desc">CFI=0.961, RMSEA=0.051 — 模型拟合良好；10 条假设路径全部获得实证支持</p>
-  </div>
-  <div class="chart-fig rv" style="max-width:800px;margin:0 auto"><img src="charts/图7-1 SEM路径系数模型.png" alt="SEM"><div class="chart-cap">图 7-1 SEM 路径分析图</div></div>
-  <div class="card rv" style="margin-top:2rem">
+<div class="ctn">
+  <div class="shd rv"><span class="stag ink">SEM</span>
+    <h2 class="stitle">结构方程模型：全路径验证</h2>
+    <p class="sdesc">CFI=0.961, RMSEA=0.051 — 模型拟合良好；10 条假设路径全部获得实证支持</p></div>
+  <div class="cfig rv" style="max-width:800px;margin:0 auto"><img src="charts/图7-1 SEM路径系数模型.png" alt="SEM"><div class="cap">图 7-1 SEM 路径分析图</div></div>
+  <div class="card rv" style="margin-top:1.8rem">
     <div class="card-t"><span class="ic">🎯</span>假设检验结果总览</div>
     <div style="overflow-x:auto">
-    <table class="dtable">
+    <table class="dtbl">
       <thead><tr><th>假设</th><th>路径</th><th>标准化系数</th><th>p 值</th><th>结果</th></tr></thead>
       <tbody>
         <tr><td>H1</td><td>痛点 → 购买意愿</td><td>0.13</td><td>0.003</td><td class="hyp-ok">支持</td></tr>
@@ -621,22 +757,20 @@ footer .f-brand{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:.5rem}
 
 <hr class="sep">
 
-<!-- ═══ PRICE 定价分析 ═══ -->
+<!-- 定价分析 -->
 <section id="price" class="alt">
-<div class="container">
-  <div class="sec-hd rv">
-    <span class="sec-tag gold">PRICING</span>
-    <h2 class="sec-title">Van Westendorp 价格敏感度分析</h2>
-    <p class="sec-desc">可接受价格带 2,680–5,420 元，最优定价点 3,890 元；定价策略完美落入目标区间</p>
+<div class="ctn">
+  <div class="shd rv"><span class="stag gold">PRICING</span>
+    <h2 class="stitle">Van Westendorp 价格敏感度分析</h2>
+    <p class="sdesc">可接受价格带 2,680–5,420 元，最优定价点 3,890 元；定价策略完美落入目标区间</p></div>
+  <div class="cfig rv" style="max-width:800px;margin:0 auto"><img src="charts/图8-1 PSM价格敏感度分析.png" alt="PSM"><div class="cap">图 8-1 Van Westendorp PSM 四曲线交叉分析</div></div>
+  <div class="pband rv" style="margin-top:2.2rem">
+    <div class="pnode"><div class="big blue">¥2,680</div><div class="ptag">PMC 价格下限</div></div>
+    <div class="pnode"><div class="big blue">¥3,250</div><div class="ptag">IDP 无差异价位</div></div>
+    <div class="pnode star"><div class="big gold">¥3,890</div><div class="ptag">OPP 最优定价 ★</div></div>
+    <div class="pnode"><div class="big blue">¥5,420</div><div class="ptag">PME 价格上限</div></div>
   </div>
-  <div class="chart-fig rv" style="max-width:800px;margin:0 auto"><img src="charts/图8-1 PSM价格敏感度分析.png" alt="PSM"><div class="chart-cap">图 8-1 Van Westendorp PSM 四曲线交叉分析</div></div>
-  <div class="price-band rv" style="margin-top:2.5rem">
-    <div class="price-node"><div class="big blue">¥2,680</div><div class="tag">PMC 价格下限</div></div>
-    <div class="price-node"><div class="big blue">¥3,250</div><div class="tag">IDP 无差异价位</div></div>
-    <div class="price-node star"><div class="big gold">¥3,890</div><div class="tag">OPP 最优定价 ★</div></div>
-    <div class="price-node"><div class="big blue">¥5,420</div><div class="tag">PME 价格上限</div></div>
-  </div>
-  <div class="chart-fig rv" style="max-width:800px;margin:2rem auto 0"><img src="charts/图8-2 GABOR定价分位数分析.png" alt="分用户价格"><div class="chart-cap">图 8-2 购买意愿漏斗图</div></div>
+  <div class="cfig rv" style="max-width:800px;margin:1.8rem auto 0"><img src="charts/图8-2 GABOR定价分位数分析.png" alt="分用户价格"><div class="cap">图 8-2 购买意愿漏斗图</div></div>
   <div class="insight rv">
     <strong>定价策略建议：</strong>公安禁毒和海关系统的 OPP 分别为 4,120 元和 3,950 元，支持<strong>执法版 4,580–4,980 元</strong>定价。危化企业和园区/物流的 OPP 分别为 3,620 元和 3,480 元，对应<strong>标准版 3,580 元</strong>定位。
   </div>
@@ -645,36 +779,34 @@ footer .f-brand{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:.5rem}
 
 <hr class="sep">
 
-<!-- ═══ CLUSTER 用户聚类 ═══ -->
+<!-- 用户聚类 -->
 <section id="cluster">
-<div class="container">
-  <div class="sec-hd rv">
-    <span class="sec-tag sage">SEGMENTATION</span>
-    <h2 class="sec-title">K-means 用户聚类与精准营销</h2>
-    <p class="sec-desc">k=4 时轮廓系数最高（0.412），四类用户画像清晰可操作</p>
-  </div>
+<div class="ctn">
+  <div class="shd rv"><span class="stag sage">SEGMENTATION</span>
+    <h2 class="stitle">K-means 用户聚类与精准营销</h2>
+    <p class="sdesc">k=4 时轮廓系数最高（0.412），四类用户画像清晰可操作</p></div>
   <div class="g2">
-    <div class="chart-fig rv-l"><img src="charts/图9-1 K-Means聚类轮廓系数.png" alt="轮廓系数"><div class="chart-cap">图 9-1 轮廓系数诊断图</div></div>
-    <div class="chart-fig rv-r"><img src="charts/图9-2 三群体聚类特征画像.png" alt="用户画像"><div class="chart-cap">图 9-2 四类用户画像雷达对比图</div></div>
+    <div class="cfig rv-l"><img src="charts/图9-1 K-Means聚类轮廓系数.png" alt="轮廓系数"><div class="cap">图 9-1 轮廓系数诊断图</div></div>
+    <div class="cfig rv-r"><img src="charts/图9-2 三群体聚类特征画像.png" alt="用户画像"><div class="cap">图 9-2 四类用户画像雷达对比图</div></div>
   </div>
-  <div class="chart-fig rv" style="margin-top:1.5rem"><img src="charts/图9-3 聚类群体雷达对比.png" alt="聚类环形"><div class="chart-cap">图 9-3 聚类占比环形图 + 特征卡</div></div>
-  <div class="cluster-row stagger" style="margin-top:2rem">
-    <div class="cluster-card c1 rv">
+  <div class="cfig rv" style="margin-top:1.4rem"><img src="charts/图9-3 聚类群体雷达对比.png" alt="聚类环形"><div class="cap">图 9-3 聚类占比环形图 + 特征卡</div></div>
+  <div class="cl-row stagger" style="margin-top:1.8rem">
+    <div class="cl-c c1 rv">
       <h4>C1 · 铁杆拥趸</h4>
       <div class="pct" style="color:var(--teal)">27.8%（128 人）</div>
       <p>痛点极高·价值极高·意愿极强·预算充足。优先直销攻坚，推出执法版套餐，培养为种子客户和案例来源。</p>
     </div>
-    <div class="cluster-card c2 rv">
+    <div class="cl-c c2 rv">
       <h4>C2 · 理性观望</h4>
       <div class="pct" style="color:var(--gold)">30.9%（142 人）</div>
       <p>认可价值但犹豫不决。关键策略：安排免费试用与现场演示，强化第三方检测报告背书，借力政策推动。</p>
     </div>
-    <div class="cluster-card c3 rv">
+    <div class="cl-c c3 rv">
       <h4>C3 · 价格敏感</h4>
       <div class="pct" style="color:var(--coral)">23.5%（108 人）</div>
       <p>意愿受价格强烈驱动。推出标准版（3,580 元），重点传播零耗材的全生命周期 TCO 优势。</p>
     </div>
-    <div class="cluster-card c4 rv">
+    <div class="cl-c c4 rv">
       <h4>C4 · 低需冷感</h4>
       <div class="pct" style="color:var(--steel)">17.8%（82 人）</div>
       <p>痛点弱、需求低、预算紧。暂缓主动营销投入，通过行业会议和学术发表建立品类认知。</p>
@@ -688,18 +820,16 @@ footer .f-brand{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:.5rem}
 
 <hr class="sep">
 
-<!-- ═══ IPA ═══ -->
+<!-- IPA -->
 <section id="ipa" class="alt">
-<div class="container">
-  <div class="sec-hd rv">
-    <span class="sec-tag blue">IPA ANALYSIS</span>
-    <h2 class="sec-title">IPA 重要性-表现分析</h2>
-    <p class="sec-desc">混合识别能力是唯一需要重点改进的维度</p>
-  </div>
-  <div class="chart-fig rv" style="max-width:700px;margin:0 auto"><img src="charts/图10-1 IPA重要度-满意度矩阵.png" alt="IPA"><div class="chart-cap">图 10-1 IPA 重要性-表现四象限散点图</div></div>
-  <div class="card rv" style="margin-top:2rem">
+<div class="ctn">
+  <div class="shd rv"><span class="stag blue">IPA ANALYSIS</span>
+    <h2 class="stitle">IPA 重要性-表现分析</h2>
+    <p class="sdesc">混合识别能力是唯一需要重点改进的维度</p></div>
+  <div class="cfig rv" style="max-width:700px;margin:0 auto"><img src="charts/图10-1 IPA重要度-满意度矩阵.png" alt="IPA"><div class="cap">图 10-1 IPA 重要性-表现四象限散点图</div></div>
+  <div class="card rv" style="margin-top:1.8rem">
     <div class="card-t"><span class="ic">🎯</span>象限解读</div>
-    <table class="dtable">
+    <table class="dtbl">
       <thead><tr><th>维度</th><th>重要性</th><th>表现</th><th>象限</th><th>行动建议</th></tr></thead>
       <tbody>
         <tr><td>响应速度</td><td>4.36</td><td>4.40</td><td class="badge-ok">继续保持</td><td>"30 秒出结果"卖点已获认可</td></tr>
@@ -715,26 +845,24 @@ footer .f-brand{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:.5rem}
 
 <hr class="sep">
 
-<!-- ═══ NPS ═══ -->
+<!-- NPS -->
 <section id="nps">
-<div class="container">
-  <div class="sec-hd rv">
-    <span class="sec-tag sage">NPS</span>
-    <h2 class="sec-title">NPS 净推荐值分析</h2>
-    <p class="sec-desc">NPS = +15.2，在产品尚未上市的前提下已接近 B2B 硬件行业平均水平（+20）</p>
-  </div>
+<div class="ctn">
+  <div class="shd rv"><span class="stag sage">NPS</span>
+    <h2 class="stitle">NPS 净推荐值分析</h2>
+    <p class="sdesc">NPS = +15.2，在产品尚未上市的前提下已接近 B2B 硬件行业平均水平（+20）</p></div>
   <div class="g2">
     <div class="nps-hero rv-l">
-      <div class="nps-val">+15.2</div>
-      <div class="nps-lbl">NPS 净推荐值</div>
-      <div style="margin-top:1rem;font-size:.88rem;color:var(--text-mid)">推荐者 38.5%（354人）· 被动者 38.2%（352人）· 贬损者 23.3%（214人）</div>
+      <div class="nps-v">+15.2</div>
+      <div class="nps-l">NPS 净推荐值</div>
+      <div style="margin-top:.9rem;font-size:.86rem;color:var(--tx2)">推荐者 38.5%（354人）· 被动者 38.2%（352人）· 贬损者 23.3%（214人）</div>
     </div>
-    <div class="chart-fig rv-r"><img src="charts/图11-1 NPS净推荐值仪表盘.png" alt="NPS仪表盘"><div class="chart-cap">图 11-1 NPS 弧形仪表盘</div></div>
+    <div class="cfig rv-r"><img src="charts/图11-1 NPS净推荐值仪表盘.png" alt="NPS仪表盘"><div class="cap">图 11-1 NPS 弧形仪表盘</div></div>
   </div>
-  <div class="chart-fig rv" style="margin-top:1.5rem"><img src="charts/图11-2 行业NPS分群环形对比.png" alt="NPS分面"><div class="chart-cap">图 11-2 NPS 行业分面堆叠图</div></div>
-  <div class="card rv" style="margin-top:1.5rem">
+  <div class="cfig rv" style="margin-top:1.4rem"><img src="charts/图11-2 行业NPS分群环形对比.png" alt="NPS分面"><div class="cap">图 11-2 NPS 行业分面堆叠图</div></div>
+  <div class="card rv" style="margin-top:1.4rem">
     <div class="card-t"><span class="ic">📈</span>分用户 NPS 及驱动因素</div>
-    <table class="dtable">
+    <table class="dtbl">
       <thead><tr><th>用户类型</th><th>NPS</th><th>推荐者</th><th>贬损者</th><th>首要驱动因素</th></tr></thead>
       <tbody>
         <tr><td>公安禁毒</td><td style="color:var(--sage);font-weight:700">+22.1</td><td>43.5%</td><td>21.4%</td><td>效率提升（β=0.328）</td></tr>
@@ -749,17 +877,15 @@ footer .f-brand{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:.5rem}
 
 <hr class="sep">
 
-<!-- ═══ CHANNEL 渠道忠诚 ═══ -->
+<!-- 渠道忠诚 -->
 <section id="channel" class="alt">
-<div class="container">
-  <div class="sec-hd rv">
-    <span class="sec-tag coral">CHANNEL &amp; LOYALTY</span>
-    <h2 class="sec-title">渠道认知与复购忠诚度</h2>
-    <p class="sec-desc">系统集成商推荐和行业展会是最主要的认知渠道</p>
-  </div>
-  <div class="chart-fig rv" style="max-width:700px;margin:0 auto"><img src="charts/图12-1 信息获取渠道排序棒棒糖图.png" alt="渠道"><div class="chart-cap">图 12-1 渠道认知棒棒糖排名图</div></div>
-  <div class="chart-fig rv" style="max-width:700px;margin:1.5rem auto 0"><img src="charts/图12-2 复购驱动因素行业雷达对比.png" alt="忠诚度"><div class="chart-cap">图 12-2 忠诚度因素分组对比柱状图</div></div>
-  <div class="card rv" style="margin-top:1.5rem">
+<div class="ctn">
+  <div class="shd rv"><span class="stag coral">CHANNEL &amp; LOYALTY</span>
+    <h2 class="stitle">渠道认知与复购忠诚度</h2>
+    <p class="sdesc">系统集成商推荐和行业展会是最主要的认知渠道</p></div>
+  <div class="cfig rv" style="max-width:700px;margin:0 auto"><img src="charts/图12-1 信息获取渠道排序棒棒糖图.png" alt="渠道"><div class="cap">图 12-1 渠道认知棒棒糖排名图</div></div>
+  <div class="cfig rv" style="max-width:700px;margin:1.4rem auto 0"><img src="charts/图12-2 复购驱动因素行业雷达对比.png" alt="忠诚度"><div class="cap">图 12-2 忠诚度因素分组对比柱状图</div></div>
+  <div class="card rv" style="margin-top:1.4rem">
     <div class="card-t"><span class="ic">💬</span>代表性回答摘录</div>
     <blockquote class="quote">"每次都要送到市局实验室，一来一回最快 3 天，嫌疑人早跑了。"<br>——公安禁毒，云南</blockquote>
     <blockquote class="quote teal">"口岸上一天过几百车，GC-MS 排队排到天黑也检不完。"<br>——海关口岸，广东</blockquote>
@@ -770,23 +896,21 @@ footer .f-brand{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:.5rem}
 
 <hr class="sep">
 
-<!-- ═══ COMPETE 竞争格局 ═══ -->
+<!-- 竞争格局 -->
 <section id="compete">
-<div class="container">
-  <div class="sec-hd rv">
-    <span class="sec-tag ink">COMPETITION</span>
-    <h2 class="sec-title">竞争格局与市场规模</h2>
-    <p class="sec-desc">灵探 InSensor 在"价格—准确率—便携性"三角中实现了竞品无法覆盖的交叉区域</p>
-  </div>
+<div class="ctn">
+  <div class="shd rv"><span class="stag ink">COMPETITION</span>
+    <h2 class="stitle">竞争格局与市场规模</h2>
+    <p class="sdesc">灵探 InSensor 在"价格—准确率—便携性"三角中实现了竞品无法覆盖的交叉区域</p></div>
   <div class="g2">
-    <div class="chart-fig rv-l"><img src="charts/图13-1 供应商信任度蝴蝶双向图.png" alt="供应商"><div class="chart-cap">图 13-1 供应商信任度分析</div></div>
-    <div class="chart-fig rv-r"><img src="charts/图13-2 品牌影响力堆叠分布.png" alt="品牌"><div class="chart-cap">图 13-2 品牌影响力堆叠分布</div></div>
+    <div class="cfig rv-l"><img src="charts/图13-1 供应商信任度蝴蝶双向图.png" alt="供应商"><div class="cap">图 13-1 供应商信任度分析</div></div>
+    <div class="cfig rv-r"><img src="charts/图13-2 品牌影响力堆叠分布.png" alt="品牌"><div class="cap">图 13-2 品牌影响力堆叠分布</div></div>
   </div>
-  <div class="chart-fig rv" style="margin-top:1.5rem"><img src="charts/图13-3 总体满意度仪表盘.png" alt="满意度"><div class="chart-cap">图 13-3 总体满意度仪表盘</div></div>
-  <div class="card rv" style="margin-top:1.5rem">
+  <div class="cfig rv" style="margin-top:1.4rem"><img src="charts/图13-3 总体满意度仪表盘.png" alt="满意度"><div class="cap">图 13-3 总体满意度仪表盘</div></div>
+  <div class="card rv" style="margin-top:1.4rem">
     <div class="card-t"><span class="ic">🏆</span>竞品对比矩阵</div>
     <div style="overflow-x:auto">
-    <table class="dtable">
+    <table class="dtbl">
       <thead><tr><th>维度</th><th>GC-MS</th><th>手持拉曼</th><th>IMS</th><th>生物快检</th><th style="background:var(--teal)">灵探 InSensor</th></tr></thead>
       <tbody>
         <tr><td>检测时间</td><td>~312 min</td><td>15–60 s</td><td>5–15 s</td><td>3–10 min</td><td style="font-weight:700;color:var(--teal)">&lt;30 s</td></tr>
@@ -806,14 +930,12 @@ footer .f-brand{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:.5rem}
 
 <hr class="sep">
 
-<!-- ═══ FINANCE 财务预测 ═══ -->
+<!-- 财务预测 -->
 <section id="finance" class="alt">
-<div class="container">
-  <div class="sec-hd rv">
-    <span class="sec-tag gold">FINANCE</span>
-    <h2 class="sec-title">财务预测与投资回报</h2>
-    <p class="sec-desc">500 万初始投资，预计 2–3 年回本，投资回报率 60%</p>
-  </div>
+<div class="ctn">
+  <div class="shd rv"><span class="stag gold">FINANCE</span>
+    <h2 class="stitle">财务预测与投资回报</h2>
+    <p class="sdesc">500 万初始投资，预计 2–3 年回本，投资回报率 60%</p></div>
   <div class="kpi-row stagger">
     <div class="kpi rv"><div class="num gold">500万</div><div class="label">总投资额</div></div>
     <div class="kpi rv"><div class="num teal">60%</div><div class="label">投资回报率</div></div>
@@ -821,14 +943,14 @@ footer .f-brand{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:.5rem}
     <div class="kpi rv"><div class="num sage">5,202万</div><div class="label">5年总营收</div></div>
   </div>
   <div class="g2">
-    <div class="chart-fig rv-l"><img src="charts/图14-1 五年财务预测面积图.png" alt="财务预测"><div class="chart-cap">图 14-1 五年财务预测瀑布图（2026–2030）</div></div>
-    <div class="chart-fig rv-r"><img src="charts/图14-2 ROI-IRR-NPV投资回报仪表盘.png" alt="ROI仪表盘"><div class="chart-cap">图 14-2 投资回报综合仪表盘</div></div>
+    <div class="cfig rv-l"><img src="charts/图14-1 五年财务预测面积图.png" alt="财务预测"><div class="cap">图 14-1 五年财务预测瀑布图（2026–2030）</div></div>
+    <div class="cfig rv-r"><img src="charts/图14-2 ROI-IRR-NPV投资回报仪表盘.png" alt="ROI仪表盘"><div class="cap">图 14-2 投资回报综合仪表盘</div></div>
   </div>
-  <div class="chart-fig rv" style="margin-top:1.5rem"><img src="charts/图14-3 LTV-CAC与回收期组合图.png" alt="回收期"><div class="chart-cap">图 14-3 投资回收组合图</div></div>
-  <div class="card rv" style="margin-top:1.5rem">
+  <div class="cfig rv" style="margin-top:1.4rem"><img src="charts/图14-3 LTV-CAC与回收期组合图.png" alt="回收期"><div class="cap">图 14-3 投资回收组合图</div></div>
+  <div class="card rv" style="margin-top:1.4rem">
     <div class="card-t"><span class="ic">💰</span>五年营收预测</div>
     <div style="overflow-x:auto">
-    <table class="dtable">
+    <table class="dtbl">
       <thead><tr><th>年份</th><th>销量（台）</th><th>均价（元）</th><th>营收（万元）</th><th>单位成本（元）</th><th>毛利率</th></tr></thead>
       <tbody>
         <tr><td>2026</td><td>300</td><td>4,980</td><td>149.4</td><td>2,000</td><td>59.8%</td></tr>
@@ -846,21 +968,19 @@ footer .f-brand{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:.5rem}
 
 <hr class="sep">
 
-<!-- ═══ STRATEGY 战略建议 ═══ -->
+<!-- 战略建议 -->
 <section id="strategy">
-<div class="container">
-  <div class="sec-hd rv">
-    <span class="sec-tag teal">STRATEGY</span>
-    <h2 class="sec-title">战略建议与实施路径</h2>
-    <p class="sec-desc">四步走战略：种子验证 → 政策嵌入 → 规模扩张 → 生态锁定</p>
+<div class="ctn">
+  <div class="shd rv"><span class="stag teal">STRATEGY</span>
+    <h2 class="stitle">战略建议与实施路径</h2>
+    <p class="sdesc">四步走战略：种子验证 → 政策嵌入 → 规模扩张 → 生态锁定</p></div>
+  <div class="cfig rv" style="max-width:800px;margin:0 auto"><img src="charts/图15-1 战略优先级气泡矩阵.png" alt="SWOT"><div class="cap">图 15-1 SWOT 战略分析矩阵</div></div>
+  <div class="g2" style="margin-top:1.4rem">
+    <div class="cfig rv-l"><img src="charts/图15-2 实施路线甘特图.png" alt="甘特图"><div class="cap">图 15-2 三阶段战略路线甘特图</div></div>
+    <div class="cfig rv-r"><img src="charts/图A-1 全量相关系数热力图.png" alt="相关系数"><div class="cap">图 A-1 核心题项相关系数矩阵</div></div>
   </div>
-  <div class="chart-fig rv" style="max-width:800px;margin:0 auto"><img src="charts/图15-1 战略优先级气泡矩阵.png" alt="SWOT"><div class="chart-cap">图 15-1 SWOT 战略分析矩阵</div></div>
-  <div class="g2" style="margin-top:1.5rem">
-    <div class="chart-fig rv-l"><img src="charts/图15-2 实施路线甘特图.png" alt="甘特图"><div class="chart-cap">图 15-2 三阶段战略路线甘特图</div></div>
-    <div class="chart-fig rv-r"><img src="charts/图A-1 全量相关系数热力图.png" alt="相关系数"><div class="chart-cap">图 A-1 核心题项相关系数矩阵</div></div>
-  </div>
-  <div class="chart-fig rv" style="max-width:700px;margin:1.5rem auto 0"><img src="charts/图A-2 多重共线性VIF诊断.png" alt="VIF"><div class="chart-cap">图 A-2 数据质量诊断仪表盘</div></div>
-  <div class="card rv" style="margin-top:2rem">
+  <div class="cfig rv" style="max-width:700px;margin:1.4rem auto 0"><img src="charts/图A-2 多重共线性VIF诊断.png" alt="VIF"><div class="cap">图 A-2 数据质量诊断仪表盘</div></div>
+  <div class="card rv" style="margin-top:1.8rem">
     <div class="card-t"><span class="ic">🗺️</span>战略路线详解</div>
     <div class="vtl">
       <div class="vtl-item">
@@ -885,9 +1005,9 @@ footer .f-brand{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:.5rem}
       </div>
     </div>
   </div>
-  <div class="card rv" style="margin-top:1.5rem">
+  <div class="card rv" style="margin-top:1.4rem">
     <div class="card-t"><span class="ic">📌</span>核心营销策略矩阵</div>
-    <table class="dtable">
+    <table class="dtbl">
       <thead><tr><th>维度</th><th>策略</th><th>数据支撑</th></tr></thead>
       <tbody>
         <tr><td>定价</td><td>标准版 3,580 元 / 执法版 4,980 元</td><td>VW OPP = 3,890 元</td></tr>
@@ -904,265 +1024,239 @@ footer .f-brand{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:.5rem}
 
 <hr class="sep">
 
-<!-- ═══ SURVEY 调研问卷 ═══ -->
+<!-- 调研问卷 -->
 <section id="survey" class="alt">
-<div class="container-sm">
-  <div class="sec-hd rv">
-    <span class="sec-tag sky">QUESTIONNAIRE</span>
-    <h2 class="sec-title">调研问卷</h2>
-    <p class="sec-desc">配额抽样 · 匿名作答 · 纯学术用途 · 8 板块 45 题 · 预计 8–12 分钟</p>
-  </div>
-  <div class="card rv" style="margin-bottom:2rem">
-    <p style="color:var(--text-mid);font-size:.9rem;line-height:1.8">本问卷旨在了解便携式易制毒前体化学品检测装备的市场需求、用户痛点及采购偏好，用于学术研究与商业可行性分析。问卷匿名填写，不采集个人身份信息，所有数据仅做统计分析之用。</p>
-    <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:1rem">
-      <span style="font-size:.82rem;color:var(--blue);font-weight:600">📋 8 大板块</span>
-      <span style="font-size:.82rem;color:var(--blue);font-weight:600">📝 45 道题目</span>
-      <span style="font-size:.82rem;color:var(--blue);font-weight:600">⏱ 8–12 分钟</span>
-      <span style="font-size:.82rem;color:var(--blue);font-weight:600">🔒 匿名保密</span>
+<div class="ctn-sm">
+  <div class="shd rv"><span class="stag sky">QUESTIONNAIRE</span>
+    <h2 class="stitle">调研问卷</h2>
+    <p class="sdesc">配额抽样 · 匿名作答 · 纯学术用途 · 8 板块 45 题 · 预计 8–12 分钟</p></div>
+  <div class="card rv" style="margin-bottom:1.8rem">
+    <p style="color:var(--tx2);font-size:.88rem;line-height:1.8">本问卷旨在了解便携式易制毒前体化学品检测装备的市场需求、用户痛点及采购偏好，用于学术研究与商业可行性分析。问卷匿名填写，不采集个人身份信息，所有数据仅做统计分析之用。</p>
+    <div style="display:flex;gap:1.4rem;flex-wrap:wrap;margin-top:.9rem">
+      <span style="font-size:.8rem;color:var(--blue);font-weight:600">📋 8 大板块</span>
+      <span style="font-size:.8rem;color:var(--blue);font-weight:600">📝 45 道题目</span>
+      <span style="font-size:.8rem;color:var(--blue);font-weight:600">⏱ 8–12 分钟</span>
+      <span style="font-size:.8rem;color:var(--blue);font-weight:600">🔒 匿名保密</span>
     </div>
   </div>
 
-  <div class="q-accordion rv">
-    <!-- S 筛选 -->
-    <div class="q-acc-item">
-      <div class="q-acc-head" onclick="this.parentElement.classList.toggle('open')">
-        <div class="q-sec-icon" style="background:rgba(15,23,42,.06);color:var(--ink)">S</div>
-        <div class="q-sec-info"><h3>筛选部分</h3><span>Screening · 2 题</span></div>
-        <div class="q-acc-chevron">▼</div>
+  <div class="qacc rv">
+
+    <div class="qai">
+      <div class="qah" onclick="this.parentElement.classList.toggle('open')">
+        <div class="qsi" style="background:rgba(15,36,64,.05);color:var(--ink)">S</div>
+        <div class="qsf"><h3>筛选部分</h3><span>Screening · 2 题</span></div>
+        <div class="qchev">▼</div>
       </div>
-      <div class="q-acc-body"><div class="q-acc-content">
-        <div class="q-card"><span class="q-num ink">S1</span><div class="q-text">您目前的工作是否涉及易制毒前体化学品的检测、管理、采购或使用？</div><ul class="opts"><li><span class="opt-r"></span>是（继续）</li><li><span class="opt-r"></span>否（感谢参与，问卷结束）</li></ul></div>
-        <div class="q-card"><span class="q-num ink">S2</span><div class="q-text">您是否参与或影响所在单位检测装备的采购决策？</div><ul class="opts"><li><span class="opt-r"></span>是，我是主要决策者</li><li><span class="opt-r"></span>是，我参与评估与建议</li><li><span class="opt-r"></span>否，但我是设备使用者（继续）</li><li><span class="opt-r"></span>完全不涉及（感谢参与，问卷结束）</li></ul></div>
+      <div class="qab"><div class="qac">
+        <div class="qc"><span class="qn ink">S1</span><div class="qt">您目前的工作是否涉及易制毒前体化学品的检测、管理、采购或使用？</div><ul class="opts"><li><span class="optr"></span>是（继续）</li><li><span class="optr"></span>否（感谢参与，问卷结束）</li></ul></div>
+        <div class="qc"><span class="qn ink">S2</span><div class="qt">您是否参与或影响所在单位检测装备的采购决策？</div><ul class="opts"><li><span class="optr"></span>是，我是主要决策者</li><li><span class="optr"></span>是，我参与评估与建议</li><li><span class="optr"></span>否，但我是设备使用者（继续）</li><li><span class="optr"></span>完全不涉及（感谢参与，问卷结束）</li></ul></div>
       </div></div>
     </div>
 
-    <!-- A 基本画像 -->
-    <div class="q-acc-item">
-      <div class="q-acc-head" onclick="this.parentElement.classList.toggle('open')">
-        <div class="q-sec-icon" style="background:rgba(37,99,235,.08);color:var(--blue)">A</div>
-        <div class="q-sec-info"><h3>基本画像</h3><span>Demographics · 7 题</span></div>
-        <div class="q-acc-chevron">▼</div>
+    <div class="qai">
+      <div class="qah" onclick="this.parentElement.classList.toggle('open')">
+        <div class="qsi" style="background:rgba(37,99,235,.07);color:var(--blue)">A</div>
+        <div class="qsf"><h3>基本画像</h3><span>Demographics · 7 题</span></div>
+        <div class="qchev">▼</div>
       </div>
-      <div class="q-acc-body"><div class="q-acc-content">
-        <div class="q-card"><span class="q-num blue">A1</span><div class="q-text">您所在单位的性质是？</div><ul class="opts"><li><span class="opt-r"></span>公安禁毒系统</li><li><span class="opt-r"></span>海关/口岸系统</li><li><span class="opt-r"></span>危化品生产企业</li><li><span class="opt-r"></span>工业园区管理机构</li><li><span class="opt-r"></span>物流/仓储企业</li><li><span class="opt-r"></span>第三方检测机构</li><li><span class="opt-r"></span>科研院所/高校</li><li><span class="opt-r"></span>其他（请注明）</li></ul></div>
-        <div class="q-card"><span class="q-num blue">A2</span><div class="q-text">您所在单位位于哪个省/自治区/直辖市？</div><div class="q-note">（下拉选择 31 个省级行政区）</div></div>
-        <div class="q-card"><span class="q-num blue">A3</span><div class="q-text">您所在的主要工作场景是？</div><ul class="opts"><li><span class="opt-r"></span>现场执法/缉毒操作</li><li><span class="opt-r"></span>口岸/卡口查验</li><li><span class="opt-r"></span>企业安全巡检</li><li><span class="opt-r"></span>园区环境监测</li><li><span class="opt-r"></span>物流节点筛查</li><li><span class="opt-r"></span>实验室检测</li><li><span class="opt-r"></span>管理与决策</li><li><span class="opt-r"></span>其他</li></ul></div>
-        <div class="q-card"><span class="q-num blue">A4</span><div class="q-text">您的性别？</div><ul class="opts"><li><span class="opt-r"></span>男</li><li><span class="opt-r"></span>女</li></ul></div>
-        <div class="q-card"><span class="q-num blue">A5</span><div class="q-text">您从事与易制毒化学品相关工作的年限？</div><ul class="opts"><li><span class="opt-r"></span>不足 1 年</li><li><span class="opt-r"></span>1–3 年</li><li><span class="opt-r"></span>3–5 年</li><li><span class="opt-r"></span>5–10 年</li><li><span class="opt-r"></span>10 年以上</li></ul></div>
-        <div class="q-card"><span class="q-num blue">A6</span><div class="q-text">您所在单位每年涉及前体化学品检测/筛查的任务量约为？</div><ul class="opts"><li><span class="opt-r"></span>50 次以下</li><li><span class="opt-r"></span>50–200 次</li><li><span class="opt-r"></span>200–500 次</li><li><span class="opt-r"></span>500–1000 次</li><li><span class="opt-r"></span>1000 次以上</li></ul></div>
-        <div class="q-card"><span class="q-num blue">A7</span><div class="q-text">您所在单位年度检测装备采购预算（含维护）大约为？</div><ul class="opts"><li><span class="opt-r"></span>5 万元以下</li><li><span class="opt-r"></span>5–15 万元</li><li><span class="opt-r"></span>15–30 万元</li><li><span class="opt-r"></span>30–50 万元</li><li><span class="opt-r"></span>50 万元以上</li><li><span class="opt-r"></span>不清楚</li></ul></div>
+      <div class="qab"><div class="qac">
+        <div class="qc"><span class="qn blue">A1</span><div class="qt">您所在单位的性质是？</div><ul class="opts"><li><span class="optr"></span>公安禁毒系统</li><li><span class="optr"></span>海关/口岸系统</li><li><span class="optr"></span>危化品生产企业</li><li><span class="optr"></span>工业园区管理机构</li><li><span class="optr"></span>物流/仓储企业</li><li><span class="optr"></span>第三方检测机构</li><li><span class="optr"></span>科研院所/高校</li><li><span class="optr"></span>其他（请注明）</li></ul></div>
+        <div class="qc"><span class="qn blue">A2</span><div class="qt">您所在单位位于哪个省/自治区/直辖市？</div><div class="qnote">（下拉选择 31 个省级行政区）</div></div>
+        <div class="qc"><span class="qn blue">A3</span><div class="qt">您所在的主要工作场景是？</div><ul class="opts"><li><span class="optr"></span>现场执法/缉毒操作</li><li><span class="optr"></span>口岸/卡口查验</li><li><span class="optr"></span>企业安全巡检</li><li><span class="optr"></span>园区环境监测</li><li><span class="optr"></span>物流节点筛查</li><li><span class="optr"></span>实验室检测</li><li><span class="optr"></span>管理与决策</li><li><span class="optr"></span>其他</li></ul></div>
+        <div class="qc"><span class="qn blue">A4</span><div class="qt">您的性别？</div><ul class="opts"><li><span class="optr"></span>男</li><li><span class="optr"></span>女</li></ul></div>
+        <div class="qc"><span class="qn blue">A5</span><div class="qt">您从事与易制毒化学品相关工作的年限？</div><ul class="opts"><li><span class="optr"></span>不足 1 年</li><li><span class="optr"></span>1–3 年</li><li><span class="optr"></span>3–5 年</li><li><span class="optr"></span>5–10 年</li><li><span class="optr"></span>10 年以上</li></ul></div>
+        <div class="qc"><span class="qn blue">A6</span><div class="qt">您所在单位每年涉及前体化学品检测/筛查的任务量约为？</div><ul class="opts"><li><span class="optr"></span>50 次以下</li><li><span class="optr"></span>50–200 次</li><li><span class="optr"></span>200–500 次</li><li><span class="optr"></span>500–1000 次</li><li><span class="optr"></span>1000 次以上</li></ul></div>
+        <div class="qc"><span class="qn blue">A7</span><div class="qt">您所在单位年度检测装备采购预算（含维护）大约为？</div><ul class="opts"><li><span class="optr"></span>5 万元以下</li><li><span class="optr"></span>5–15 万元</li><li><span class="optr"></span>15–30 万元</li><li><span class="optr"></span>30–50 万元</li><li><span class="optr"></span>50 万元以上</li><li><span class="optr"></span>不清楚</li></ul></div>
       </div></div>
     </div>
 
-    <!-- B 痛点与需求 -->
-    <div class="q-acc-item">
-      <div class="q-acc-head" onclick="this.parentElement.classList.toggle('open')">
-        <div class="q-sec-icon" style="background:rgba(220,38,38,.08);color:var(--coral)">B</div>
-        <div class="q-sec-info"><h3>痛点与需求</h3><span>Pain Points · 9 题</span></div>
-        <div class="q-acc-chevron">▼</div>
+    <div class="qai">
+      <div class="qah" onclick="this.parentElement.classList.toggle('open')">
+        <div class="qsi" style="background:rgba(220,38,38,.07);color:var(--coral)">B</div>
+        <div class="qsf"><h3>痛点与需求</h3><span>Pain Points · 9 题</span></div>
+        <div class="qchev">▼</div>
       </div>
-      <div class="q-acc-body"><div class="q-acc-content">
-        <div class="q-card"><span class="q-num coral">B1</span><div class="q-text">您认为当前检测方式中"送检等待时间过长"的严重程度如何？</div><div class="likert"><div class="likert-item"><div class="likert-num">1</div><div class="likert-lbl">完全不严重</div></div><div class="likert-item"><div class="likert-num">2</div></div><div class="likert-item"><div class="likert-num">3</div><div class="likert-lbl">一般</div></div><div class="likert-item"><div class="likert-num">4</div></div><div class="likert-item"><div class="likert-num">5</div><div class="likert-lbl">非常严重</div></div></div></div>
-        <div class="q-card"><span class="q-num coral">B2</span><div class="q-text">您认为"混合样本难以准确识别"的严重程度如何？</div><div class="likert"><div class="likert-item"><div class="likert-num">1</div></div><div class="likert-item"><div class="likert-num">2</div></div><div class="likert-item"><div class="likert-num">3</div></div><div class="likert-item"><div class="likert-num">4</div></div><div class="likert-item"><div class="likert-num">5</div></div></div></div>
-        <div class="q-card"><span class="q-num coral">B3</span><div class="q-text">您认为"现有设备对易制毒前体化学品的场景适配不足"的严重程度如何？</div><div class="likert"><div class="likert-item"><div class="likert-num">1</div></div><div class="likert-item"><div class="likert-num">2</div></div><div class="likert-item"><div class="likert-num">3</div></div><div class="likert-item"><div class="likert-num">4</div></div><div class="likert-item"><div class="likert-num">5</div></div></div></div>
-        <div class="q-card"><span class="q-num coral">B4</span><div class="q-text">您认为"基层一线缺乏便携式检测手段"的严重程度如何？</div><div class="likert"><div class="likert-item"><div class="likert-num">1</div></div><div class="likert-item"><div class="likert-num">2</div></div><div class="likert-item"><div class="likert-num">3</div></div><div class="likert-item"><div class="likert-num">4</div></div><div class="likert-item"><div class="likert-num">5</div></div></div></div>
-        <div class="q-card"><span class="q-num coral">B5</span><div class="q-text">您认为"耗材消耗与维护成本高"的严重程度如何？</div><div class="likert"><div class="likert-item"><div class="likert-num">1</div></div><div class="likert-item"><div class="likert-num">2</div></div><div class="likert-item"><div class="likert-num">3</div></div><div class="likert-item"><div class="likert-num">4</div></div><div class="likert-item"><div class="likert-num">5</div></div></div></div>
-        <div class="q-card"><span class="q-num coral">B6</span><div class="q-text">近两年来，您所在单位面临的易制毒化学品监管压力是否有所增加？</div><div class="likert"><div class="likert-item"><div class="likert-num">1</div><div class="likert-lbl">完全没有</div></div><div class="likert-item"><div class="likert-num">2</div></div><div class="likert-item"><div class="likert-num">3</div></div><div class="likert-item"><div class="likert-num">4</div></div><div class="likert-item"><div class="likert-num">5</div><div class="likert-lbl">显著增加</div></div></div></div>
-        <div class="q-card"><span class="q-num coral">B7</span><div class="q-text">您认为新增列管品种（如 4-哌啶酮等）对检测需求的推动作用如何？</div><div class="likert"><div class="likert-item"><div class="likert-num">1</div><div class="likert-lbl">无推动</div></div><div class="likert-item"><div class="likert-num">2</div></div><div class="likert-item"><div class="likert-num">3</div></div><div class="likert-item"><div class="likert-num">4</div></div><div class="likert-item"><div class="likert-num">5</div><div class="likert-lbl">非常大</div></div></div></div>
-        <div class="q-card"><span class="q-num coral">B8</span><div class="q-text">您认为国家对出口管理加严政策对您所在单位的检测需求有多大影响？</div><div class="likert"><div class="likert-item"><div class="likert-num">1</div><div class="likert-lbl">无影响</div></div><div class="likert-item"><div class="likert-num">2</div></div><div class="likert-item"><div class="likert-num">3</div></div><div class="likert-item"><div class="likert-num">4</div></div><div class="likert-item"><div class="likert-num">5</div><div class="likert-lbl">非常大</div></div></div></div>
-        <div class="q-card"><span class="q-num coral">B9</span><div class="q-text">您所在单位目前主要使用以下哪些检测方式？（多选）</div><ul class="opts"><li><span class="opt-c"></span>实验室 GC-MS/HPLC</li><li><span class="opt-c"></span>手持拉曼光谱</li><li><span class="opt-c"></span>离子迁移谱（IMS）</li><li><span class="opt-c"></span>生物样本快检</li><li><span class="opt-c"></span>工业气体检测仪</li><li><span class="opt-c"></span>便携式传感器设备</li><li><span class="opt-c"></span>尚无专用检测设备</li><li><span class="opt-c"></span>其他</li></ul></div>
+      <div class="qab"><div class="qac">
+        <div class="qc"><span class="qn coral">B1</span><div class="qt">您认为当前检测方式中"送检等待时间过长"的严重程度如何？</div><div class="lk"><div class="lk-i"><div class="lk-n">1</div><div class="lk-l">完全不严重</div></div><div class="lk-i"><div class="lk-n">2</div></div><div class="lk-i"><div class="lk-n">3</div><div class="lk-l">一般</div></div><div class="lk-i"><div class="lk-n">4</div></div><div class="lk-i"><div class="lk-n">5</div><div class="lk-l">非常严重</div></div></div></div>
+        <div class="qc"><span class="qn coral">B2</span><div class="qt">您认为"混合样本难以准确识别"的严重程度如何？</div><div class="lk"><div class="lk-i"><div class="lk-n">1</div></div><div class="lk-i"><div class="lk-n">2</div></div><div class="lk-i"><div class="lk-n">3</div></div><div class="lk-i"><div class="lk-n">4</div></div><div class="lk-i"><div class="lk-n">5</div></div></div></div>
+        <div class="qc"><span class="qn coral">B3</span><div class="qt">您认为"现有设备对易制毒前体化学品的场景适配不足"的严重程度如何？</div><div class="lk"><div class="lk-i"><div class="lk-n">1</div></div><div class="lk-i"><div class="lk-n">2</div></div><div class="lk-i"><div class="lk-n">3</div></div><div class="lk-i"><div class="lk-n">4</div></div><div class="lk-i"><div class="lk-n">5</div></div></div></div>
+        <div class="qc"><span class="qn coral">B4</span><div class="qt">您认为"基层一线缺乏便携式检测手段"的严重程度如何？</div><div class="lk"><div class="lk-i"><div class="lk-n">1</div></div><div class="lk-i"><div class="lk-n">2</div></div><div class="lk-i"><div class="lk-n">3</div></div><div class="lk-i"><div class="lk-n">4</div></div><div class="lk-i"><div class="lk-n">5</div></div></div></div>
+        <div class="qc"><span class="qn coral">B5</span><div class="qt">您认为"耗材消耗与维护成本高"的严重程度如何？</div><div class="lk"><div class="lk-i"><div class="lk-n">1</div></div><div class="lk-i"><div class="lk-n">2</div></div><div class="lk-i"><div class="lk-n">3</div></div><div class="lk-i"><div class="lk-n">4</div></div><div class="lk-i"><div class="lk-n">5</div></div></div></div>
+        <div class="qc"><span class="qn coral">B6</span><div class="qt">近两年来，您所在单位面临的易制毒化学品监管压力是否有所增加？</div><div class="lk"><div class="lk-i"><div class="lk-n">1</div><div class="lk-l">完全没有</div></div><div class="lk-i"><div class="lk-n">2</div></div><div class="lk-i"><div class="lk-n">3</div></div><div class="lk-i"><div class="lk-n">4</div></div><div class="lk-i"><div class="lk-n">5</div><div class="lk-l">显著增加</div></div></div></div>
+        <div class="qc"><span class="qn coral">B7</span><div class="qt">您认为新增列管品种（如 4-哌啶酮等）对检测需求的推动作用如何？</div><div class="lk"><div class="lk-i"><div class="lk-n">1</div><div class="lk-l">无推动</div></div><div class="lk-i"><div class="lk-n">2</div></div><div class="lk-i"><div class="lk-n">3</div></div><div class="lk-i"><div class="lk-n">4</div></div><div class="lk-i"><div class="lk-n">5</div><div class="lk-l">非常大</div></div></div></div>
+        <div class="qc"><span class="qn coral">B8</span><div class="qt">您认为国家对出口管理加严政策对您所在单位的检测需求有多大影响？</div><div class="lk"><div class="lk-i"><div class="lk-n">1</div><div class="lk-l">无影响</div></div><div class="lk-i"><div class="lk-n">2</div></div><div class="lk-i"><div class="lk-n">3</div></div><div class="lk-i"><div class="lk-n">4</div></div><div class="lk-i"><div class="lk-n">5</div><div class="lk-l">非常大</div></div></div></div>
+        <div class="qc"><span class="qn coral">B9</span><div class="qt">您所在单位目前主要使用以下哪些检测方式？（多选）</div><ul class="opts"><li><span class="optc"></span>实验室 GC-MS/HPLC</li><li><span class="optc"></span>手持拉曼光谱</li><li><span class="optc"></span>离子迁移谱（IMS）</li><li><span class="optc"></span>生物样本快检</li><li><span class="optc"></span>工业气体检测仪</li><li><span class="optc"></span>便携式传感器设备</li><li><span class="optc"></span>尚无专用检测设备</li><li><span class="optc"></span>其他</li></ul></div>
       </div></div>
     </div>
 
-    <!-- C 产品认知 -->
-    <div class="q-acc-item">
-      <div class="q-acc-head" onclick="this.parentElement.classList.toggle('open')">
-        <div class="q-sec-icon" style="background:rgba(13,148,136,.08);color:var(--teal)">C</div>
-        <div class="q-sec-info"><h3>产品认知</h3><span>Product Awareness · 4 题</span></div>
-        <div class="q-acc-chevron">▼</div>
+    <div class="qai">
+      <div class="qah" onclick="this.parentElement.classList.toggle('open')">
+        <div class="qsi" style="background:rgba(13,148,136,.07);color:var(--teal)">C</div>
+        <div class="qsf"><h3>产品认知</h3><span>Product Awareness · 4 题</span></div>
+        <div class="qchev">▼</div>
       </div>
-      <div class="q-acc-body"><div class="q-acc-content">
-        <div class="product-info"><strong>产品简介 ｜ 灵探 InSensor</strong><br>一款基于传感器阵列与动态温度调制的便携式前体化学品现场快检终端。<strong>30 秒内出结果</strong>、<strong>无耗材消耗</strong>、边缘推理/可离线使用、综合准确率 <strong>97.22%</strong>、整机 <strong>2.05kg</strong>。</div>
-        <div class="q-card"><span class="q-num teal">C1</span><div class="q-text">在本次调研之前，您是否了解过灵探 InSensor 或类似的便携式前体化学品检测设备？</div><ul class="opts"><li><span class="opt-r"></span>非常了解</li><li><span class="opt-r"></span>比较了解</li><li><span class="opt-r"></span>听说过但不太了解</li><li><span class="opt-r"></span>完全没听说过</li></ul></div>
-        <div class="q-card"><span class="q-num teal">C2</span><div class="q-text">您认为"30 秒内完成现场检测"这一特性的价值如何？</div><div class="likert"><div class="likert-item"><div class="likert-num">1</div><div class="likert-lbl">毫无价值</div></div><div class="likert-item"><div class="likert-num">2</div></div><div class="likert-item"><div class="likert-num">3</div></div><div class="likert-item"><div class="likert-num">4</div></div><div class="likert-item"><div class="likert-num">5</div><div class="likert-lbl">极高价值</div></div></div></div>
-        <div class="q-card"><span class="q-num teal">C3</span><div class="q-text">您认为"无耗材消耗"这一特性的价值如何？</div><div class="likert"><div class="likert-item"><div class="likert-num">1</div></div><div class="likert-item"><div class="likert-num">2</div></div><div class="likert-item"><div class="likert-num">3</div></div><div class="likert-item"><div class="likert-num">4</div></div><div class="likert-item"><div class="likert-num">5</div></div></div></div>
-        <div class="q-card"><span class="q-num teal">C4</span><div class="q-text">您认为"便携部署/可离线使用"这一特性的价值如何？</div><div class="likert"><div class="likert-item"><div class="likert-num">1</div></div><div class="likert-item"><div class="likert-num">2</div></div><div class="likert-item"><div class="likert-num">3</div></div><div class="likert-item"><div class="likert-num">4</div></div><div class="likert-item"><div class="likert-num">5</div></div></div></div>
+      <div class="qab"><div class="qac">
+        <div class="pinfo"><strong>产品简介 ｜ 灵探 InSensor</strong><br>一款基于传感器阵列与动态温度调制的便携式前体化学品现场快检终端。<strong>30 秒内出结果</strong>、<strong>无耗材消耗</strong>、边缘推理/可离线使用、综合准确率 <strong>97.22%</strong>、整机 <strong>2.05kg</strong>。</div>
+        <div class="qc"><span class="qn teal">C1</span><div class="qt">在本次调研之前，您是否了解过灵探 InSensor 或类似的便携式前体化学品检测设备？</div><ul class="opts"><li><span class="optr"></span>非常了解</li><li><span class="optr"></span>比较了解</li><li><span class="optr"></span>听说过但不太了解</li><li><span class="optr"></span>完全没听说过</li></ul></div>
+        <div class="qc"><span class="qn teal">C2</span><div class="qt">您认为"30 秒内完成现场检测"这一特性的价值如何？</div><div class="lk"><div class="lk-i"><div class="lk-n">1</div><div class="lk-l">毫无价值</div></div><div class="lk-i"><div class="lk-n">2</div></div><div class="lk-i"><div class="lk-n">3</div></div><div class="lk-i"><div class="lk-n">4</div></div><div class="lk-i"><div class="lk-n">5</div><div class="lk-l">极高价值</div></div></div></div>
+        <div class="qc"><span class="qn teal">C3</span><div class="qt">您认为"无耗材消耗"这一特性的价值如何？</div><div class="lk"><div class="lk-i"><div class="lk-n">1</div></div><div class="lk-i"><div class="lk-n">2</div></div><div class="lk-i"><div class="lk-n">3</div></div><div class="lk-i"><div class="lk-n">4</div></div><div class="lk-i"><div class="lk-n">5</div></div></div></div>
+        <div class="qc"><span class="qn teal">C4</span><div class="qt">您认为"便携部署/可离线使用"这一特性的价值如何？</div><div class="lk"><div class="lk-i"><div class="lk-n">1</div></div><div class="lk-i"><div class="lk-n">2</div></div><div class="lk-i"><div class="lk-n">3</div></div><div class="lk-i"><div class="lk-n">4</div></div><div class="lk-i"><div class="lk-n">5</div></div></div></div>
       </div></div>
     </div>
 
-    <!-- D 感知价值 -->
-    <div class="q-acc-item">
-      <div class="q-acc-head" onclick="this.parentElement.classList.toggle('open')">
-        <div class="q-sec-icon" style="background:rgba(217,119,6,.08);color:var(--gold)">D</div>
-        <div class="q-sec-info"><h3>感知价值</h3><span>Perceived Value · 5 题 + 注意力检验</span></div>
-        <div class="q-acc-chevron">▼</div>
+    <div class="qai">
+      <div class="qah" onclick="this.parentElement.classList.toggle('open')">
+        <div class="qsi" style="background:rgba(217,119,6,.07);color:var(--gold)">D</div>
+        <div class="qsf"><h3>感知价值</h3><span>Perceived Value · 5 题 + 注意力检验</span></div>
+        <div class="qchev">▼</div>
       </div>
-      <div class="q-acc-body"><div class="q-acc-content">
-        <div class="q-card"><span class="q-num gold">D1</span><div class="q-text">总体而言，您认为灵探 InSensor 能够有效解决您工作中的实际需求。</div><div class="likert"><div class="likert-item"><div class="likert-num">1</div><div class="likert-lbl">非常不同意</div></div><div class="likert-item"><div class="likert-num">2</div></div><div class="likert-item"><div class="likert-num">3</div></div><div class="likert-item"><div class="likert-num">4</div></div><div class="likert-item"><div class="likert-num">5</div><div class="likert-lbl">非常同意</div></div></div></div>
-        <div class="q-card"><span class="q-num gold">D2</span><div class="q-text">与现有检测方式相比，灵探 InSensor 的综合性价比更高。</div><div class="likert"><div class="likert-item"><div class="likert-num">1</div></div><div class="likert-item"><div class="likert-num">2</div></div><div class="likert-item"><div class="likert-num">3</div></div><div class="likert-item"><div class="likert-num">4</div></div><div class="likert-item"><div class="likert-num">5</div></div></div></div>
-        <div class="q-card"><span class="q-num gold">D3</span><div class="q-text">灵探 InSensor 能显著提升我所在单位的检测效率。</div><div class="likert"><div class="likert-item"><div class="likert-num">1</div></div><div class="likert-item"><div class="likert-num">2</div></div><div class="likert-item"><div class="likert-num">3</div></div><div class="likert-item"><div class="likert-num">4</div></div><div class="likert-item"><div class="likert-num">5</div></div></div></div>
-        <div class="q-card"><span class="q-num gold">D4</span><div class="q-text">使用灵探 InSensor 可以降低一线人员的操作难度和培训成本。</div><div class="likert"><div class="likert-item"><div class="likert-num">1</div></div><div class="likert-item"><div class="likert-num">2</div></div><div class="likert-item"><div class="likert-num">3</div></div><div class="likert-item"><div class="likert-num">4</div></div><div class="likert-item"><div class="likert-num">5</div></div></div></div>
-        <div class="q-card"><span class="q-num gold">D5</span><div class="q-text">灵探 InSensor 的技术可靠性（97.22% 准确率）达到了我的工作要求。</div><div class="likert"><div class="likert-item"><div class="likert-num">1</div></div><div class="likert-item"><div class="likert-num">2</div></div><div class="likert-item"><div class="likert-num">3</div></div><div class="likert-item"><div class="likert-num">4</div></div><div class="likert-item"><div class="likert-num">5</div></div></div></div>
-        <div class="q-card" style="border-left:3px solid var(--coral)"><span class="q-num coral">D_check</span><div class="q-text">注意力检验题：为确保作答质量，请在本题选择"4"。</div><div class="likert"><div class="likert-item"><div class="likert-num">1</div></div><div class="likert-item"><div class="likert-num">2</div></div><div class="likert-item"><div class="likert-num">3</div></div><div class="likert-item" style="background:rgba(220,38,38,.06)"><div class="likert-num" style="color:var(--coral)">4 ✓</div></div><div class="likert-item"><div class="likert-num">5</div></div></div></div>
+      <div class="qab"><div class="qac">
+        <div class="qc"><span class="qn gold">D1</span><div class="qt">总体而言，您认为灵探 InSensor 能够有效解决您工作中的实际需求。</div><div class="lk"><div class="lk-i"><div class="lk-n">1</div><div class="lk-l">非常不同意</div></div><div class="lk-i"><div class="lk-n">2</div></div><div class="lk-i"><div class="lk-n">3</div></div><div class="lk-i"><div class="lk-n">4</div></div><div class="lk-i"><div class="lk-n">5</div><div class="lk-l">非常同意</div></div></div></div>
+        <div class="qc"><span class="qn gold">D2</span><div class="qt">与现有检测方式相比，灵探 InSensor 的综合性价比更高。</div><div class="lk"><div class="lk-i"><div class="lk-n">1</div></div><div class="lk-i"><div class="lk-n">2</div></div><div class="lk-i"><div class="lk-n">3</div></div><div class="lk-i"><div class="lk-n">4</div></div><div class="lk-i"><div class="lk-n">5</div></div></div></div>
+        <div class="qc"><span class="qn gold">D3</span><div class="qt">灵探 InSensor 能显著提升我所在单位的检测效率。</div><div class="lk"><div class="lk-i"><div class="lk-n">1</div></div><div class="lk-i"><div class="lk-n">2</div></div><div class="lk-i"><div class="lk-n">3</div></div><div class="lk-i"><div class="lk-n">4</div></div><div class="lk-i"><div class="lk-n">5</div></div></div></div>
+        <div class="qc"><span class="qn gold">D4</span><div class="qt">使用灵探 InSensor 可以降低一线人员的操作难度和培训成本。</div><div class="lk"><div class="lk-i"><div class="lk-n">1</div></div><div class="lk-i"><div class="lk-n">2</div></div><div class="lk-i"><div class="lk-n">3</div></div><div class="lk-i"><div class="lk-n">4</div></div><div class="lk-i"><div class="lk-n">5</div></div></div></div>
+        <div class="qc"><span class="qn gold">D5</span><div class="qt">灵探 InSensor 的技术可靠性（97.22% 准确率）达到了我的工作要求。</div><div class="lk"><div class="lk-i"><div class="lk-n">1</div></div><div class="lk-i"><div class="lk-n">2</div></div><div class="lk-i"><div class="lk-n">3</div></div><div class="lk-i"><div class="lk-n">4</div></div><div class="lk-i"><div class="lk-n">5</div></div></div></div>
+        <div class="qc" style="border-left:3px solid var(--coral)"><span class="qn coral">D_check</span><div class="qt">注意力检验题：为确保作答质量，请在本题选择"4"。</div><div class="lk"><div class="lk-i"><div class="lk-n">1</div></div><div class="lk-i"><div class="lk-n">2</div></div><div class="lk-i"><div class="lk-n">3</div></div><div class="lk-i" style="background:rgba(220,38,38,.05)"><div class="lk-n" style="color:var(--coral)">4 ✓</div></div><div class="lk-i"><div class="lk-n">5</div></div></div></div>
       </div></div>
     </div>
 
-    <!-- E 购买意愿与支付意愿 -->
-    <div class="q-acc-item">
-      <div class="q-acc-head" onclick="this.parentElement.classList.toggle('open')">
-        <div class="q-sec-icon" style="background:rgba(22,163,74,.08);color:var(--sage)">E</div>
-        <div class="q-sec-info"><h3>购买意愿与支付意愿</h3><span>Purchase Intent & WTP · 8 题</span></div>
-        <div class="q-acc-chevron">▼</div>
+    <div class="qai">
+      <div class="qah" onclick="this.parentElement.classList.toggle('open')">
+        <div class="qsi" style="background:rgba(22,163,74,.07);color:var(--sage)">E</div>
+        <div class="qsf"><h3>购买意愿与支付意愿</h3><span>Purchase Intent &amp; WTP · 8 题</span></div>
+        <div class="qchev">▼</div>
       </div>
-      <div class="q-acc-body"><div class="q-acc-content">
-        <div class="q-card"><span class="q-num sage">E1</span><div class="q-text">如果灵探 InSensor 已正式上市，在未来 12 个月内，您所在单位采购该设备的可能性有多大？</div><div class="likert"><div class="likert-item"><div class="likert-num">1</div><div class="likert-lbl">完全不可能</div></div><div class="likert-item"><div class="likert-num">2</div></div><div class="likert-item"><div class="likert-num">3</div></div><div class="likert-item"><div class="likert-num">4</div></div><div class="likert-item"><div class="likert-num">5</div><div class="likert-lbl">非常可能</div></div></div></div>
-        <div class="q-card"><span class="q-num sage">E2</span><div class="q-text">如果政策要求必须配备前体化学品现场检测手段，您所在单位的采购意愿会提升多少？</div><div class="likert"><div class="likert-item"><div class="likert-num">1</div><div class="likert-lbl">不会提升</div></div><div class="likert-item"><div class="likert-num">2</div></div><div class="likert-item"><div class="likert-num">3</div></div><div class="likert-item"><div class="likert-num">4</div></div><div class="likert-item"><div class="likert-num">5</div><div class="likert-lbl">大幅提升</div></div></div></div>
-        <div class="q-card"><span class="q-num sage">E3</span><div class="q-text">如果同行/上级单位已经成功使用灵探 InSensor，您所在单位的采购意愿会如何变化？</div><div class="likert"><div class="likert-item"><div class="likert-num">1</div><div class="likert-lbl">不会变化</div></div><div class="likert-item"><div class="likert-num">2</div></div><div class="likert-item"><div class="likert-num">3</div></div><div class="likert-item"><div class="likert-num">4</div></div><div class="likert-item"><div class="likert-num">5</div><div class="likert-lbl">大幅提升</div></div></div></div>
-        <div class="product-info" style="border-left-color:var(--gold)"><strong>Van Westendorp 价格敏感度测量</strong><br>以下 4 题请根据您对便携式前体化学品检测终端的认知，分别回答各价格判断阈值。</div>
-        <div class="q-card"><span class="q-num gold">E4</span><div class="q-text">您认为这类设备定价多少时，会觉得"太便宜了，可能质量有问题"？</div><div class="vw-input"><span>¥</span><div class="ph">______</div><span>元/台</span></div></div>
-        <div class="q-card"><span class="q-num gold">E5</span><div class="q-text">您认为这类设备定价多少时，会觉得"价格合理，物有所值"？</div><div class="vw-input"><span>¥</span><div class="ph">______</div><span>元/台</span></div></div>
-        <div class="q-card"><span class="q-num gold">E6</span><div class="q-text">您认为这类设备定价多少时，会觉得"有点贵，但还在可接受范围内"？</div><div class="vw-input"><span>¥</span><div class="ph">______</div><span>元/台</span></div></div>
-        <div class="q-card"><span class="q-num gold">E7</span><div class="q-text">您认为这类设备定价多少时，会觉得"太贵了，完全不会考虑"？</div><div class="vw-input"><span>¥</span><div class="ph">______</div><span>元/台</span></div></div>
-        <div class="q-card"><span class="q-num sage">E8</span><div class="q-text">如果灵探 InSensor 提供年度运维校准服务（含软件升级+传感器校准），年费 500–800 元/台，您所在单位的付费意愿如何？</div><div class="likert"><div class="likert-item"><div class="likert-num">1</div><div class="likert-lbl">完全不愿</div></div><div class="likert-item"><div class="likert-num">2</div></div><div class="likert-item"><div class="likert-num">3</div></div><div class="likert-item"><div class="likert-num">4</div></div><div class="likert-item"><div class="likert-num">5</div><div class="likert-lbl">非常愿意</div></div></div></div>
+      <div class="qab"><div class="qac">
+        <div class="qc"><span class="qn sage">E1</span><div class="qt">如果灵探 InSensor 已正式上市，在未来 12 个月内，您所在单位采购该设备的可能性有多大？</div><div class="lk"><div class="lk-i"><div class="lk-n">1</div><div class="lk-l">完全不可能</div></div><div class="lk-i"><div class="lk-n">2</div></div><div class="lk-i"><div class="lk-n">3</div></div><div class="lk-i"><div class="lk-n">4</div></div><div class="lk-i"><div class="lk-n">5</div><div class="lk-l">非常可能</div></div></div></div>
+        <div class="qc"><span class="qn sage">E2</span><div class="qt">如果政策要求必须配备前体化学品现场检测手段，您所在单位的采购意愿会提升多少？</div><div class="lk"><div class="lk-i"><div class="lk-n">1</div><div class="lk-l">不会提升</div></div><div class="lk-i"><div class="lk-n">2</div></div><div class="lk-i"><div class="lk-n">3</div></div><div class="lk-i"><div class="lk-n">4</div></div><div class="lk-i"><div class="lk-n">5</div><div class="lk-l">大幅提升</div></div></div></div>
+        <div class="qc"><span class="qn sage">E3</span><div class="qt">如果同行/上级单位已经成功使用灵探 InSensor，您所在单位的采购意愿会如何变化？</div><div class="lk"><div class="lk-i"><div class="lk-n">1</div><div class="lk-l">不会变化</div></div><div class="lk-i"><div class="lk-n">2</div></div><div class="lk-i"><div class="lk-n">3</div></div><div class="lk-i"><div class="lk-n">4</div></div><div class="lk-i"><div class="lk-n">5</div><div class="lk-l">大幅提升</div></div></div></div>
+        <div class="pinfo" style="border-left-color:var(--gold)"><strong>Van Westendorp 价格敏感度测量</strong><br>以下 4 题请根据您对便携式前体化学品检测终端的认知，分别回答各价格判断阈值。</div>
+        <div class="qc"><span class="qn gold">E4</span><div class="qt">您认为这类设备定价多少时，会觉得"太便宜了，可能质量有问题"？</div><div class="vw"><span>¥</span><div class="ph">______</div><span>元/台</span></div></div>
+        <div class="qc"><span class="qn gold">E5</span><div class="qt">您认为这类设备定价多少时，会觉得"价格合理，物有所值"？</div><div class="vw"><span>¥</span><div class="ph">______</div><span>元/台</span></div></div>
+        <div class="qc"><span class="qn gold">E6</span><div class="qt">您认为这类设备定价多少时，会觉得"有点贵，但还在可接受范围内"？</div><div class="vw"><span>¥</span><div class="ph">______</div><span>元/台</span></div></div>
+        <div class="qc"><span class="qn gold">E7</span><div class="qt">您认为这类设备定价多少时，会觉得"太贵了，完全不会考虑"？</div><div class="vw"><span>¥</span><div class="ph">______</div><span>元/台</span></div></div>
+        <div class="qc"><span class="qn sage">E8</span><div class="qt">如果灵探 InSensor 提供年度运维校准服务（含软件升级+传感器校准），年费 500–800 元/台，您所在单位的付费意愿如何？</div><div class="lk"><div class="lk-i"><div class="lk-n">1</div><div class="lk-l">完全不愿</div></div><div class="lk-i"><div class="lk-n">2</div></div><div class="lk-i"><div class="lk-n">3</div></div><div class="lk-i"><div class="lk-n">4</div></div><div class="lk-i"><div class="lk-n">5</div><div class="lk-l">非常愿意</div></div></div></div>
       </div></div>
     </div>
 
-    <!-- F 渠道与信任 -->
-    <div class="q-acc-item">
-      <div class="q-acc-head" onclick="this.parentElement.classList.toggle('open')">
-        <div class="q-sec-icon" style="background:rgba(37,99,235,.08);color:var(--blue)">F</div>
-        <div class="q-sec-info"><h3>渠道与信任</h3><span>Channel & Trust · 3 题</span></div>
-        <div class="q-acc-chevron">▼</div>
+    <div class="qai">
+      <div class="qah" onclick="this.parentElement.classList.toggle('open')">
+        <div class="qsi" style="background:rgba(37,99,235,.07);color:var(--blue)">F</div>
+        <div class="qsf"><h3>渠道与信任</h3><span>Channel &amp; Trust · 3 题</span></div>
+        <div class="qchev">▼</div>
       </div>
-      <div class="q-acc-body"><div class="q-acc-content">
-        <div class="q-card"><span class="q-num blue">F1</span><div class="q-text">您最信任以下哪种渠道推介的检测装备？（最多选 3 项）</div><ul class="opts"><li><span class="opt-c"></span>上级部门/主管机关推荐</li><li><span class="opt-c"></span>同行单位使用反馈</li><li><span class="opt-c"></span>学术期刊/科研报告</li><li><span class="opt-c"></span>系统集成商推荐</li><li><span class="opt-c"></span>行业展会/技术交流会</li><li><span class="opt-c"></span>品牌官方宣传</li><li><span class="opt-c"></span>网络搜索/自行了解</li><li><span class="opt-c"></span>其他</li></ul></div>
-        <div class="q-card"><span class="q-num blue">F2</span><div class="q-text">您对"通过系统集成商采购检测装备"的信任度如何？</div><div class="likert"><div class="likert-item"><div class="likert-num">1</div><div class="likert-lbl">完全不信任</div></div><div class="likert-item"><div class="likert-num">2</div></div><div class="likert-item"><div class="likert-num">3</div></div><div class="likert-item"><div class="likert-num">4</div></div><div class="likert-item"><div class="likert-num">5</div><div class="likert-lbl">非常信任</div></div></div></div>
-        <div class="q-card"><span class="q-num blue">F3</span><div class="q-text">您对"产品已在多地公安系统试用并取得实际效果"这一信息的信任度如何？</div><div class="likert"><div class="likert-item"><div class="likert-num">1</div><div class="likert-lbl">完全不信任</div></div><div class="likert-item"><div class="likert-num">2</div></div><div class="likert-item"><div class="likert-num">3</div></div><div class="likert-item"><div class="likert-num">4</div></div><div class="likert-item"><div class="likert-num">5</div><div class="likert-lbl">非常信任</div></div></div></div>
+      <div class="qab"><div class="qac">
+        <div class="qc"><span class="qn blue">F1</span><div class="qt">您最信任以下哪种渠道推介的检测装备？（最多选 3 项）</div><ul class="opts"><li><span class="optc"></span>上级部门/主管机关推荐</li><li><span class="optc"></span>同行单位使用反馈</li><li><span class="optc"></span>学术期刊/科研报告</li><li><span class="optc"></span>系统集成商推荐</li><li><span class="optc"></span>行业展会/技术交流会</li><li><span class="optc"></span>品牌官方宣传</li><li><span class="optc"></span>网络搜索/自行了解</li><li><span class="optc"></span>其他</li></ul></div>
+        <div class="qc"><span class="qn blue">F2</span><div class="qt">您对"通过系统集成商采购检测装备"的信任度如何？</div><div class="lk"><div class="lk-i"><div class="lk-n">1</div><div class="lk-l">完全不信任</div></div><div class="lk-i"><div class="lk-n">2</div></div><div class="lk-i"><div class="lk-n">3</div></div><div class="lk-i"><div class="lk-n">4</div></div><div class="lk-i"><div class="lk-n">5</div><div class="lk-l">非常信任</div></div></div></div>
+        <div class="qc"><span class="qn blue">F3</span><div class="qt">您对"产品已在多地公安系统试用并取得实际效果"这一信息的信任度如何？</div><div class="lk"><div class="lk-i"><div class="lk-n">1</div><div class="lk-l">完全不信任</div></div><div class="lk-i"><div class="lk-n">2</div></div><div class="lk-i"><div class="lk-n">3</div></div><div class="lk-i"><div class="lk-n">4</div></div><div class="lk-i"><div class="lk-n">5</div><div class="lk-l">非常信任</div></div></div></div>
       </div></div>
     </div>
 
-    <!-- G 复购与推荐 -->
-    <div class="q-acc-item">
-      <div class="q-acc-head" onclick="this.parentElement.classList.toggle('open')">
-        <div class="q-sec-icon" style="background:rgba(13,148,136,.08);color:var(--teal)">G</div>
-        <div class="q-sec-info"><h3>复购与推荐</h3><span>Loyalty & NPS · 4 题</span></div>
-        <div class="q-acc-chevron">▼</div>
+    <div class="qai">
+      <div class="qah" onclick="this.parentElement.classList.toggle('open')">
+        <div class="qsi" style="background:rgba(13,148,136,.07);color:var(--teal)">G</div>
+        <div class="qsf"><h3>复购与推荐</h3><span>Loyalty &amp; NPS · 4 题</span></div>
+        <div class="qchev">▼</div>
       </div>
-      <div class="q-acc-body"><div class="q-acc-content">
-        <div class="q-card"><span class="q-num teal">G1</span><div class="q-text">如果您所在单位已采购灵探 InSensor 并使用满意，追加购买的可能性有多大？</div><div class="likert"><div class="likert-item"><div class="likert-num">1</div><div class="likert-lbl">完全不可能</div></div><div class="likert-item"><div class="likert-num">2</div></div><div class="likert-item"><div class="likert-num">3</div></div><div class="likert-item"><div class="likert-num">4</div></div><div class="likert-item"><div class="likert-num">5</div><div class="likert-lbl">非常可能</div></div></div></div>
-        <div class="q-card"><span class="q-num teal">G2</span><div class="q-text">您认为以下哪些因素最影响追加购买？（最多选 3 项）</div><ul class="opts"><li><span class="opt-c"></span>设备性能稳定可靠</li><li><span class="opt-c"></span>售后服务响应及时</li><li><span class="opt-c"></span>软件/算法持续升级</li><li><span class="opt-c"></span>价格优惠</li><li><span class="opt-c"></span>上级要求或政策推动</li><li><span class="opt-c"></span>覆盖范围需要扩大</li><li><span class="opt-c"></span>其他</li></ul></div>
-        <div class="q-card"><span class="q-num teal">G3</span><div class="q-text">如果从现有检测方式切换到灵探 InSensor，您觉得切换成本（含学习、适应、流程调整）有多高？</div><div class="likert"><div class="likert-item"><div class="likert-num">1</div><div class="likert-lbl">几乎没有</div></div><div class="likert-item"><div class="likert-num">2</div></div><div class="likert-item"><div class="likert-num">3</div></div><div class="likert-item"><div class="likert-num">4</div></div><div class="likert-item"><div class="likert-num">5</div><div class="likert-lbl">非常高</div></div></div></div>
-        <div class="q-card"><span class="q-num teal">G4</span><div class="q-text">您向同行/上下游推荐灵探 InSensor 的可能性有多大？（NPS）</div><div class="nps-scale"><div class="nps-item det">0</div><div class="nps-item det">1</div><div class="nps-item det">2</div><div class="nps-item det">3</div><div class="nps-item det">4</div><div class="nps-item det">5</div><div class="nps-item det">6</div><div class="nps-item pas">7</div><div class="nps-item pas">8</div><div class="nps-item pro">9</div><div class="nps-item pro">10</div></div><div class="nps-labels"><span>完全不可能</span><span>极有可能</span></div></div>
+      <div class="qab"><div class="qac">
+        <div class="qc"><span class="qn teal">G1</span><div class="qt">如果您所在单位已采购灵探 InSensor 并使用满意，追加购买的可能性有多大？</div><div class="lk"><div class="lk-i"><div class="lk-n">1</div><div class="lk-l">完全不可能</div></div><div class="lk-i"><div class="lk-n">2</div></div><div class="lk-i"><div class="lk-n">3</div></div><div class="lk-i"><div class="lk-n">4</div></div><div class="lk-i"><div class="lk-n">5</div><div class="lk-l">非常可能</div></div></div></div>
+        <div class="qc"><span class="qn teal">G2</span><div class="qt">您认为以下哪些因素最影响追加购买？（最多选 3 项）</div><ul class="opts"><li><span class="optc"></span>设备性能稳定可靠</li><li><span class="optc"></span>售后服务响应及时</li><li><span class="optc"></span>软件/算法持续升级</li><li><span class="optc"></span>价格优惠</li><li><span class="optc"></span>上级要求或政策推动</li><li><span class="optc"></span>覆盖范围需要扩大</li><li><span class="optc"></span>其他</li></ul></div>
+        <div class="qc"><span class="qn teal">G3</span><div class="qt">如果从现有检测方式切换到灵探 InSensor，您觉得切换成本（含学习、适应、流程调整）有多高？</div><div class="lk"><div class="lk-i"><div class="lk-n">1</div><div class="lk-l">几乎没有</div></div><div class="lk-i"><div class="lk-n">2</div></div><div class="lk-i"><div class="lk-n">3</div></div><div class="lk-i"><div class="lk-n">4</div></div><div class="lk-i"><div class="lk-n">5</div><div class="lk-l">非常高</div></div></div></div>
+        <div class="qc"><span class="qn teal">G4</span><div class="qt">您向同行/上下游推荐灵探 InSensor 的可能性有多大？（NPS）</div><div class="nps-sc"><div class="nps-i det">0</div><div class="nps-i det">1</div><div class="nps-i det">2</div><div class="nps-i det">3</div><div class="nps-i det">4</div><div class="nps-i det">5</div><div class="nps-i det">6</div><div class="nps-i pas">7</div><div class="nps-i pas">8</div><div class="nps-i pro">9</div><div class="nps-i pro">10</div></div><div class="nps-lbls"><span>完全不可能</span><span>极有可能</span></div></div>
       </div></div>
     </div>
 
-    <!-- H 开放题 -->
-    <div class="q-acc-item">
-      <div class="q-acc-head" onclick="this.parentElement.classList.toggle('open')">
-        <div class="q-sec-icon" style="background:rgba(15,23,42,.06);color:var(--ink)">H</div>
-        <div class="q-sec-info"><h3>开放题</h3><span>Open-ended · 2 题（选填）</span></div>
-        <div class="q-acc-chevron">▼</div>
+    <div class="qai">
+      <div class="qah" onclick="this.parentElement.classList.toggle('open')">
+        <div class="qsi" style="background:rgba(15,36,64,.05);color:var(--ink)">H</div>
+        <div class="qsf"><h3>开放题</h3><span>Open-ended · 2 题（选填）</span></div>
+        <div class="qchev">▼</div>
       </div>
-      <div class="q-acc-body"><div class="q-acc-content">
-        <div class="q-card"><span class="q-num ink">H1</span><div class="q-text">您对目前使用的前体化学品检测方式最不满意的地方是什么？</div><textarea class="open-text" readonly placeholder="请在此填写您的想法……"></textarea></div>
-        <div class="q-card"><span class="q-num ink">H2</span><div class="q-text">如果有一款便携式前体化学品快检设备，您最希望它具备哪些功能或改进？</div><textarea class="open-text" readonly placeholder="请在此填写您的想法……"></textarea></div>
+      <div class="qab"><div class="qac">
+        <div class="qc"><span class="qn ink">H1</span><div class="qt">您对目前使用的前体化学品检测方式最不满意的地方是什么？</div><textarea class="otxt" readonly placeholder="请在此填写您的想法……"></textarea></div>
+        <div class="qc"><span class="qn ink">H2</span><div class="qt">如果有一款便携式前体化学品快检设备，您最希望它具备哪些功能或改进？</div><textarea class="otxt" readonly placeholder="请在此填写您的想法……"></textarea></div>
       </div></div>
     </div>
+
   </div>
-  <div style="text-align:center;padding:2rem 0">
-    <div style="display:inline-block;padding:.8rem 2.5rem;background:var(--ink);color:#fff;border-radius:12px;font-weight:700;font-size:.95rem">问卷到此结束，感谢您的宝贵时间！</div>
+
+  <div style="text-align:center;padding:1.8rem 0">
+    <div style="display:inline-block;padding:.7rem 2.2rem;background:var(--ink);color:#fff;border-radius:12px;font-weight:700;font-size:.92rem">问卷到此结束，感谢您的宝贵时间！</div>
   </div>
 </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <div class="f-brand">灵探 InSensor</div>
+  <div class="fb">灵探 InSensor</div>
   <p>便携式易制毒前体化学品智能现场快检终端</p>
-  <p style="margin-top:.8rem;font-size:.78rem;opacity:.5">准确率 97.22% · 检测时间 &lt;30s · 整机 2.05kg · 零耗材 · 论文 52 篇 · 专利 32 项</p>
-  <p style="margin-top:1rem;font-size:.75rem;opacity:.4">本报告基于 920 份有效问卷的统计分析结果，仅供学术研究与商业参考使用</p>
+  <p style="margin-top:.7rem;font-size:.76rem;opacity:.5">准确率 97.22% · 检测时间 &lt;30s · 整机 2.05kg · 零耗材 · 论文 52 篇 · 专利 32 项</p>
+  <p style="margin-top:.9rem;font-size:.72rem;opacity:.35">本报告基于 920 份有效问卷的统计分析结果，仅供学术研究与商业参考使用</p>
 </footer>
 
-<!-- BTT -->
 <button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="回到顶部">↑</button>
 
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" onclick="this.classList.remove('active')"><img id="lightboxImg" src="" alt="放大查看"></div>
+<div class="lb" id="lb" onclick="this.classList.remove('on')"><img id="lbImg" src="" alt="放大查看"></div>
 
-<!-- JAVASCRIPT -->
 <script>
 (function(){
-  // Scroll Reveal
-  const obs = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
       if(e.isIntersecting){
         e.target.classList.add('vis');
-        // Animate bars
-        e.target.querySelectorAll('.abar-fill').forEach(b=>{b.style.width=b.dataset.width});
-        // Count up
-        e.target.querySelectorAll('[data-count]').forEach(el=>{
-          const target=parseInt(el.dataset.count);
-          if(el._counted) return; el._counted=true;
-          let current=0;const step=Math.ceil(target/60);
-          const timer=setInterval(()=>{current+=step;if(current>=target){current=target;clearInterval(timer)}el.textContent=current.toLocaleString()},25);
+        e.target.querySelectorAll('.abar-fill').forEach(function(b){b.style.width=b.dataset.width});
+        e.target.querySelectorAll('[data-count]').forEach(function(el){
+          var t=parseInt(el.dataset.count);if(el._c)return;el._c=1;
+          var c=0,s=Math.ceil(t/55);
+          var tm=setInterval(function(){c+=s;if(c>=t){c=t;clearInterval(tm)}el.textContent=c.toLocaleString()},28);
         });
       }
     });
-  },{threshold:0.12,rootMargin:'0px 0px -60px 0px'});
-  document.querySelectorAll('.rv,.rv-l,.rv-r,.rv-s').forEach(el=>obs.observe(el));
+  },{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+  document.querySelectorAll('.rv,.rv-l,.rv-r,.rv-s').forEach(function(el){obs.observe(el)});
 
-  // Progress bar
-  const pbar=document.getElementById('progressBar');
-  const nav=document.getElementById('navbar');
-  const btt=document.getElementById('btt');
-  window.addEventListener('scroll',()=>{
-    const y=window.scrollY;const h=document.documentElement.scrollHeight-window.innerHeight;
-    pbar.style.width=(y/h*100)+'%';
-    nav.classList.toggle('solid',y>60);
-    btt.classList.toggle('show',y>600);
+  var pb=document.getElementById('progbar'),nb=document.getElementById('navbar'),bt=document.getElementById('btt');
+  window.addEventListener('scroll',function(){
+    var y=window.scrollY,h=document.documentElement.scrollHeight-window.innerHeight;
+    pb.style.width=(y/h*100)+'%';
+    nb.classList.toggle('solid',y>50);
+    bt.classList.toggle('show',y>500);
   },{passive:true});
 
-  // Active nav link
-  const sections=document.querySelectorAll('section[id]');
-  const navLinks=document.querySelectorAll('.nav-links a');
-  const linkObs=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
+  var secs=document.querySelectorAll('section[id]'),navAs=document.querySelectorAll('.nav-links a');
+  var lobs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
       if(e.isIntersecting){
-        navLinks.forEach(a=>a.classList.remove('active'));
-        const link=document.querySelector('.nav-links a[href="#'+e.target.id+'"]');
-        if(link) link.classList.add('active');
+        navAs.forEach(function(a){a.classList.remove('active')});
+        var lnk=document.querySelector('.nav-links a[href="#'+e.target.id+'"]');
+        if(lnk)lnk.classList.add('active');
       }
     });
-  },{threshold:0.25});
-  sections.forEach(s=>linkObs.observe(s));
+  },{threshold:0.2});
+  secs.forEach(function(s){lobs.observe(s)});
 
-  // Smooth scroll
-  navLinks.forEach(a=>{
-    a.addEventListener('click',e=>{
+  navAs.forEach(function(a){
+    a.addEventListener('click',function(e){
       e.preventDefault();
-      const target=document.querySelector(a.getAttribute('href'));
-      if(target){target.scrollIntoView({behavior:'smooth',block:'start'});document.querySelector('.nav-links').classList.remove('open')}
+      var tgt=document.querySelector(a.getAttribute('href'));
+      if(tgt){tgt.scrollIntoView({behavior:'smooth',block:'start'});document.querySelector('.nav-links').classList.remove('open')}
     });
   });
 
-  // Chart lightbox
-  document.querySelectorAll('.chart-fig img').forEach(img=>{
-    img.addEventListener('click',()=>{
-      document.getElementById('lightboxImg').src=img.src;
-      document.getElementById('lightbox').classList.add('active');
+  document.querySelectorAll('.cfig img').forEach(function(img){
+    img.addEventListener('click',function(){
+      document.getElementById('lbImg').src=img.src;
+      document.getElementById('lb').classList.add('on');
     });
   });
 
-  // Count up for hero metrics (auto-trigger since hero is visible on load)
-  setTimeout(()=>{
-    document.querySelectorAll('.hero-metric [data-count]').forEach(el=>{
-      const target=parseInt(el.dataset.count);
-      let current=0;const step=Math.ceil(target/45);
-      const timer=setInterval(()=>{current+=step;if(current>=target){current=target;clearInterval(timer)}el.textContent=current.toLocaleString()},30);
+  setTimeout(function(){
+    document.querySelectorAll('.hero-m [data-count]').forEach(function(el){
+      var t=parseInt(el.dataset.count);var c=0,s=Math.ceil(t/40);
+      var tm=setInterval(function(){c+=s;if(c>=t){c=t;clearInterval(tm)}el.textContent=c.toLocaleString()},32);
     });
-  },800);
+  },700);
 })();
 </script>
-
 </body>
 </html>

@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>灵探 InSensor — 市场调研问卷</title>
+<style>
+:root {
+  --ink: #16324F;
+  --blue: #2F6E8F;
+  --teal: #3A7C80;
+  --gold: #9E7440;
+  --coral: #B86E63;
+  --sage: #70886D;
+  --steel: #6B7B8D;
+  --bg: #FAFBFC;
+  --card: #FFFFFF;
+  --border: #E8ECF0;
+  --text: #2C3E50;
+  --text-light: #7B8A99;
+  --accent-glow: rgba(47,110,143,0.12);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Segoe UI",system-ui,sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--steel);border-radius:3px}
+
+/* ═══ ANIMATIONS ═══ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(47,110,143,0.3)}50%{box-shadow:0 0 0 12px rgba(47,110,143,0)}}
+.reveal{opacity:0;transform:translateY(30px);transition:all 0.7s cubic-bezier(0.16,1,0.3,1)}
+.reveal.visible{opacity:1;transform:none}
+
+/* ═══ NAV ═══ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  background:rgba(22,50,79,0.95);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.nav-inner{
+  max-width:900px;margin:0 auto;padding:0 2rem;
+  height:56px;display:flex;align-items:center;justify-content:space-between;
+}
+.nav-brand{font-size:1rem;font-weight:700;color:#fff;display:flex;align-items:center;gap:0.5rem}
+.nav-brand .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite}
+.nav-back{color:rgba(255,255,255,0.7);text-decoration:none;font-size:0.85rem;padding:0.3rem 0.8rem;border-radius:6px;transition:all 0.25s}
+.nav-back:hover{color:#fff;background:rgba(255,255,255,0.1)}
+
+/* ═══ HERO ═══ */
+.hero{
+  min-height:50vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:linear-gradient(155deg,#0B1D30 0%,var(--ink) 40%,var(--blue) 80%,var(--teal) 100%);
+  color:#fff;text-align:center;padding:7rem 2rem 4rem;position:relative;
+}
+.hero::after{content:"";position:absolute;bottom:-2px;left:0;right:0;height:80px;background:linear-gradient(to bottom,transparent,var(--bg))}
+.hero>*{position:relative;z-index:1}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);
+  padding:0.3rem 1rem;border-radius:20px;font-size:0.78rem;margin-bottom:1.5rem;
+}
+.hero-badge .indicator{width:6px;height:6px;border-radius:50%;background:#4ADE80}
+.hero h1{font-size:clamp(1.6rem,4vw,2.6rem);font-weight:800;line-height:1.3;margin-bottom:0.8rem}
+.hero h1 span{background:linear-gradient(135deg,#70C1B3,#B0E0E6,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{max-width:600px;font-size:0.95rem;opacity:0.8;line-height:1.7}
+
+/* ═══ MAIN ═══ */
+.container{max-width:820px;margin:0 auto;padding:0 2rem}
+
+/* ═══ INTRO ═══ */
+.intro-card{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:2rem 2.5rem;margin:-2rem auto 2rem;position:relative;z-index:2;
+  box-shadow:0 4px 20px rgba(0,0,0,0.06);max-width:820px;
+}
+.intro-card p{color:var(--text-light);font-size:0.92rem;line-height:1.8}
+.intro-meta{display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:1rem}
+.intro-meta span{font-size:0.82rem;color:var(--blue);font-weight:600;display:flex;align-items:center;gap:0.3rem}
+
+/* ═══ SECTION ═══ */
+.q-section{padding:2.5rem 0}
+.section-divider{
+  display:flex;align-items:center;gap:1rem;margin-bottom:2rem;
+}
+.section-icon{
+  width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;flex-shrink:0;
+}
+.section-icon.blue{background:rgba(47,110,143,0.1);color:var(--blue)}
+.section-icon.teal{background:rgba(58,124,128,0.1);color:var(--teal)}
+.section-icon.coral{background:rgba(184,110,99,0.1);color:var(--coral)}
+.section-icon.gold{background:rgba(158,116,64,0.1);color:var(--gold)}
+.section-icon.sage{background:rgba(112,136,109,0.1);color:var(--sage)}
+.section-icon.ink{background:rgba(22,50,79,0.08);color:var(--ink)}
+.section-divider h2{font-size:1.3rem;font-weight:700;color:var(--ink)}
+.section-divider .tag{font-size:0.72rem;color:var(--text-light);font-weight:500}
+
+/* ═══ QUESTION ═══ */
+.q-card{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:1.6rem 2rem;margin-bottom:1.2rem;
+  transition:transform 0.25s,box-shadow 0.25s;
+}
+.q-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.06)}
+.q-num{
+  display:inline-block;font-size:0.72rem;font-weight:700;
+  padding:0.15rem 0.6rem;border-radius:8px;margin-bottom:0.6rem;
+}
+.q-num.blue{background:rgba(47,110,143,0.1);color:var(--blue)}
+.q-num.teal{background:rgba(58,124,128,0.1);color:var(--teal)}
+.q-num.coral{background:rgba(184,110,99,0.1);color:var(--coral)}
+.q-num.gold{background:rgba(158,116,64,0.1);color:var(--gold)}
+.q-num.sage{background:rgba(112,136,109,0.1);color:var(--sage)}
+.q-num.ink{background:rgba(22,50,79,0.08);color:var(--ink)}
+.q-text{font-size:0.94rem;font-weight:600;color:var(--ink);margin-bottom:0.8rem;line-height:1.6}
+.q-note{font-size:0.82rem;color:var(--text-light);margin-bottom:0.8rem;font-style:italic}
+
+/* Options */
+.opts{list-style:none;padding:0;margin:0}
+.opts li{
+  display:flex;align-items:center;gap:0.6rem;
+  padding:0.5rem 0.8rem;margin-bottom:0.3rem;border-radius:8px;
+  font-size:0.88rem;transition:background 0.2s;cursor:default;
+}
+.opts li:hover{background:var(--accent-glow)}
+.opt-radio,.opt-check{
+  width:18px;height:18px;border-radius:50%;border:2px solid var(--border);
+  flex-shrink:0;transition:all 0.2s;position:relative;
+}
+.opt-check{border-radius:4px}
+
+/* Likert scale */
+.likert{display:flex;gap:0;margin:0.5rem 0}
+.likert-item{
+  flex:1;text-align:center;padding:0.6rem 0.3rem;
+  border:1px solid var(--border);font-size:0.82rem;
+  transition:all 0.2s;cursor:default;
+}
+.likert-item:first-child{border-radius:8px 0 0 8px}
+.likert-item:last-child{border-radius:0 8px 8px 0}
+.likert-item:hover{background:var(--accent-glow);border-color:var(--blue)}
+.likert-num{font-weight:700;color:var(--ink);font-size:1rem}
+.likert-label{font-size:0.68rem;color:var(--text-light);display:block;margin-top:0.15rem}
+
+/* NPS */
+.nps-scale{display:flex;gap:0;margin:0.5rem 0}
+.nps-item{
+  flex:1;text-align:center;padding:0.5rem 0;
+  border:1px solid var(--border);font-size:0.88rem;font-weight:600;
+  transition:all 0.2s;cursor:default;
+}
+.nps-item:first-child{border-radius:8px 0 0 8px}
+.nps-item:last-child{border-radius:0 8px 8px 0}
+.nps-item.detractor{color:var(--coral)}
+.nps-item.passive{color:var(--gold)}
+.nps-item.promoter{color:var(--teal)}
+.nps-item:hover{background:var(--accent-glow)}
+.nps-labels{display:flex;justify-content:space-between;font-size:0.72rem;color:var(--text-light);margin-top:0.3rem}
+
+/* Open text */
+.open-text{
+  width:100%;min-height:60px;border:1px solid var(--border);border-radius:8px;
+  padding:0.8rem;font-size:0.88rem;color:var(--text-light);
+  background:var(--bg);resize:none;font-family:inherit;
+}
+
+/* VW price */
+.vw-input{
+  display:inline-flex;align-items:center;gap:0.3rem;
+  border:1px solid var(--border);border-radius:8px;
+  padding:0.4rem 0.8rem;background:var(--bg);margin-top:0.3rem;
+}
+.vw-input span{font-size:0.85rem;color:var(--text-light)}
+.vw-input .placeholder{
+  min-width:80px;border-bottom:1px dashed var(--steel);text-align:center;
+  font-size:0.9rem;color:var(--ink);padding:0.1rem 0;
+}
+
+/* Product info box */
+.product-info{
+  background:linear-gradient(135deg,#F0F7FF,#EBF5FF);
+  border-left:4px solid var(--blue);border-radius:0 12px 12px 0;
+  padding:1.2rem 1.5rem;margin:1rem 0 1.5rem;font-size:0.88rem;
+  color:var(--ink);line-height:1.8;
+}
+.product-info strong{color:var(--blue)}
+
+/* Separator */
+.sep{border:none;height:1px;margin:1rem 0;background:linear-gradient(90deg,transparent,var(--border),transparent)}
+
+/* ═══ FOOTER ═══ */
+footer{
+  background:var(--ink);color:rgba(255,255,255,0.6);
+  text-align:center;padding:2.5rem 2rem;font-size:0.82rem;margin-top:3rem;
+}
+footer .brand{font-size:1rem;font-weight:700;color:#fff;margin-bottom:0.5rem}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:640px){
+  .likert{flex-wrap:wrap}
+  .likert-item{flex:0 0 calc(20% - 2px)}
+  .nps-scale{flex-wrap:wrap}
+  .nps-item{flex:0 0 calc(11.11% - 2px);min-width:30px}
+  .intro-card{padding:1.5rem}
+  .q-card{padding:1.2rem 1.4rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand"><span class="dot"></span>灵探·调研问卷</div>
+    <a href="index.html" class="nav-back">← 返回报告</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-badge"><span class="indicator"></span>正式调研问卷 · 8 板块 45 题</div>
+  <h1>便携式易制毒前体化学品检测装备<br><span>需求与市场调研</span></h1>
+  <p class="subtitle">配额抽样 · 匿名作答 · 纯学术用途 · 预计 8–12 分钟</p>
+</header>
+
+<!-- INTRO -->
+<div class="container">
+<div class="intro-card reveal">
+  <p>尊敬的受访者，您好！本问卷旨在了解便携式易制毒前体化学品检测装备的市场需求、用户痛点及采购偏好，用于学术研究与商业可行性分析。问卷匿名填写，不采集个人身份信息，所有数据仅做统计分析之用。</p>
+  <div class="intro-meta">
+    <span>📋 8 大板块</span>
+    <span>📝 45 道题目</span>
+    <span>⏱ 8–12 分钟</span>
+    <span>🔒 匿名保密</span>
+  </div>
+</div>
+</div>
+
+<!-- ═══ S 筛选部分 ═══ -->
+<div class="container">
+<section class="q-section reveal">
+  <div class="section-divider">
+    <div class="section-icon ink">S</div>
+    <div><h2>筛选部分</h2><span class="tag">Screening · 2 题</span></div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num ink">S1</span>
+    <div class="q-text">您目前的工作是否涉及易制毒前体化学品的检测、管理、采购或使用？</div>
+    <ul class="opts">
+      <li><span class="opt-radio"></span>是（继续）</li>
+      <li><span class="opt-radio"></span>否（感谢参与，问卷结束）</li>
+    </ul>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num ink">S2</span>
+    <div class="q-text">您是否参与或影响所在单位检测装备的采购决策？</div>
+    <ul class="opts">
+      <li><span class="opt-radio"></span>是，我是主要决策者</li>
+      <li><span class="opt-radio"></span>是，我参与评估与建议</li>
+      <li><span class="opt-radio"></span>否，但我是设备使用者（继续）</li>
+      <li><span class="opt-radio"></span>完全不涉及（感谢参与，问卷结束）</li>
+    </ul>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ A 基本画像 ═══ -->
+<section class="q-section reveal">
+  <div class="section-divider">
+    <div class="section-icon blue">A</div>
+    <div><h2>基本画像</h2><span class="tag">Demographics · 7 题</span></div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num blue">A1</span>
+    <div class="q-text">您所在单位的性质是？</div>
+    <ul class="opts">
+      <li><span class="opt-radio"></span>公安禁毒系统</li>
+      <li><span class="opt-radio"></span>海关/口岸系统</li>
+      <li><span class="opt-radio"></span>危化品生产企业</li>
+      <li><span class="opt-radio"></span>工业园区管理机构</li>
+      <li><span class="opt-radio"></span>物流/仓储企业</li>
+      <li><span class="opt-radio"></span>第三方检测机构</li>
+      <li><span class="opt-radio"></span>科研院所/高校</li>
+      <li><span class="opt-radio"></span>其他（请注明）______</li>
+    </ul>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num blue">A2</span>
+    <div class="q-text">您所在单位位于哪个省 / 自治区 / 直辖市？</div>
+    <div class="q-note">（下拉选择 31 个省级行政区）</div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num blue">A3</span>
+    <div class="q-text">您所在的主要工作场景是？</div>
+    <ul class="opts">
+      <li><span class="opt-radio"></span>现场执法/缉毒操作</li>
+      <li><span class="opt-radio"></span>口岸/卡口查验</li>
+      <li><span class="opt-radio"></span>企业安全巡检</li>
+      <li><span class="opt-radio"></span>园区环境监测</li>
+      <li><span class="opt-radio"></span>物流节点筛查</li>
+      <li><span class="opt-radio"></span>实验室检测</li>
+      <li><span class="opt-radio"></span>管理与决策</li>
+      <li><span class="opt-radio"></span>其他______</li>
+    </ul>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num blue">A4</span>
+    <div class="q-text">您的性别？</div>
+    <ul class="opts">
+      <li><span class="opt-radio"></span>男</li>
+      <li><span class="opt-radio"></span>女</li>
+    </ul>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num blue">A5</span>
+    <div class="q-text">您从事与易制毒化学品相关工作的年限？</div>
+    <ul class="opts">
+      <li><span class="opt-radio"></span>不足 1 年</li>
+      <li><span class="opt-radio"></span>1–3 年</li>
+      <li><span class="opt-radio"></span>3–5 年</li>
+      <li><span class="opt-radio"></span>5–10 年</li>
+      <li><span class="opt-radio"></span>10 年以上</li>
+    </ul>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num blue">A6</span>
+    <div class="q-text">您所在单位每年涉及前体化学品检测/筛查的任务量约为？</div>
+    <ul class="opts">
+      <li><span class="opt-radio"></span>50 次以下</li>
+      <li><span class="opt-radio"></span>50–200 次</li>
+      <li><span class="opt-radio"></span>200–500 次</li>
+      <li><span class="opt-radio"></span>500–1000 次</li>
+      <li><span class="opt-radio"></span>1000 次以上</li>
+    </ul>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num blue">A7</span>
+    <div class="q-text">您所在单位年度检测装备采购预算（含维护）大约为？</div>
+    <ul class="opts">
+      <li><span class="opt-radio"></span>5 万元以下</li>
+      <li><span class="opt-radio"></span>5–15 万元</li>
+      <li><span class="opt-radio"></span>15–30 万元</li>
+      <li><span class="opt-radio"></span>30–50 万元</li>
+      <li><span class="opt-radio"></span>50 万元以上</li>
+      <li><span class="opt-radio"></span>不清楚</li>
+    </ul>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ B 痛点与需求 ═══ -->
+<section class="q-section reveal">
+  <div class="section-divider">
+    <div class="section-icon coral">B</div>
+    <div><h2>痛点与需求</h2><span class="tag">Pain Points · 9 题</span></div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num coral">B1</span>
+    <div class="q-text">您认为当前检测方式中"送检等待时间过长"的严重程度如何？</div>
+    <div class="likert">
+      <div class="likert-item"><div class="likert-num">1</div><div class="likert-label">完全不严重</div></div>
+      <div class="likert-item"><div class="likert-num">2</div><div class="likert-label">不太严重</div></div>
+      <div class="likert-item"><div class="likert-num">3</div><div class="likert-label">一般</div></div>
+      <div class="likert-item"><div class="likert-num">4</div><div class="likert-label">比较严重</div></div>
+      <div class="likert-item"><div class="likert-num">5</div><div class="likert-label">非常严重</div></div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num coral">B2</span>
+    <div class="q-text">您认为"混合样本难以准确识别"的严重程度如何？</div>
+    <div class="likert">
+      <div class="likert-item"><div class="likert-num">1</div></div>
+      <div class="likert-item"><div class="likert-num">2</div></div>
+      <div class="likert-item"><div class="likert-num">3</div></div>
+      <div class="likert-item"><div class="likert-num">4</div></div>
+      <div class="likert-item"><div class="likert-num">5</div></div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num coral">B3</span>
+    <div class="q-text">您认为"现有设备对易制毒前体化学品的场景适配不足"的严重程度如何？</div>
+    <div class="likert">
+      <div class="likert-item"><div class="likert-num">1</div></div>
+      <div class="likert-item"><div class="likert-num">2</div></div>
+      <div class="likert-item"><div class="likert-num">3</div></div>
+      <div class="likert-item"><div class="likert-num">4</div></div>
+      <div class="likert-item"><div class="likert-num">5</div></div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num coral">B4</span>
+    <div class="q-text">您认为"基层一线缺乏便携式检测手段"的严重程度如何？</div>
+    <div class="likert">
+      <div class="likert-item"><div class="likert-num">1</div></div>
+      <div class="likert-item"><div class="likert-num">2</div></div>
+      <div class="likert-item"><div class="likert-num">3</div></div>
+      <div class="likert-item"><div class="likert-num">4</div></div>
+      <div class="likert-item"><div class="likert-num">5</div></div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num coral">B5</span>
+    <div class="q-text">您认为"耗材消耗与维护成本高"的严重程度如何？</div>
+    <div class="likert">
+      <div class="likert-item"><div class="likert-num">1</div></div>
+      <div class="likert-item"><div class="likert-num">2</div></div>
+      <div class="likert-item"><div class="likert-num">3</div></div>
+      <div class="likert-item"><div class="likert-num">4</div></div>
+      <div class="likert-item"><div class="likert-num">5</div></div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num coral">B6</span>
+    <div class="q-text">近两年来，您所在单位面临的易制毒化学品监管压力是否有所增加？</div>
+    <div class="likert">
+      <div class="likert-item"><div class="likert-num">1</div><div class="likert-label">完全没有</div></div>
+      <div class="likert-item"><div class="likert-num">2</div><div class="likert-label">略有增加</div></div>
+      <div class="likert-item"><div class="likert-num">3</div><div class="likert-label">一定增加</div></div>
+      <div class="likert-item"><div class="likert-num">4</div><div class="likert-label">明显增加</div></div>
+      <div class="likert-item"><div class="likert-num">5</div><div class="likert-label">显著增加</div></div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num coral">B7</span>
+    <div class="q-text">您认为新增列管品种（如 4-哌啶酮等）对检测需求的推动作用如何？</div>
+    <div class="likert">
+      <div class="likert-item"><div class="likert-num">1</div><div class="likert-label">无推动</div></div>
+      <div class="likert-item"><div class="likert-num">2</div><div class="likert-label">较小</div></div>
+      <div class="likert-item"><div class="likert-num">3</div><div class="likert-label">一般</div></div>
+      <div class="likert-item"><div class="likert-num">4</div><div class="likert-label">较大</div></div>
+      <div class="likert-item"><div class="likert-num">5</div><div class="likert-label">非常大</div></div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num coral">B8</span>
+    <div class="q-text">您认为国家对出口管理加严政策对您所在单位的检测需求有多大影响？</div>
+    <div class="likert">
+      <div class="likert-item"><div class="likert-num">1</div><div class="likert-label">无影响</div></div>
+      <div class="likert-item"><div class="likert-num">2</div><div class="likert-label">较小</div></div>
+      <div class="likert-item"><div class="likert-num">3</div><div class="likert-label">一般</div></div>
+      <div class="likert-item"><div class="likert-num">4</div><div class="likert-label">较大</div></div>
+      <div class="likert-item"><div class="likert-num">5</div><div class="likert-label">非常大</div></div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num coral">B9</span>
+    <div class="q-text">您所在单位目前主要使用以下哪些检测方式？<span style="font-weight:400;color:var(--text-light)">（多选）</span></div>
+    <ul class="opts">
+      <li><span class="opt-check"></span>实验室 GC-MS/HPLC</li>
+      <li><span class="opt-check"></span>手持拉曼光谱（如 Thermo TruNarc）</li>
+      <li><span class="opt-check"></span>离子迁移谱（IMS）</li>
+      <li><span class="opt-check"></span>生物样本快检（汗液/唾液试纸）</li>
+      <li><span class="opt-check"></span>工业气体检测仪</li>
+      <li><span class="opt-check"></span>便携式传感器设备</li>
+      <li><span class="opt-check"></span>尚无专用检测设备</li>
+      <li><span class="opt-check"></span>其他______</li>
+    </ul>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ C 产品认知 ═══ -->
+<section class="q-section reveal">
+  <div class="section-divider">
+    <div class="section-icon teal">C</div>
+    <div><h2>产品认知</h2><span class="tag">Product Awareness · 4 题</span></div>
+  </div>
+
+  <div class="product-info">
+    <strong>产品简介 ｜ 灵探 InSensor</strong><br>
+    一款基于传感器阵列与动态温度调制的便携式前体化学品现场快检终端。主要特征：<strong>30 秒内出结果</strong>、<strong>无耗材消耗</strong>、边缘推理/可离线使用、综合准确率 <strong>97.22%</strong>。
+  </div>
+
+  <div class="q-card">
+    <span class="q-num teal">C1</span>
+    <div class="q-text">在本次调研之前，您是否了解过灵探 InSensor 或类似的便携式前体化学品检测设备？</div>
+    <ul class="opts">
+      <li><span class="opt-radio"></span>非常了解</li>
+      <li><span class="opt-radio"></span>比较了解</li>
+      <li><span class="opt-radio"></span>听说过但不太了解</li>
+      <li><span class="opt-radio"></span>完全没听说过</li>
+    </ul>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num teal">C2</span>
+    <div class="q-text">您认为"30 秒内完成现场检测"这一特性的价值如何？</div>
+    <div class="likert">
+      <div class="likert-item"><div class="likert-num">1</div><div class="likert-label">毫无价值</div></div>
+      <div class="likert-item"><div class="likert-num">2</div><div class="likert-label">价值较低</div></div>
+      <div class="likert-item"><div class="likert-num">3</div><div class="likert-label">一般</div></div>
+      <div class="likert-item"><div class="likert-num">4</div><div class="likert-label">价值较高</div></div>
+      <div class="likert-item"><div class="likert-num">5</div><div class="likert-label">极高价值</div></div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num teal">C3</span>
+    <div class="q-text">您认为"无耗材消耗"这一特性的价值如何？</div>
+    <div class="likert">
+      <div class="likert-item"><div class="likert-num">1</div></div>
+      <div class="likert-item"><div class="likert-num">2</div></div>
+      <div class="likert-item"><div class="likert-num">3</div></div>
+      <div class="likert-item"><div class="likert-num">4</div></div>
+      <div class="likert-item"><div class="likert-num">5</div></div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num teal">C4</span>
+    <div class="q-text">您认为"便携部署/可离线使用"这一特性的价值如何？</div>
+    <div class="likert">
+      <div class="likert-item"><div class="likert-num">1</div></div>
+      <div class="likert-item"><div class="likert-num">2</div></div>
+      <div class="likert-item"><div class="likert-num">3</div></div>
+      <div class="likert-item"><div class="likert-num">4</div></div>
+      <div class="likert-item"><div class="likert-num">5</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ D 感知价值 ═══ -->
+<section class="q-section reveal">
+  <div class="section-divider">
+    <div class="section-icon gold">D</div>
+    <div><h2>感知价值</h2><span class="tag">Perceived Value · 5 题 + 注意力检验</span></div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num gold">D1</span>
+    <div class="q-text">总体而言，您认为灵探 InSensor 能够有效解决您工作中的实际需求。</div>
+    <div class="likert">
+      <div class="likert-item"><div class="likert-num">1</div><div class="likert-label">非常不同意</div></div>
+      <div class="likert-item"><div class="likert-num">2</div><div class="likert-label">不同意</div></div>
+      <div class="likert-item"><div class="likert-num">3</div><div class="likert-label">一般</div></div>
+      <div class="likert-item"><div class="likert-num">4</div><div class="likert-label">同意</div></div>
+      <div class="likert-item"><div class="likert-num">5</div><div class="likert-label">非常同意</div></div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num gold">D2</span>
+    <div class="q-text">与现有检测方式相比，灵探 InSensor 的综合性价比更高。</div>
+    <div class="likert">
+      <div class="likert-item"><div class="likert-num">1</div></div>
+      <div class="likert-item"><div class="likert-num">2</div></div>
+      <div class="likert-item"><div class="likert-num">3</div></div>
+      <div class="likert-item"><div class="likert-num">4</div></div>
+      <div class="likert-item"><div class="likert-num">5</div></div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num gold">D3</span>
+    <div class="q-text">灵探 InSensor 能显著提升我所在单位的检测效率。</div>
+    <div class="likert">
+      <div class="likert-item"><div class="likert-num">1</div></div>
+      <div class="likert-item"><div class="likert-num">2</div></div>
+      <div class="likert-item"><div class="likert-num">3</div></div>
+      <div class="likert-item"><div class="likert-num">4</div></div>
+      <div class="likert-item"><div class="likert-num">5</div></div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num gold">D4</span>
+    <div class="q-text">使用灵探 InSensor 可以降低一线人员的操作难度和培训成本。</div>
+    <div class="likert">
+      <div class="likert-item"><div class="likert-num">1</div></div>
+      <div class="likert-item"><div class="likert-num">2</div></div>
+      <div class="likert-item"><div class="likert-num">3</div></div>
+      <div class="likert-item"><div class="likert-num">4</div></div>
+      <div class="likert-item"><div class="likert-num">5</div></div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num gold">D5</span>
+    <div class="q-text">灵探 InSensor 的技术可靠性（97.22% 准确率）达到了我的工作要求。</div>
+    <div class="likert">
+      <div class="likert-item"><div class="likert-num">1</div></div>
+      <div class="likert-item"><div class="likert-num">2</div></div>
+      <div class="likert-item"><div class="likert-num">3</div></div>
+      <div class="likert-item"><div class="likert-num">4</div></div>
+      <div class="likert-item"><div class="likert-num">5</div></div>
+    </div>
+  </div>
+
+  <div class="q-card" style="border-left:3px solid var(--coral)">
+    <span class="q-num coral">D_check</span>
+    <div class="q-text">注意力检验题：为确保作答质量，请在本题选择"4"。</div>
+    <div class="likert">
+      <div class="likert-item"><div class="likert-num">1</div></div>
+      <div class="likert-item"><div class="likert-num">2</div></div>
+      <div class="likert-item"><div class="likert-num">3</div></div>
+      <div class="likert-item" style="background:rgba(184,110,99,0.08);border-color:var(--coral)"><div class="likert-num" style="color:var(--coral)">4 ✓</div></div>
+      <div class="likert-item"><div class="likert-num">5</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ E 购买意愿与支付意愿 ═══ -->
+<section class="q-section reveal">
+  <div class="section-divider">
+    <div class="section-icon sage">E</div>
+    <div><h2>购买意愿与支付意愿</h2><span class="tag">Purchase Intent & WTP · 8 题</span></div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num sage">E1</span>
+    <div class="q-text">如果灵探 InSensor 已正式上市，在未来 12 个月内，您所在单位采购该设备的可能性有多大？</div>
+    <div class="likert">
+      <div class="likert-item"><div class="likert-num">1</div><div class="likert-label">完全不可能</div></div>
+      <div class="likert-item"><div class="likert-num">2</div><div class="likert-label">不太可能</div></div>
+      <div class="likert-item"><div class="likert-num">3</div><div class="likert-label">一般</div></div>
+      <div class="likert-item"><div class="likert-num">4</div><div class="likert-label">比较可能</div></div>
+      <div class="likert-item"><div class="likert-num">5</div><div class="likert-label">非常可能</div></div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num sage">E2</span>
+    <div class="q-text">如果政策要求必须配备前体化学品现场检测手段，您所在单位的采购意愿会提升多少？</div>
+    <div class="likert">
+      <div class="likert-item"><div class="likert-num">1</div><div class="likert-label">不会提升</div></div>
+      <div class="likert-item"><div class="likert-num">2</div><div class="likert-label">略有提升</div></div>
+      <div class="likert-item"><div class="likert-num">3</div><div class="likert-label">提升一般</div></div>
+      <div class="likert-item"><div class="likert-num">4</div><div class="likert-label">明显提升</div></div>
+      <div class="likert-item"><div class="likert-num">5</div><div class="likert-label">大幅提升</div></div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num sage">E3</span>
+    <div class="q-text">如果同行/上级单位已经成功使用灵探 InSensor，您所在单位的采购意愿会如何变化？</div>
+    <div class="likert">
+      <div class="likert-item"><div class="likert-num">1</div><div class="likert-label">不会变化</div></div>
+      <div class="likert-item"><div class="likert-num">2</div><div class="likert-label">略有提升</div></div>
+      <div class="likert-item"><div class="likert-num">3</div><div class="likert-label">提升一般</div></div>
+      <div class="likert-item"><div class="likert-num">4</div><div class="likert-label">明显提升</div></div>
+      <div class="likert-item"><div class="likert-num">5</div><div class="likert-label">大幅提升</div></div>
+    </div>
+  </div>
+
+  <div class="product-info" style="border-left-color:var(--gold)">
+    <strong>Van Westendorp 价格敏感度测量</strong><br>
+    以下 4 题请根据您对便携式前体化学品检测终端的认知，分别回答各价格判断阈值。
+  </div>
+
+  <div class="q-card">
+    <span class="q-num gold">E4</span>
+    <div class="q-text">您认为这类设备定价多少时，会觉得"太便宜了，可能质量有问题"？</div>
+    <div class="vw-input"><span>¥</span><div class="placeholder">______</div><span>元/台</span></div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num gold">E5</span>
+    <div class="q-text">您认为这类设备定价多少时，会觉得"价格合理，物有所值"？</div>
+    <div class="vw-input"><span>¥</span><div class="placeholder">______</div><span>元/台</span></div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num gold">E6</span>
+    <div class="q-text">您认为这类设备定价多少时，会觉得"有点贵，但还在可接受范围内"？</div>
+    <div class="vw-input"><span>¥</span><div class="placeholder">______</div><span>元/台</span></div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num gold">E7</span>
+    <div class="q-text">您认为这类设备定价多少时，会觉得"太贵了，完全不会考虑"？</div>
+    <div class="vw-input"><span>¥</span><div class="placeholder">______</div><span>元/台</span></div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num sage">E8</span>
+    <div class="q-text">如果灵探 InSensor 提供年度运维校准服务（含软件升级 + 传感器校准），年费 500–800 元/台，您所在单位的付费意愿如何？</div>
+    <div class="likert">
+      <div class="likert-item"><div class="likert-num">1</div><div class="likert-label">完全不愿</div></div>
+      <div class="likert-item"><div class="likert-num">2</div><div class="likert-label">不太愿意</div></div>
+      <div class="likert-item"><div class="likert-num">3</div><div class="likert-label">一般</div></div>
+      <div class="likert-item"><div class="likert-num">4</div><div class="likert-label">比较愿意</div></div>
+      <div class="likert-item"><div class="likert-num">5</div><div class="likert-label">非常愿意</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ F 渠道与信任 ═══ -->
+<section class="q-section reveal">
+  <div class="section-divider">
+    <div class="section-icon blue">F</div>
+    <div><h2>渠道与信任</h2><span class="tag">Channel & Trust · 3 题</span></div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num blue">F1</span>
+    <div class="q-text">您最信任以下哪种渠道推介的检测装备？<span style="font-weight:400;color:var(--text-light)">（最多选 3 项）</span></div>
+    <ul class="opts">
+      <li><span class="opt-check"></span>上级部门/主管机关推荐</li>
+      <li><span class="opt-check"></span>同行单位使用反馈</li>
+      <li><span class="opt-check"></span>学术期刊/科研报告</li>
+      <li><span class="opt-check"></span>系统集成商推荐</li>
+      <li><span class="opt-check"></span>行业展会/技术交流会</li>
+      <li><span class="opt-check"></span>品牌官方宣传</li>
+      <li><span class="opt-check"></span>网络搜索/自行了解</li>
+      <li><span class="opt-check"></span>其他______</li>
+    </ul>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num blue">F2</span>
+    <div class="q-text">您对"通过系统集成商采购检测装备"的信任度如何？</div>
+    <div class="likert">
+      <div class="likert-item"><div class="likert-num">1</div><div class="likert-label">完全不信任</div></div>
+      <div class="likert-item"><div class="likert-num">2</div><div class="likert-label">不太信任</div></div>
+      <div class="likert-item"><div class="likert-num">3</div><div class="likert-label">一般</div></div>
+      <div class="likert-item"><div class="likert-num">4</div><div class="likert-label">比较信任</div></div>
+      <div class="likert-item"><div class="likert-num">5</div><div class="likert-label">非常信任</div></div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num blue">F3</span>
+    <div class="q-text">您对"产品已在多地公安系统试用并取得实际效果"这一信息的信任度如何？</div>
+    <div class="likert">
+      <div class="likert-item"><div class="likert-num">1</div><div class="likert-label">完全不信任</div></div>
+      <div class="likert-item"><div class="likert-num">2</div><div class="likert-label">不太信任</div></div>
+      <div class="likert-item"><div class="likert-num">3</div><div class="likert-label">一般</div></div>
+      <div class="likert-item"><div class="likert-num">4</div><div class="likert-label">比较信任</div></div>
+      <div class="likert-item"><div class="likert-num">5</div><div class="likert-label">非常信任</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ G 复购与推荐 ═══ -->
+<section class="q-section reveal">
+  <div class="section-divider">
+    <div class="section-icon teal">G</div>
+    <div><h2>复购与推荐</h2><span class="tag">Loyalty & NPS · 4 题</span></div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num teal">G1</span>
+    <div class="q-text">如果您所在单位已采购灵探 InSensor 并使用满意，追加购买的可能性有多大？</div>
+    <div class="likert">
+      <div class="likert-item"><div class="likert-num">1</div><div class="likert-label">完全不可能</div></div>
+      <div class="likert-item"><div class="likert-num">2</div><div class="likert-label">不太可能</div></div>
+      <div class="likert-item"><div class="likert-num">3</div><div class="likert-label">一般</div></div>
+      <div class="likert-item"><div class="likert-num">4</div><div class="likert-label">比较可能</div></div>
+      <div class="likert-item"><div class="likert-num">5</div><div class="likert-label">非常可能</div></div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num teal">G2</span>
+    <div class="q-text">您认为以下哪些因素最影响追加购买？<span style="font-weight:400;color:var(--text-light)">（最多选 3 项）</span></div>
+    <ul class="opts">
+      <li><span class="opt-check"></span>设备性能稳定可靠</li>
+      <li><span class="opt-check"></span>售后服务响应及时</li>
+      <li><span class="opt-check"></span>软件/算法持续升级</li>
+      <li><span class="opt-check"></span>价格优惠</li>
+      <li><span class="opt-check"></span>上级要求或政策推动</li>
+      <li><span class="opt-check"></span>覆盖范围需要扩大</li>
+      <li><span class="opt-check"></span>其他______</li>
+    </ul>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num teal">G3</span>
+    <div class="q-text">如果从现有检测方式切换到灵探 InSensor，您觉得切换成本（含学习、适应、流程调整）有多高？</div>
+    <div class="likert">
+      <div class="likert-item"><div class="likert-num">1</div><div class="likert-label">几乎没有</div></div>
+      <div class="likert-item"><div class="likert-num">2</div><div class="likert-label">较低</div></div>
+      <div class="likert-item"><div class="likert-num">3</div><div class="likert-label">一般</div></div>
+      <div class="likert-item"><div class="likert-num">4</div><div class="likert-label">较高</div></div>
+      <div class="likert-item"><div class="likert-num">5</div><div class="likert-label">非常高</div></div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num teal">G4</span>
+    <div class="q-text">您向同行/上下游推荐灵探 InSensor 的可能性有多大？<span style="font-weight:400;color:var(--text-light)">（NPS 净推荐值）</span></div>
+    <div class="nps-scale">
+      <div class="nps-item detractor">0</div>
+      <div class="nps-item detractor">1</div>
+      <div class="nps-item detractor">2</div>
+      <div class="nps-item detractor">3</div>
+      <div class="nps-item detractor">4</div>
+      <div class="nps-item detractor">5</div>
+      <div class="nps-item detractor">6</div>
+      <div class="nps-item passive">7</div>
+      <div class="nps-item passive">8</div>
+      <div class="nps-item promoter">9</div>
+      <div class="nps-item promoter">10</div>
+    </div>
+    <div class="nps-labels"><span>完全不可能</span><span>极有可能</span></div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ H 开放题 ═══ -->
+<section class="q-section reveal">
+  <div class="section-divider">
+    <div class="section-icon ink">H</div>
+    <div><h2>开放题</h2><span class="tag">Open-ended · 2 题（选填）</span></div>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num ink">H1</span>
+    <div class="q-text">您对目前使用的前体化学品检测方式最不满意的地方是什么？</div>
+    <textarea class="open-text" readonly placeholder="请在此填写您的想法……"></textarea>
+  </div>
+
+  <div class="q-card">
+    <span class="q-num ink">H2</span>
+    <div class="q-text">如果有一款便携式前体化学品快检设备，您最希望它具备哪些功能或改进？</div>
+    <textarea class="open-text" readonly placeholder="请在此填写您的想法……"></textarea>
+  </div>
+</section>
+
+<div class="container" style="text-align:center;padding:2rem 0">
+  <div style="display:inline-block;padding:1rem 3rem;background:var(--ink);color:#fff;border-radius:12px;font-weight:700;font-size:1rem;opacity:0.8">
+    问卷到此结束，感谢您的宝贵时间！
+  </div>
+</div>
+
+</div><!-- .container -->
+
+
+
+<!-- JS: scroll reveal -->
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
