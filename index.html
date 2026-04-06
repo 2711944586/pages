@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <!-- v2025.07.07 -->
 <title>灵探 InSensor — 市场分析报告与调研问卷</title>
+<meta name="description" content="灵探 InSensor 便携式前体化学品检测终端市场分析报告——基于920份问卷的多维统计建模成果">
+<meta name="theme-color" content="#030712">
+<meta property="og:title" content="灵探 InSensor — 市场分析报告">
+<meta property="og:description" content="覆盖SEM、PSM、K-means、IPA、NPS等9种方法的全面市场可行性验证">
+<meta property="og:type" content="article">
 <style>
 :root{
   --void:#030712;--dark:#0B1120;--ink:#0C1E3A;
@@ -460,14 +465,15 @@ footer .fb{font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:.4rem}
   .stitle{font-size:1.4rem}
   .sdesc{font-size:.86rem}
   .card{padding:1.4rem 1.3rem}
-  .dtbl{font-size:.78rem}
-  .dtbl thead th{padding:.55rem .6rem;font-size:.76rem}
+  .dtbl{font-size:.78rem;display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .dtbl thead th{padding:.55rem .6rem;font-size:.76rem;white-space:nowrap}
   .dtbl tbody td{padding:.5rem .6rem}
   .abar{flex-direction:column;align-items:flex-start;gap:.3rem}
   .abar-lbl{width:auto;text-align:left}
   .bn6{grid-template-columns:1fr 1fr}
   .bn-i.sp2,.bn-i.sp3{grid-column:span 1}
   .cfig .cap{font-size:.76rem;padding:.6rem .8rem}
+  .cfig img{border-radius:0}
   .pband{flex-direction:column;align-items:center}
   .pnode{min-width:calc(100% - 2rem)}
   .shd{margin-bottom:2.2rem}
@@ -475,6 +481,9 @@ footer .fb{font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:.4rem}
   .qacc .qac{padding:0 1rem 1rem}
   .qc{padding:.9rem 1rem}
   .lb img{max-width:96vw;max-height:88vh;border-radius:8px}
+  .vtl{padding-left:32px}
+  .vtl::before{left:10px}
+  .vtl-item::before{left:-28px;width:13px;height:13px}
 }
 @media(max-width:480px){
   :root{--gap:3rem}
@@ -507,6 +516,10 @@ footer .fb{font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:.4rem}
   .scroll-cue{display:none}
   .btt{bottom:1rem;right:1rem;width:40px;height:40px;font-size:.95rem}
   section{padding:var(--gap) 0}
+  .insight{padding:1rem 1.1rem;font-size:.82rem}
+  .pband .pnode{padding:1rem 1.2rem}
+  .nps-hero{padding:2rem 1.5rem}
+  .nps-hero .nps-v{font-size:2.5rem}
 }
 </style>
 </head>
@@ -571,7 +584,7 @@ footer .fb{font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:.4rem}
     <div class="bn-i sp2 rv"><div class="bi-ic">🎯</div><div class="bi-v" style="color:var(--teal)">97.22%</div><div class="bi-l">综合准确率</div></div>
     <div class="bn-i sp2 rv"><div class="bi-ic">🔋</div><div class="bi-v" style="color:var(--gold)">零耗材</div><div class="bi-l">无需试剂消耗</div></div>
     <div class="bn-i sp2 rv"><div class="bi-ic">📐</div><div class="bi-v" style="color:var(--blue)">2.05 kg</div><div class="bi-l">整机重量</div><div class="bi-d">尺寸 200×75×300mm，单手可持</div></div>
-    <div class="bn-i sp2 rv"><div class="bi-ic">💰</div><div class="bi-v" style="color:var(--gold)">500 万</div><div class="bi-l">天使轮融资</div><div class="bi-d">创始团队 88% · 投资方 7% · 期权池 5%</div></div>
+    <div class="bn-i sp2 rv"><div class="bi-ic">💰</div><div class="bi-v" style="color:var(--gold)">500 万</div><div class="bi-l">天使轮融资</div><div class="bi-d">释放股权 10% · 创始团队 65% · 核心员工 15% · 战略预留 10%</div></div>
     <div class="bn-i sp2 rv"><div class="bi-ic">🛡️</div><div class="bi-v" style="color:var(--teal)">60%</div><div class="bi-l">投资回报率</div><div class="bi-d">预计 2–3 年回本</div></div>
   </div>
 </div>
@@ -624,14 +637,14 @@ footer .fb{font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:.4rem}
     <h2 class="stitle">样本画像与描述性统计</h2>
     <p class="sdesc">配额控制良好，三类用户实际占比与计划比例完全一致；样本以 3–10 年中坚力量为主</p></div>
   <div class="g2">
-    <div class="cfig rv-l"><img src="charts/图3-1 样本行业与部门分布嵌套环形图.png" alt="样本用户类型分布"><div class="cap">图 3-1 样本用户类型嵌套环形图（n=920）</div></div>
-    <div class="cfig rv-r"><img src="charts/图3-2 行业-部门交叉热力图.png" alt="样本地域分布"><div class="cap">图 3-2 部门×行业交叉热力图</div></div>
+    <div class="cfig rv-l"><img loading="lazy" src="charts/图3-1 样本行业与部门分布嵌套环形图.png" alt="样本用户类型分布"><div class="cap">图 3-1 样本用户类型嵌套环形图（n=920）</div></div>
+    <div class="cfig rv-r"><img loading="lazy" src="charts/图3-2 行业-部门交叉热力图.png" alt="样本地域分布"><div class="cap">图 3-2 部门×行业交叉热力图</div></div>
   </div>
   <div class="g2" style="margin-top:1.4rem">
-    <div class="cfig rv-l"><img src="charts/图3-3 细分岗位矩形树图.png" alt="行业规模"><div class="cap">图 3-3 行业规模矩形树图</div></div>
-    <div class="cfig rv-r"><img src="charts/图3-4 从业年限与学历棒棒糖图.png" alt="职级学历"><div class="cap">图 3-4 职级×学历分组棒棒糖图</div></div>
+    <div class="cfig rv-l"><img loading="lazy" src="charts/图3-3 细分岗位矩形树图.png" alt="行业规模"><div class="cap">图 3-3 行业规模矩形树图</div></div>
+    <div class="cfig rv-r"><img loading="lazy" src="charts/图3-4 从业年限与学历棒棒糖图.png" alt="职级学历"><div class="cap">图 3-4 职级×学历分组棒棒糖图</div></div>
   </div>
-  <div class="cfig rv" style="margin-top:1.4rem"><img src="charts/图3-5 年度预算径向条形图.png" alt="年检测量"><div class="cap">图 3-5 地区×从业年限径向柱状图</div></div>
+  <div class="cfig rv" style="margin-top:1.4rem"><img loading="lazy" src="charts/图3-5 年度预算径向条形图.png" alt="年检测量"><div class="cap">图 3-5 地区×从业年限径向柱状图</div></div>
   <div class="insight rv" style="margin-top:1.4rem">
     <strong>核心发现：</strong>55.2% 的受访者仍依赖实验室 GC-MS/HPLC 检测，12.2% 甚至没有任何专用检测设备——后者构成灵探 InSensor 的直接市场切入点。样本以 3–10 年中坚力量为主（55.0%），年检测量 500 次以上的高频用户占 46.5%，对便携快检存在强烈的场景需求。
   </div>
@@ -651,8 +664,8 @@ footer .fb{font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:.4rem}
     <h2 class="stitle">量表信度与效度</h2>
     <p class="sdesc">所有量表 Cronbach's α ≥ 0.79，CFA 五项拟合指标全部达到"良好"水平</p></div>
   <div class="g2">
-    <div class="cfig rv-l"><img src="charts/图4-1 Cronbach信度系数汇总.png" alt="信度"><div class="cap">图 4-1 Cronbach's α 仪表盘</div></div>
-    <div class="cfig rv-r"><img src="charts/图4-2 结构效度CFA指标全景.png" alt="CFA"><div class="cap">图 4-2 CFA 拟合指标雷达图</div></div>
+    <div class="cfig rv-l"><img loading="lazy" src="charts/图4-1 Cronbach信度系数汇总.png" alt="信度"><div class="cap">图 4-1 Cronbach's α 仪表盘</div></div>
+    <div class="cfig rv-r"><img loading="lazy" src="charts/图4-2 结构效度CFA指标全景.png" alt="CFA"><div class="cap">图 4-2 CFA 拟合指标雷达图</div></div>
   </div>
   <div class="card rv" style="margin-top:1.4rem">
     <div class="card-t"><span class="ic">✅</span>信效度检验总结</div>
@@ -679,10 +692,10 @@ footer .fb{font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:.4rem}
     <h2 class="stitle">行业痛点深度分析</h2>
     <p class="sdesc">五项痛点均值均 > 3.80，行业整体处于"高痛点"状态；送检时延（M=4.36）是最突出痛点</p></div>
   <div class="g2">
-    <div class="cfig rv-l"><img src="charts/图5-1 痛点严重度热力矩阵.png" alt="痛点雷达"><div class="cap">图 5-1 八维痛点雷达图（行业叠加）</div></div>
-    <div class="cfig rv-r"><img src="charts/图5-2 行业痛点雷达对比.png" alt="痛点对比"><div class="cap">图 5-2 技术使用偏好子弹图</div></div>
+    <div class="cfig rv-l"><img loading="lazy" src="charts/图5-1 痛点严重度热力矩阵.png" alt="痛点雷达"><div class="cap">图 5-1 八维痛点雷达图（行业叠加）</div></div>
+    <div class="cfig rv-r"><img loading="lazy" src="charts/图5-2 行业痛点雷达对比.png" alt="痛点对比"><div class="cap">图 5-2 技术使用偏好子弹图</div></div>
   </div>
-  <div class="cfig rv" style="margin-top:1.4rem"><img src="charts/图5-3 痛点TOPSIS综合排序.png" alt="痛点分组"><div class="cap">图 5-3 痛点分组箱线图（2×2 分面）</div></div>
+  <div class="cfig rv" style="margin-top:1.4rem"><img loading="lazy" src="charts/图5-3 痛点TOPSIS综合排序.png" alt="痛点分组"><div class="cap">图 5-3 痛点分组箱线图（2×2 分面）</div></div>
   <div class="card rv" style="margin-top:1.4rem">
     <div class="card-t"><span class="ic">🔥</span>五大痛点严重度</div>
     <div style="margin-top:.4rem">
@@ -708,14 +721,14 @@ footer .fb{font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:.4rem}
     <h2 class="stitle">感知价值与购买意愿</h2>
     <p class="sdesc">感知价值（β=0.412）是购买意愿最强预测因子；中介效应达 63%</p></div>
   <div class="g2">
-    <div class="cfig rv-l"><img src="charts/图6-1 感知价值重要度排序.png" alt="感知价值"><div class="cap">图 6-1 满意度-期望值哑铃图</div></div>
-    <div class="cfig rv-r"><img src="charts/图6-4 功能维度哑铃对比.png" alt="散点密度"><div class="cap">图 6-4 散点密度图（回归 + KDE 等高线）</div></div>
+    <div class="cfig rv-l"><img loading="lazy" src="charts/图6-1 感知价值重要度排序.png" alt="感知价值"><div class="cap">图 6-1 满意度-期望值哑铃图</div></div>
+    <div class="cfig rv-r"><img loading="lazy" src="charts/图6-4 功能维度哑铃对比.png" alt="散点密度"><div class="cap">图 6-4 散点密度图（回归 + KDE 等高线）</div></div>
   </div>
   <div class="g2" style="margin-top:1.4rem">
-    <div class="cfig rv-l"><img src="charts/图6-2 行业感知价值雷达对比.png" alt="价值堆叠"><div class="cap">图 6-2 价值维度堆叠百分比柱状图</div></div>
-    <div class="cfig rv-r"><img src="charts/图6-3 感知价值TopN交叉分析.png" alt="热力图"><div class="cap">图 6-3 行业×价值维度热力图</div></div>
+    <div class="cfig rv-l"><img loading="lazy" src="charts/图6-2 行业感知价值雷达对比.png" alt="价值堆叠"><div class="cap">图 6-2 价值维度堆叠百分比柱状图</div></div>
+    <div class="cfig rv-r"><img loading="lazy" src="charts/图6-3 感知价值TopN交叉分析.png" alt="热力图"><div class="cap">图 6-3 行业×价值维度热力图</div></div>
   </div>
-  <div class="cfig rv" style="margin-top:1.4rem"><img src="charts/图6-5 便携维度Likert分歧图.png" alt="瀑布图"><div class="cap">图 6-5 满意度增量瀑布图</div></div>
+  <div class="cfig rv" style="margin-top:1.4rem"><img loading="lazy" src="charts/图6-5 便携维度Likert分歧图.png" alt="瀑布图"><div class="cap">图 6-5 满意度增量瀑布图</div></div>
   <div class="card rv" style="margin-top:1.4rem">
     <div class="card-t"><span class="ic">📊</span>层次回归核心系数</div>
     <table class="dtbl">
@@ -744,7 +757,7 @@ footer .fb{font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:.4rem}
   <div class="shd rv"><span class="stag ink">SEM</span>
     <h2 class="stitle">结构方程模型：全路径验证</h2>
     <p class="sdesc">CFI=0.961, RMSEA=0.051 — 模型拟合良好；10 条假设路径全部获得实证支持</p></div>
-  <div class="cfig rv" style="max-width:800px;margin:0 auto"><img src="charts/图7-1 SEM路径系数模型.png" alt="SEM"><div class="cap">图 7-1 SEM 路径分析图</div></div>
+  <div class="cfig rv" style="max-width:800px;margin:0 auto"><img loading="lazy" src="charts/图7-1 SEM路径系数模型.png" alt="SEM"><div class="cap">图 7-1 SEM 路径分析图</div></div>
   <div class="card rv" style="margin-top:1.8rem">
     <div class="card-t"><span class="ic">🎯</span>假设检验结果总览</div>
     <div style="overflow-x:auto">
@@ -779,14 +792,14 @@ footer .fb{font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:.4rem}
   <div class="shd rv"><span class="stag gold">PRICING</span>
     <h2 class="stitle">Van Westendorp 价格敏感度分析</h2>
     <p class="sdesc">可接受价格带 2,680–5,420 元，最优定价点 4,980 元；定价策略完美落入目标区间</p></div>
-  <div class="cfig rv" style="max-width:800px;margin:0 auto"><img src="charts/图8-1 PSM价格敏感度分析.png" alt="PSM"><div class="cap">图 8-1 Van Westendorp PSM 四曲线交叉分析</div></div>
+  <div class="cfig rv" style="max-width:800px;margin:0 auto"><img loading="lazy" src="charts/图8-1 PSM价格敏感度分析.png" alt="PSM"><div class="cap">图 8-1 Van Westendorp PSM 四曲线交叉分析</div></div>
   <div class="pband rv" style="margin-top:2.2rem">
     <div class="pnode"><div class="big blue">¥2,680</div><div class="ptag">PMC 价格下限</div></div>
     <div class="pnode"><div class="big blue">¥3,250</div><div class="ptag">IDP 无差异价位</div></div>
     <div class="pnode star"><div class="big gold">¥4,980</div><div class="ptag">OPP 最优定价 ★</div></div>
     <div class="pnode"><div class="big blue">¥5,420</div><div class="ptag">PME 价格上限</div></div>
   </div>
-  <div class="cfig rv" style="max-width:800px;margin:1.8rem auto 0"><img src="charts/图8-2 GABOR定价分位数分析.png" alt="分用户价格"><div class="cap">图 8-2 购买意愿漏斗图</div></div>
+  <div class="cfig rv" style="max-width:800px;margin:1.8rem auto 0"><img loading="lazy" src="charts/图8-2 GABOR定价分位数分析.png" alt="分用户价格"><div class="cap">图 8-2 购买意愿漏斗图</div></div>
   <div class="insight rv">
     <strong>定价策略建议：</strong>公安禁毒系统的 OPP 为 4,120 元，支持<strong>执法版 4,580–4,980 元</strong>定价。危化企业和园区/物流的 OPP 分别为 3,620 元和 3,480 元，对应<strong>标准版 3,580 元</strong>定位。
   </div>
@@ -802,10 +815,10 @@ footer .fb{font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:.4rem}
     <h2 class="stitle">K-means 用户聚类与精准营销</h2>
     <p class="sdesc">k=4 时轮廓系数最高（0.412），四类用户画像清晰可操作</p></div>
   <div class="g2">
-    <div class="cfig rv-l"><img src="charts/图9-1 K-Means聚类轮廓系数.png" alt="轮廓系数"><div class="cap">图 9-1 轮廓系数诊断图</div></div>
-    <div class="cfig rv-r"><img src="charts/图9-2 三群体聚类特征画像.png" alt="用户画像"><div class="cap">图 9-2 四类用户画像雷达对比图</div></div>
+    <div class="cfig rv-l"><img loading="lazy" src="charts/图9-1 K-Means聚类轮廓系数.png" alt="轮廓系数"><div class="cap">图 9-1 轮廓系数诊断图</div></div>
+    <div class="cfig rv-r"><img loading="lazy" src="charts/图9-2 三群体聚类特征画像.png" alt="用户画像"><div class="cap">图 9-2 四类用户画像雷达对比图</div></div>
   </div>
-  <div class="cfig rv" style="margin-top:1.4rem"><img src="charts/图9-3 聚类群体雷达对比.png" alt="聚类环形"><div class="cap">图 9-3 聚类占比环形图 + 特征卡</div></div>
+  <div class="cfig rv" style="margin-top:1.4rem"><img loading="lazy" src="charts/图9-3 聚类群体雷达对比.png" alt="聚类环形"><div class="cap">图 9-3 聚类占比环形图 + 特征卡</div></div>
   <div class="cl-row stagger" style="margin-top:1.8rem">
     <div class="cl-c c1 rv">
       <h4>C1 · 铁杆拥趸</h4>
@@ -842,7 +855,7 @@ footer .fb{font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:.4rem}
   <div class="shd rv"><span class="stag blue">IPA ANALYSIS</span>
     <h2 class="stitle">IPA 重要性-表现分析</h2>
     <p class="sdesc">混合识别能力是唯一需要重点改进的维度</p></div>
-  <div class="cfig rv" style="max-width:700px;margin:0 auto"><img src="charts/图10-1 IPA重要度-满意度矩阵.png" alt="IPA"><div class="cap">图 10-1 IPA 重要性-表现四象限散点图</div></div>
+  <div class="cfig rv" style="max-width:700px;margin:0 auto"><img loading="lazy" src="charts/图10-1 IPA重要度-满意度矩阵.png" alt="IPA"><div class="cap">图 10-1 IPA 重要性-表现四象限散点图</div></div>
   <div class="card rv" style="margin-top:1.8rem">
     <div class="card-t"><span class="ic">🎯</span>象限解读</div>
     <table class="dtbl">
@@ -876,9 +889,9 @@ footer .fb{font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:.4rem}
       <div class="nps-l">NPS 净推荐值</div>
       <div style="margin-top:.9rem;font-size:.86rem;color:var(--tx2)">推荐者 38.5%（354人）· 被动者 38.2%（352人）· 贬损者 23.3%（214人）</div>
     </div>
-    <div class="cfig rv-r"><img src="charts/图11-1 NPS净推荐值仪表盘.png" alt="NPS仪表盘"><div class="cap">图 11-1 NPS 弧形仪表盘</div></div>
+    <div class="cfig rv-r"><img loading="lazy" src="charts/图11-1 NPS净推荐值仪表盘.png" alt="NPS仪表盘"><div class="cap">图 11-1 NPS 弧形仪表盘</div></div>
   </div>
-  <div class="cfig rv" style="margin-top:1.4rem"><img src="charts/图11-2 行业NPS分群环形对比.png" alt="NPS分面"><div class="cap">图 11-2 NPS 行业分面堆叠图</div></div>
+  <div class="cfig rv" style="margin-top:1.4rem"><img loading="lazy" src="charts/图11-2 行业NPS分群环形对比.png" alt="NPS分面"><div class="cap">图 11-2 NPS 行业分面堆叠图</div></div>
   <div class="card rv" style="margin-top:1.4rem">
     <div class="card-t"><span class="ic">📈</span>分用户 NPS 及驱动因素</div>
     <table class="dtbl">
@@ -904,8 +917,8 @@ footer .fb{font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:.4rem}
   <div class="shd rv"><span class="stag coral">CHANNEL &amp; LOYALTY</span>
     <h2 class="stitle">渠道认知与复购忠诚度</h2>
     <p class="sdesc">系统集成商推荐和行业展会是最主要的认知渠道</p></div>
-  <div class="cfig rv" style="max-width:700px;margin:0 auto"><img src="charts/图12-1 信息获取渠道排序棒棒糖图.png" alt="渠道"><div class="cap">图 12-1 渠道认知棒棒糖排名图</div></div>
-  <div class="cfig rv" style="max-width:700px;margin:1.4rem auto 0"><img src="charts/图12-2 复购驱动因素行业雷达对比.png" alt="忠诚度"><div class="cap">图 12-2 忠诚度因素分组对比柱状图</div></div>
+  <div class="cfig rv" style="max-width:700px;margin:0 auto"><img loading="lazy" src="charts/图12-1 信息获取渠道排序棒棒糖图.png" alt="渠道"><div class="cap">图 12-1 渠道认知棒棒糖排名图</div></div>
+  <div class="cfig rv" style="max-width:700px;margin:1.4rem auto 0"><img loading="lazy" src="charts/图12-2 复购驱动因素行业雷达对比.png" alt="忠诚度"><div class="cap">图 12-2 忠诚度因素分组对比柱状图</div></div>
   <div class="card rv" style="margin-top:1.4rem">
     <div class="card-t"><span class="ic">💬</span>代表性回答摘录</div>
     <blockquote class="quote">"每次都要送到市局实验室，一来一回最快 3 天，嫌疑人早跑了。"<br>——公安禁毒，云南</blockquote>
@@ -926,10 +939,10 @@ footer .fb{font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:.4rem}
     <h2 class="stitle">竞争格局与市场规模</h2>
     <p class="sdesc">灵探 InSensor 在"价格—准确率—便携性"三角中实现了竞品无法覆盖的交叉区域</p></div>
   <div class="g2">
-    <div class="cfig rv-l"><img src="charts/图13-1 供应商信任度蝴蝶双向图.png" alt="供应商"><div class="cap">图 13-1 供应商信任度分析</div></div>
-    <div class="cfig rv-r"><img src="charts/图13-2 品牌影响力堆叠分布.png" alt="品牌"><div class="cap">图 13-2 品牌影响力堆叠分布</div></div>
+    <div class="cfig rv-l"><img loading="lazy" src="charts/图13-1 供应商信任度蝴蝶双向图.png" alt="供应商"><div class="cap">图 13-1 供应商信任度分析</div></div>
+    <div class="cfig rv-r"><img loading="lazy" src="charts/图13-2 品牌影响力堆叠分布.png" alt="品牌"><div class="cap">图 13-2 品牌影响力堆叠分布</div></div>
   </div>
-  <div class="cfig rv" style="margin-top:1.4rem"><img src="charts/图13-3 总体满意度仪表盘.png" alt="满意度"><div class="cap">图 13-3 总体满意度仪表盘</div></div>
+  <div class="cfig rv" style="margin-top:1.4rem"><img loading="lazy" src="charts/图13-3 总体满意度仪表盘.png" alt="满意度"><div class="cap">图 13-3 总体满意度仪表盘</div></div>
   <div class="card rv" style="margin-top:1.4rem">
     <div class="card-t"><span class="ic">🏆</span>竞品对比矩阵</div>
     <div style="overflow-x:auto">
@@ -966,10 +979,10 @@ footer .fb{font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:.4rem}
     <div class="kpi rv"><div class="num sage">5,202万</div><div class="label">5年总营收</div></div>
   </div>
   <div class="g2">
-    <div class="cfig rv-l"><img src="charts/图14-1 五年财务预测面积图.png" alt="财务预测"><div class="cap">图 14-1 五年财务预测瀑布图（2026–2030）</div></div>
-    <div class="cfig rv-r"><img src="charts/图14-2 ROI-IRR-NPV投资回报仪表盘.png" alt="ROI仪表盘"><div class="cap">图 14-2 投资回报综合仪表盘</div></div>
+    <div class="cfig rv-l"><img loading="lazy" src="charts/图14-1 五年财务预测面积图.png" alt="财务预测"><div class="cap">图 14-1 五年财务预测瀑布图（2026–2030）</div></div>
+    <div class="cfig rv-r"><img loading="lazy" src="charts/图14-2 ROI-IRR-NPV投资回报仪表盘.png" alt="ROI仪表盘"><div class="cap">图 14-2 投资回报综合仪表盘</div></div>
   </div>
-  <div class="cfig rv" style="margin-top:1.4rem"><img src="charts/图14-3 LTV-CAC与回收期组合图.png" alt="回收期"><div class="cap">图 14-3 投资回收组合图</div></div>
+  <div class="cfig rv" style="margin-top:1.4rem"><img loading="lazy" src="charts/图14-3 LTV-CAC与回收期组合图.png" alt="回收期"><div class="cap">图 14-3 投资回收组合图</div></div>
   <div class="card rv" style="margin-top:1.4rem">
     <div class="card-t"><span class="ic">💰</span>五年营收预测</div>
     <div style="overflow-x:auto">
@@ -1000,12 +1013,12 @@ footer .fb{font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:.4rem}
   <div class="shd rv"><span class="stag teal">STRATEGY</span>
     <h2 class="stitle">战略建议与实施路径</h2>
     <p class="sdesc">四步走战略：种子验证 → 政策嵌入 → 规模扩张 → 生态锁定</p></div>
-  <div class="cfig rv" style="max-width:800px;margin:0 auto"><img src="charts/图15-1 战略优先级气泡矩阵.png" alt="SWOT"><div class="cap">图 15-1 SWOT 战略分析矩阵</div></div>
+  <div class="cfig rv" style="max-width:800px;margin:0 auto"><img loading="lazy" src="charts/图15-1 战略优先级气泡矩阵.png" alt="SWOT"><div class="cap">图 15-1 SWOT 战略分析矩阵</div></div>
   <div class="g2" style="margin-top:1.4rem">
-    <div class="cfig rv-l"><img src="charts/图15-2 实施路线甘特图.png" alt="甘特图"><div class="cap">图 15-2 三阶段战略路线甘特图</div></div>
-    <div class="cfig rv-r"><img src="charts/图A-1 全量相关系数热力图.png" alt="相关系数"><div class="cap">图 A-1 核心题项相关系数矩阵</div></div>
+    <div class="cfig rv-l"><img loading="lazy" src="charts/图15-2 实施路线甘特图.png" alt="甘特图"><div class="cap">图 15-2 三阶段战略路线甘特图</div></div>
+    <div class="cfig rv-r"><img loading="lazy" src="charts/图A-1 全量相关系数热力图.png" alt="相关系数"><div class="cap">图 A-1 核心题项相关系数矩阵</div></div>
   </div>
-  <div class="cfig rv" style="max-width:700px;margin:1.4rem auto 0"><img src="charts/图A-2 多重共线性VIF诊断.png" alt="VIF"><div class="cap">图 A-2 数据质量诊断仪表盘</div></div>
+  <div class="cfig rv" style="max-width:700px;margin:1.4rem auto 0"><img loading="lazy" src="charts/图A-2 多重共线性VIF诊断.png" alt="VIF"><div class="cap">图 A-2 数据质量诊断仪表盘</div></div>
   <div class="card rv" style="margin-top:1.8rem">
     <div class="card-t"><span class="ic">🗺️</span>战略路线详解</div>
     <div class="vtl">
@@ -1222,7 +1235,7 @@ footer .fb{font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:.4rem}
 
 <button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="回到顶部">↑</button>
 
-<div class="lb" id="lb" onclick="this.classList.remove('on')"><img id="lbImg" src="" alt="放大查看"></div>
+<div class="lb" id="lb" onclick="this.classList.remove('on')"><img loading="lazy" id="lbImg" src="" alt="放大查看"></div>
 
 <script>
 (function(){
